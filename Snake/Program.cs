@@ -1,14 +1,25 @@
 ﻿using GameSnake;
+using GameSnake.Enum;
 
 var height = 20;
-int width = 40;
+var width = 40;
+var directory = new Rotation(Direction.Right);
 
-Console.SetWindowSize(width, height);
-Console.SetBufferSize(width, height);
+Console.SetWindowSize(width + 2, height + 2);
+Console.SetBufferSize(width + 2, height + 2);
 Console.CursorVisible = false;
-
-
 Console.Title = "SNAKE";
+
 var snake = new Snake(width / 2, height / 2);
+
+while (true) {
+    if (Console.KeyAvailable) {
+        ConsoleKeyInfo key = Console.ReadKey();
+        if (directory.NewDirection(key)) {
+            snake.Direction = directory.Value;
+        }
+    }
+    snake.Move();
+}
 Console.ReadKey();
 

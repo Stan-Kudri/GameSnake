@@ -1,7 +1,7 @@
 ﻿namespace GameSnake {
     public class Point {
-        public int _x;
-        public int _y;
+        private int _x;
+        private int _y;
         private readonly char _symbol;
 
         public Point(int x, int y, char symbol) {
@@ -9,6 +9,17 @@
             _y = y;
             _symbol = symbol;
         }
+
+        public int X {
+            get => _x;
+            set => _x = value;
+        }
+        public int Y {
+            get => _y;
+            set => _y = value;
+        }
+
+        public Point Get => new Point(X, Y, _symbol);
 
         public void Draw() {
             DrawPoint(_symbol);
