@@ -11,7 +11,7 @@ namespace GameSnake {
         private Point _head;
         private Point _tail;
         private int _length = 1;
-        private Directions _directory;
+        private Directions _directory = Directions.Right;
 
         public Snake(int x, int y) : this(x, y, 1) { }
 
@@ -26,8 +26,8 @@ namespace GameSnake {
                         x,
                         y,
                         SymbolSnake);
-                point.Draw();
                 _body.Add(point);
+                point.Draw();
             }
 
             _head = _body.Last();
@@ -39,45 +39,47 @@ namespace GameSnake {
         }
 
         public void Move() {
-            _head = GetNextPoint();
+            _head = NextPoint;
             _body.Add(_head);
 
             _tail = _body.First();
             _body.Remove(_tail);
 
-            _head.Draw();
             _tail.Clear();
+            _head.Draw();
 
             Thread.Sleep(100);
         }
 
-        private Point GetNextPoint() {
-            Point point = _head.Get;
+        private Point NextPoint {
+            get {
+                Point point = _head.Get;
 
-            switch (_directory) {
-                case Directions.Up:
-                    --point.Y;
-                    if (point.Y == 0)
-                        point.Y = _heightField;
-                    break;
-                case Directions.Down:
-                    ++point.Y;
-                    if (point.Y == _heightField)
-                        point.Y = 0;
-                    break;
-                case Directions.Right:
-                    ++point.X;
-                    if (point.X == _widthField)
-                        point.X = 0;
-                    break;
-                case Directions.Left:
-                    --point.X;
-                    if (point.X == 0)
-                        point.X = _widthField;
-                    break;
+                switch (_directory) {
+                    case Directions.Up:
+                        --point.Y;
+                        if (point.Y == 0)
+                            point.Y = _heightField - 1;
+                        break;
+                    case Directions.Down:
+                        ++point.Y;
+                        if (point.Y == _heightField)
+                            point.Y = 1;
+                        break;
+                    case Directions.Right:
+                        ++point.X;
+                        if (point.X == _widthField - 1)
+                            point.X = 1;
+                        break;
+                    case Directions.Left:
+                        --point.X;
+                        if (point.X == 0)
+                            point.X = _widthField - 1;
+                        break;
+                }
+
+                return point;
             }
-
-            return point;
         }
     }
 }
