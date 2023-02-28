@@ -33,5 +33,20 @@
             Console.SetCursorPosition(_x, _y);
             Console.WriteLine(symbol);
         }
+
+        public override int GetHashCode() {
+            return HashCode.Combine(_x, _y, _symbol);
+        }
+
+        public override bool Equals(object? obj) {
+            return Equals(obj as Point);
+        }
+
+        private bool Equals(Point? point) {
+            if (point == null) {
+                return false;
+            }
+            return point._x == _x && point._y == _y && point._symbol == _symbol;
+        }
     }
 }

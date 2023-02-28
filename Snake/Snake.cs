@@ -40,6 +40,9 @@ namespace GameSnake {
 
         public void Move() {
             _head = NextPoint;
+            if (TheEnd(_head)) {
+                throw new Exception("Game Over");
+            }
             _body.Add(_head);
 
             _tail = _body.First();
@@ -80,6 +83,15 @@ namespace GameSnake {
 
                 return point;
             }
+        }
+
+        private bool TheEnd(Point point) {
+            for (var i = 1; i < _length - 1; i++) {
+                if (point.Equals(_body[i])) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
