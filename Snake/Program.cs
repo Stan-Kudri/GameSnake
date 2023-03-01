@@ -10,7 +10,7 @@ Console.SetBufferSize(width + 2, height + 2);
 Console.CursorVisible = false;
 Console.Title = "SNAKE";
 
-var snake = new Snake(width / 2, height / 2, 15);
+var snake = new Snake(width / 2, height / 2, 10);
 var board = new Field(width, height);
 
 while (true) {
