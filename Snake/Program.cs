@@ -3,24 +3,30 @@ using GameSnake.Enum;
 
 var height = 20;
 var width = 40;
-var directory = new Direct(Directions.Left);
 
-Console.SetWindowSize(width + 2, height + 2);
-Console.SetBufferSize(width + 2, height + 2);
-Console.CursorVisible = false;
-Console.Title = "SNAKE";
+Game(height, width);
 
-var snake = new Snake(width / 2, height / 2, 10);
-var board = new Field(width, height);
 
-while (true) {
-    if (Console.KeyAvailable) {
-        ConsoleKeyInfo key = Console.ReadKey();
-        if (directory.NewDirection(key)) {
-            snake.Direction = directory.Value;
+void Game(int height, int width) {
+    var directory = new Direct(Directions.Left);
+
+    Console.SetWindowSize(width + 2, height + 2);
+    Console.SetBufferSize(width + 2, height + 2);
+    Console.CursorVisible = false;
+    Console.Title = "SNAKE";
+
+    var field = new Field(width, height);
+    var snake = new Snake(width / 2, height / 2, field, 10);
+
+    while (true) {
+        if (Console.KeyAvailable) {
+            ConsoleKeyInfo key = Console.ReadKey();
+            if (directory.ChangeDirection(key.Key)) {
+                snake.Direction = directory.Value;
+            }
         }
+        snake.Move();
     }
-    snake.Move();
 }
 Console.ReadKey();
 

@@ -2,36 +2,36 @@
 
 namespace GameSnake {
     internal class Direct {
-        private Directions _directory;
+        private Directions _currentDirection;
 
-        public Direct(Directions direction) => _directory = direction;
+        public Direct(Directions direction) => _currentDirection = direction;
 
-        public Directions Value => _directory;
+        public Directions Value => _currentDirection;
 
 
-        public bool NewDirection(ConsoleKeyInfo info) {
-            switch (info.Key) {
+        public bool ChangeDirection(ConsoleKey key) {
+            switch (key) {
                 case ConsoleKey.UpArrow:
-                    if (_directory != Directions.Up && _directory != Directions.Down) {
-                        _directory = Directions.Up;
+                    if (_currentDirection != Directions.Up && _currentDirection != Directions.Down) {
+                        _currentDirection = Directions.Up;
                         return true;
                     }
                     return false;
                 case ConsoleKey.DownArrow:
-                    if (_directory != Directions.Up && _directory != Directions.Down) {
-                        _directory = Directions.Down;
+                    if (_currentDirection != Directions.Up && _currentDirection != Directions.Down) {
+                        _currentDirection = Directions.Down;
                         return true;
                     }
                     return false;
                 case ConsoleKey.RightArrow:
-                    if (_directory != Directions.Right && _directory != Directions.Left) {
-                        _directory = Directions.Right;
+                    if (_currentDirection != Directions.Right && _currentDirection != Directions.Left) {
+                        _currentDirection = Directions.Right;
                         return true;
                     }
                     return false;
                 case ConsoleKey.LeftArrow:
-                    if (_directory != Directions.Right && _directory != Directions.Left) {
-                        _directory = Directions.Left;
+                    if (_currentDirection != Directions.Right && _currentDirection != Directions.Left) {
+                        _currentDirection = Directions.Left;
                         return true;
                     }
                     return false;

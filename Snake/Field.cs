@@ -1,23 +1,25 @@
 ﻿namespace GameSnake {
     public class Field {
-        private int _width;
-        private int _height;
         private List<Point> _borders;
+
+        public int Width { get; private set; }
+
+        public int Height { get; private set; }
 
         public Field(int width, int height) {
             if (width < 1 && height < 1) {
                 throw new ArgumentException("Value board not correct");
             }
 
-            _width = width;
-            _height = height;
+            Width = width;
+            Height = height;
 
             _borders = new List<Point>();
 
-            HorizontalBorder(_width, 0);
-            HorizontalBorder(_width, _height);
-            VerticalBorder(0, _height);
-            VerticalBorder(_width, _height);
+            HorizontalBorder(Width, 0);
+            HorizontalBorder(Width, Height);
+            VerticalBorder(0, Height);
+            VerticalBorder(Width, Height);
         }
 
         private void HorizontalBorder(int x, int y) {

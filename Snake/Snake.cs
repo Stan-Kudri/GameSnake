@@ -4,8 +4,8 @@ namespace GameSnake {
     public class Snake {
         public const char SymbolSnake = 'o';
 
-        private int _heightField = 20;
-        private int _widthField = 40;
+        private int _heightField;
+        private int _widthField;
 
         private List<Point> _body;
         private Point _head;
@@ -13,24 +13,14 @@ namespace GameSnake {
         private int _length = 1;
         private Directions _directory = Directions.Right;
 
-        public Snake(int x, int y) : this(x, y, 1) { }
+        public Snake(int x, int y, Field field) : this(x, y, field, 1) { }
 
-        public Snake(int x, int y, int length) {
+        public Snake(int x, int y, Field field, int length) {
             _length = length;
             _body = new List<Point>(_length);
-            x -= _length;
-
-            for (int i = 0; i < _length; i++) {
-                x++;
-                var point = new Point(
-                        x,
-                        y,
-                        SymbolSnake);
-                _body.Add(point);
-                point.Draw();
-            }
-
-            _head = _body.Last();
+            _heightField = field.Height;
+            _widthField = field.Width;
+            BuildTheSnakeBody(x, y);
         }
 
         public Directions Direction {
@@ -83,6 +73,19 @@ namespace GameSnake {
 
                 return point;
             }
+        }
+
+        private void BuildTheSnakeBody(int x, int y) {
+            x -= _length;
+
+            for (int i = 0; i < _length; i++) {
+                x++;
+                var point = new Point(x, y, SymbolSnake);
+                _body.Add(point);
+                point.Draw();
+            }
+
+            _head = _body.Last();
         }
 
         private bool TheEnd(Point point) {
