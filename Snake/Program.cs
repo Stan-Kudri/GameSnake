@@ -1,11 +1,12 @@
 ﻿using GameSnake;
 using GameSnake.Enum;
 
+var gameOver = false;
 var height = 20;
 var width = 40;
 
 Game(height, width);
-
+Console.ReadKey();
 
 void Game(int height, int width) {
     var directory = new Direct(Directions.Left);
@@ -18,15 +19,26 @@ void Game(int height, int width) {
     var field = new Field(width, height);
     var snake = new Snake(width / 2, height / 2, field, 10);
 
-    while (true) {
+    while (gameOver == false) {
         if (Console.KeyAvailable) {
             ConsoleKeyInfo key = Console.ReadKey();
             if (directory.ChangeDirection(key.Key)) {
                 snake.Direction = directory.Value;
             }
         }
-        snake.Move();
+        if (!snake.Move()) {
+            gameOver = true;
+        }
     }
+    WriteMessage(width, height); //Game Over
 }
-Console.ReadKey();
+
+static void WriteMessage(int fieldWidth, int fieldHeight) {
+    string message = "Game Over";
+    int startWidthMessage = fieldWidth / 2 - message.Length / 2;
+    int startHeightMessage = fieldHeight / 2;
+
+    Console.SetCursorPosition(startWidthMessage, startHeightMessage);
+    Console.WriteLine(message);
+}
 

@@ -28,10 +28,10 @@ namespace GameSnake {
             set => _directory = value;
         }
 
-        public void Move() {
+        public bool Move() {
             _head = NextPoint;
             if (TheEnd(_head)) {
-                throw new Exception("Game Over");
+                return false;
             }
             _body.Add(_head);
 
@@ -42,6 +42,8 @@ namespace GameSnake {
             _head.Draw();
 
             Thread.Sleep(100);
+
+            return true;
         }
 
         private Point NextPoint {
@@ -88,9 +90,12 @@ namespace GameSnake {
             _head = _body.Last();
         }
 
-        private bool TheEnd(Point point) {
+        private bool TheEnd(Point movePoint) {
             for (var i = 1; i < _length - 1; i++) {
-                if (point.Equals(_body[i])) {
+                if (movePoint.Equals(_body[i])) {
+                    foreach (var point in _body) {
+                        point.Clear();
+                    }
                     return true;
                 }
             }
