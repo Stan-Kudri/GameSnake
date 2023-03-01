@@ -7,8 +7,8 @@
         public int Height { get; private set; }
 
         public Field(int width, int height) {
-            if (width < 1 && height < 1) {
-                throw new ArgumentException("Value board not correct");
+            if (width < 1 || height < 1) {
+                throw new ArgumentException("Invalid board size.");
             }
 
             Width = width;
