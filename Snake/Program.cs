@@ -29,6 +29,7 @@ void Game(int height, int width) {
         if (!snake.Move()) {
             gameOver = true;
         }
+        Thread.Sleep(100);
     }
     WriteMessage(width, height); //Game Over
 }

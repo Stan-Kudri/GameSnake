@@ -20,7 +20,7 @@ namespace GameSnake {
             _body = new List<Point>(_length);
             _heightField = field.Height;
             _widthField = field.Width;
-            BuildTheSnakeBody(x, y);
+            BuildBody(x, y);
         }
 
         public Directions Direction {
@@ -30,7 +30,7 @@ namespace GameSnake {
 
         public bool Move() {
             _head = NextPoint;
-            if (TheEnd(_head)) {
+            if (ClashPoint(_head)) {
                 return false;
             }
             _body.Add(_head);
@@ -40,8 +40,6 @@ namespace GameSnake {
 
             _tail.Clear();
             _head.Draw();
-
-            Thread.Sleep(100);
 
             return true;
         }
@@ -77,7 +75,7 @@ namespace GameSnake {
             }
         }
 
-        private void BuildTheSnakeBody(int x, int y) {
+        private void BuildBody(int x, int y) {
             x -= _length;
 
             for (int i = 0; i < _length; i++) {
@@ -90,7 +88,7 @@ namespace GameSnake {
             _head = _body.Last();
         }
 
-        private bool TheEnd(Point movePoint) {
+        private bool ClashPoint(Point movePoint) {
             for (var i = 1; i < _length - 1; i++) {
                 if (movePoint.Equals(_body[i])) {
                     foreach (var point in _body) {
