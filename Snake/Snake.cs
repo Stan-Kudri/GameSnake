@@ -9,7 +9,6 @@ namespace GameSnake {
 
         private List<Point> _body;
         private Point _head;
-        private Point _tail;
         private int _length = 1;
         private Directions _directory = Directions.Right;
 
@@ -35,10 +34,10 @@ namespace GameSnake {
             }
             _body.Add(_head);
 
-            _tail = _body.First();
-            _body.Remove(_tail);
+            var tail = _body.First();
+            _body.Remove(tail);
 
-            _tail.Clear();
+            tail.Clear();
             _head.Draw();
 
             return true;
