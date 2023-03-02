@@ -97,6 +97,7 @@ namespace GameSnake {
                     return true;
                 }
             }
+
             return false;
         }
     }

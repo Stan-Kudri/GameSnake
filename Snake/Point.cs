@@ -38,6 +38,7 @@
             if (point == null) {
                 return false;
             }
+
             return point.X == X && point.Y == Y && point._symbol == _symbol;
         }
     }
