@@ -21,8 +21,9 @@ void Game(int height, int width) {
 
     while (gameOver == false) {
         if (Console.KeyAvailable) {
-            ConsoleKeyInfo key = Console.ReadKey();
-            if (directory.ChangeDirection(key.Key)) {
+            ConsoleKey key = Console.ReadKey().Key;
+            var direct = GetDirection(key);
+            if (directory.ChangeDirection(direct)) {
                 snake.Direction = directory.Value;
             }
         }
@@ -41,5 +42,20 @@ static void WriteMessage(int fieldWidth, int fieldHeight) {
 
     Console.SetCursorPosition(startWidthMessage, startHeightMessage);
     Console.WriteLine(message);
+}
+
+static Directions GetDirection(ConsoleKey key) {
+    switch (key) {
+        case ConsoleKey.UpArrow:
+            return Directions.Up;
+        case ConsoleKey.DownArrow:
+            return Directions.Down;
+        case ConsoleKey.LeftArrow:
+            return Directions.Left;
+        case ConsoleKey.RightArrow:
+            return Directions.Right;
+        default:
+            return Directions.Other;
+    }
 }
 
