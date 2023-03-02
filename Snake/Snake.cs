@@ -32,6 +32,7 @@ namespace GameSnake {
             if (ClashPoint(_head)) {
                 return false;
             }
+
             _body.Add(_head);
 
             var tail = _body.First();
