@@ -1,4 +1,4 @@
-﻿namespace GameSnake {
+﻿namespace GameSnake.Components {
     public class Field {
         private List<Point> _borders;
 

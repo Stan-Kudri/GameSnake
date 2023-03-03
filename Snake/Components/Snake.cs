@@ -1,6 +1,6 @@
 ﻿using GameSnake.Enum;
 
-namespace GameSnake {
+namespace GameSnake.Components {
     public class Snake {
         public const char SymbolSnake = 'o';
 

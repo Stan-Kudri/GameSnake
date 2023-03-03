@@ -1,4 +1,5 @@
 ﻿using GameSnake;
+using GameSnake.Components;
 using GameSnake.Enum;
 using GameSnake.Extension;
 
