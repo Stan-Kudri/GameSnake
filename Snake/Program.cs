@@ -23,7 +23,7 @@ void Game(int height, int width) {
     while (gameOver == false) {
         if (Console.KeyAvailable) {
             ConsoleKey key = Console.ReadKey().Key;
-            var direct = key.GetDirection();
+            var direct = key.ToDirection();
             if (directory.ChangeDirection(direct)) {
                 snake.Direction = directory.Value;
             }

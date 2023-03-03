@@ -29,7 +29,7 @@ namespace GameSnake {
 
         public bool Move() {
             _head = NextPoint;
-            if (ClashPoint(_head)) {
+            if (Intersect(_head)) {
                 return false;
             }
 
@@ -88,7 +88,7 @@ namespace GameSnake {
             _head = _body.Last();
         }
 
-        private bool ClashPoint(Point movePoint) {
+        private bool Intersect(Point movePoint) {
             for (var i = 1; i < _length - 1; i++) {
                 if (movePoint.Equals(_body[i])) {
                     foreach (var point in _body) {

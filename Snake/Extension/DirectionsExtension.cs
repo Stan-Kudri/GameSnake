@@ -2,7 +2,7 @@
 
 namespace GameSnake.Extension {
     public static class DirectionsExtension {
-        public static Directions GetDirection(this ConsoleKey key) {
+        public static Directions ToDirection(this ConsoleKey key) {
             switch (key) {
                 case ConsoleKey.UpArrow:
                     return Directions.Up;
