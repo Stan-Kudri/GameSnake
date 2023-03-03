@@ -1,23 +1,15 @@
 ﻿namespace GameSnake {
     public class Point {
-        private int _x;
-        private int _y;
         private readonly char _symbol;
 
         public Point(int x, int y, char symbol) {
-            _x = x;
-            _y = y;
+            X = x;
+            Y = y;
             _symbol = symbol;
         }
 
-        public int X {
-            get => _x;
-            set => _x = value;
-        }
-        public int Y {
-            get => _y;
-            set => _y = value;
-        }
+        public int X { get; set; }
+        public int Y { get; set; }
 
         public Point Get => new Point(X, Y, _symbol);
 
@@ -30,12 +22,12 @@
         }
 
         private void DrawPoint(char symbol) {
-            Console.SetCursorPosition(_x, _y);
+            Console.SetCursorPosition(X, Y);
             Console.WriteLine(symbol);
         }
 
         public override int GetHashCode() {
-            return HashCode.Combine(_x, _y, _symbol);
+            return HashCode.Combine(X, Y, _symbol);
         }
 
         public override bool Equals(object? obj) {
@@ -46,7 +38,8 @@
             if (point == null) {
                 return false;
             }
-            return point._x == _x && point._y == _y && point._symbol == _symbol;
+
+            return point.X == X && point.Y == Y && point._symbol == _symbol;
         }
     }
 }
