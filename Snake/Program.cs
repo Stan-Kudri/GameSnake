@@ -11,15 +11,16 @@ Game(height, width);
 Console.ReadKey();
 
 void Game(int height, int width) {
-    var directory = new Direct(Directions.Left);
+    ConsoleViewSetting(width, height);
 
-    Console.SetWindowSize(width + 2, height + 2);
-    Console.SetBufferSize(width + 2, height + 2);
-    Console.CursorVisible = false;
-    Console.Title = "SNAKE";
+    var directory = new Direct(Directions.Left);
 
     var field = new Field(width, height);
     var snake = new Snake(width / 2, height / 2, field, 10);
+    var food = new Food(field);
+
+    food.Create();
+    food.Eat.Draw();
 
     while (gameOver == false) {
         if (Console.KeyAvailable) {
@@ -30,7 +31,7 @@ void Game(int height, int width) {
             }
         }
 
-        if (!snake.Move()) {
+        if (!snake.Move(ref food)) {
             gameOver = true;
         }
 
@@ -46,4 +47,11 @@ static void WriteMessage(int fieldWidth, int fieldHeight) {
 
     Console.SetCursorPosition(startWidthMessage, startHeightMessage);
     Console.WriteLine(message);
+}
+
+static void ConsoleViewSetting(int width, int height) {
+    Console.SetWindowSize(width + 2, height + 2);
+    Console.SetBufferSize(width + 2, height + 2);
+    Console.CursorVisible = false;
+    Console.Title = "SNAKE";
 }

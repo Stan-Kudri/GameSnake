@@ -26,6 +26,10 @@
             Console.WriteLine(symbol);
         }
 
+        public bool CoordinateMatch(Point point) {
+            return X == point.X && Y == point.Y;
+        }
+
         public override int GetHashCode() {
             return HashCode.Combine(X, Y, _symbol);
         }

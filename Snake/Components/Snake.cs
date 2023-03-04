@@ -3,6 +3,7 @@
 namespace GameSnake.Components {
     public class Snake {
         public const char SymbolSnake = 'o';
+        public const char SymbolEat = '@';
 
         private int _heightField;
         private int _widthField;
@@ -27,18 +28,28 @@ namespace GameSnake.Components {
             set => _directory = value;
         }
 
-        public bool Move() {
+        public bool Move(ref Food? food) {
             _head = NextPoint;
             if (Intersect(_head)) {
+                food.Eat.Clear();
                 return false;
             }
 
+            var tail = _body.First();
             _body.Add(_head);
 
-            var tail = _body.First();
-            _body.Remove(tail);
+            if (food != null && food.Eat.CoordinateMatch(_head)) {
+                _length++;
+                while (NotEmptyPoint(food.Eat)) {
+                    food.Create();
+                }
+                food.Eat.Draw();
+            }
+            else {
+                _body.Remove(tail);
+                tail.Clear();
+            }
 
-            tail.Clear();
             _head.Draw();
 
             return true;
@@ -94,6 +105,16 @@ namespace GameSnake.Components {
                     foreach (var point in _body) {
                         point.Clear();
                     }
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool NotEmptyPoint(Point food) {
+            foreach (var point in _body) {
+                if (food.CoordinateMatch(point)) {
                     return true;
                 }
             }
