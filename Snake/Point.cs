@@ -1,5 +1,7 @@
 ﻿namespace GameSnake {
     public class Point {
+        private const char EmptyChar = ' ';
+
         private readonly char _symbol;
 
         public Point(int x, int y, char symbol) {
@@ -18,7 +20,7 @@
         }
 
         public void Clear() {
-            DrawPoint(' ');
+            DrawPoint(EmptyChar);
         }
 
         private void DrawPoint(char symbol) {
@@ -26,7 +28,7 @@
             Console.WriteLine(symbol);
         }
 
-        public bool CoordinateMatch(Point point) {
+        public bool EqualsCoordinate(Point point) {
             return X == point.X && Y == point.Y;
         }
 

@@ -15,7 +15,7 @@
             _widthField = field.Width;
         }
 
-        public void Create() {
+        public void Draw() {
             Eat = new Point(
                 _random.Next(MinCoordinatePoint, _widthField - 1),
                 _random.Next(MinCoordinatePoint, _heightField - 1),

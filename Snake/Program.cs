@@ -1,6 +1,5 @@
 ﻿using GameSnake;
 using GameSnake.Components;
-using GameSnake.Enum;
 using GameSnake.Extension;
 
 var gameOver = false;
@@ -13,13 +12,13 @@ Console.ReadKey();
 void Game(int height, int width) {
     ConsoleViewSetting(width, height);
 
-    var directory = new Direct(Directions.Left);
+    var directory = new Direct();
 
     var field = new Field(width, height);
     var snake = new Snake(width / 2, height / 2, field, 10);
     var food = new Food(field);
 
-    food.Create();
+    food.Draw();
     food.Eat.Draw();
 
     while (gameOver == false) {
@@ -31,6 +30,7 @@ void Game(int height, int width) {
             }
         }
 
+        //Game over
         if (!snake.Move(ref food)) {
             gameOver = true;
         }
