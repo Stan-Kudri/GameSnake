@@ -27,7 +27,7 @@ namespace GameSnake.Components {
             set => _directory = value;
         }
 
-        public bool Move(ref Food? food) {
+        public bool Move(ref Food food) {
             _head = NextPoint;
             if (Intersect(_head)) {
                 food.Eat.Clear();
@@ -37,7 +37,7 @@ namespace GameSnake.Components {
             var tail = _body.First();
             _body.Add(_head);
 
-            if (food != null && food.Eat.EqualsCoordinate(_head)) {
+            if (food.Eat.EqualsCoordinate(_head)) {
                 _length++;
                 while (PointBusyItBody(food.Eat)) {
                     food.Draw();
