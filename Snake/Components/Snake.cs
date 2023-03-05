@@ -61,15 +61,13 @@ namespace GameSnake.Components {
                 _body.Add(_head);
                 _head.Draw(SymbolSnake);
 
-                while (IsFreePoint(food.Value)) {
-                    food.New();
-                }
-
                 return true;
             }
 
             return false;
         }
+
+        public bool IsFreePoint(Food food) => _body.Contains(food.Value);
 
         private Point NextPoint {
             get {
@@ -114,7 +112,5 @@ namespace GameSnake.Components {
 
             _head = _body.Last();
         }
-
-        private bool IsFreePoint(Point food) => _body.Any(food.Equals);
     }
 }
