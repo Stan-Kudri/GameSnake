@@ -34,7 +34,7 @@ void Game(int height, int width) {
             break;
         }
 
-        if (snake.EatFood(ref food)) {
+        if (snake.EatFood(food.Value)) {
             while (snake.IsFreePoint(food)) {
                 food.New();
             }

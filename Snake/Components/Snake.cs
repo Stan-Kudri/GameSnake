@@ -53,10 +53,8 @@ namespace GameSnake.Components {
             _head.Draw(SymbolSnake);
         }
 
-        public bool EatFood(ref Food food) {
-            var foodPoint = food.Value;
-
-            if (foodPoint.Equals(_head)) {
+        public bool EatFood(Point food) {
+            if (food.Equals(_head)) {
                 _length++;
                 _body.Add(_head);
                 _head.Draw(SymbolSnake);
