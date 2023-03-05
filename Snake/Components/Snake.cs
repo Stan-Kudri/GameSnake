@@ -27,13 +27,23 @@ namespace GameSnake.Components {
             set => _directory = value;
         }
 
-        public bool Move(ref Food food) {
+        public bool Intersect() {
             _head = NextPoint;
-            if (Intersect(_head)) {
-                food.Eat.Clear();
-                return false;
+
+            for (var i = 1; i < _length - 1; i++) {
+                if (_head.Equals(_body[i])) {
+                    foreach (var point in _body) {
+                        point.Clear();
+                    }
+
+                    return true;
+                }
             }
 
+            return false;
+        }
+
+        public void Move(ref Food food) {
             var tail = _body.First();
             _body.Add(_head);
 
@@ -49,8 +59,6 @@ namespace GameSnake.Components {
             }
 
             _head.Draw();
-
-            return true;
         }
 
         private Point NextPoint {
@@ -95,19 +103,6 @@ namespace GameSnake.Components {
             }
 
             _head = _body.Last();
-        }
-
-        private bool Intersect(Point movePoint) {
-            for (var i = 1; i < _length - 1; i++) {
-                if (movePoint.Equals(_body[i])) {
-                    foreach (var point in _body) {
-                        point.Clear();
-                    }
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         private bool PointBusyItBody(Point food) => _body.Any(x => food.EqualsCoordinate(x));

@@ -22,5 +22,7 @@
                 SymbolEat);
             Eat.Draw();
         }
+
+        public void Clear() => Eat.Clear();
     }
 }

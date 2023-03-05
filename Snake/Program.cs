@@ -31,11 +31,14 @@ void Game(int height, int width) {
         }
 
         //Game over
-        if (!snake.Move(ref food)) {
+        if (snake.Intersect()) {
+            food.Clear();
             gameOver = true;
         }
-
-        Thread.Sleep(100);
+        else {
+            snake.Move(ref food);
+            Thread.Sleep(100);
+        }
     }
     WriteMessage(width, height); //Game Over
 }
