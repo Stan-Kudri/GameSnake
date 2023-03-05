@@ -2,18 +2,15 @@
 using GameSnake.Components;
 using GameSnake.Extension;
 
-const char SymbolEat = '@';
-
-var gameOver = false;
 var height = 20;
 var width = 40;
 
+ConsoleViewSetting(width, height);
 Game(height, width);
+WriteMessage(width, height); //Massage "Game Over" 
 Console.ReadKey();
 
 void Game(int height, int width) {
-    ConsoleViewSetting(width, height);
-
     var directory = new Direct();
 
     var field = new Field(width, height);
@@ -21,9 +18,8 @@ void Game(int height, int width) {
     var food = new Food(field);
 
     food.Draw();
-    food.Eat.Draw(SymbolEat);
 
-    while (gameOver == false) {
+    while (true) {
         if (Console.KeyAvailable) {
             ConsoleKey key = Console.ReadKey().Key;
             var direct = key.ToDirection();
@@ -35,14 +31,18 @@ void Game(int height, int width) {
         //Game over
         if (snake.Intersect()) {
             food.Clear();
-            gameOver = true;
+            break;
         }
-        else if (!snake.EatFood(ref food)) {
+
+        if (snake.EatFood(ref food)) {
+            food.Draw();
+        }
+        else {
             snake.Move();
             Thread.Sleep(100);
+
         }
     }
-    WriteMessage(width, height); //Massage "Game Over" 
 }
 
 static void WriteMessage(int fieldWidth, int fieldHeight) {

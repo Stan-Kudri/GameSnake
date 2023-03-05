@@ -45,22 +45,24 @@ namespace GameSnake.Components {
 
         public void Move() {
             var tail = _body.First();
+
             _body.Add(_head);
             _body.Remove(tail);
+
             tail.Clear();
             _head.Draw(SymbolSnake);
         }
 
         public bool EatFood(ref Food food) {
-            var foodPoint = food.Eat;
+            var foodPoint = food.Value;
 
             if (foodPoint.Equals(_head)) {
                 _length++;
                 _body.Add(_head);
                 _head.Draw(SymbolSnake);
 
-                while (IsFreePoint(food.Eat)) {
-                    food.Draw();
+                while (IsFreePoint(food.Value)) {
+                    food.New();
                 }
 
                 return true;
@@ -113,6 +115,6 @@ namespace GameSnake.Components {
             _head = _body.Last();
         }
 
-        private bool IsFreePoint(Point food) => _body.Any(x => food.Equals(x));
+        private bool IsFreePoint(Point food) => _body.Any(food.Equals);
     }
 }

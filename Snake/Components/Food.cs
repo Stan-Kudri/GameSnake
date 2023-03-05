@@ -6,22 +6,24 @@
         private int _heightField;
         private int _widthField;
 
-        public Point Eat { get; set; }
+        public Point Value { get; set; }
 
         private Random _random = new Random();
 
         public Food(Field field) {
             _heightField = field.Height;
             _widthField = field.Width;
+            New();
         }
 
-        public void Draw() {
-            Eat = new Point(
+        public void New() {
+            Value = new Point(
                 _random.Next(MinCoordinatePoint, _widthField - 1),
                 _random.Next(MinCoordinatePoint, _heightField - 1));
-            Eat.Draw(SymbolEat);
         }
 
-        public void Clear() => Eat.Clear();
+        public void Draw() => Value.Draw(SymbolEat);
+
+        public void Clear() => Value.Clear();
     }
 }

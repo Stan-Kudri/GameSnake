@@ -2,9 +2,9 @@
 
 namespace GameSnake {
     internal class Direct {
-        private Directions _currentDirection;
+        private Directions _currentDirection = Directions.Left;
 
-        public Direct() : this(Directions.Left) {
+        public Direct() {
 
         }
 
