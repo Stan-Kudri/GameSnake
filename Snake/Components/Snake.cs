@@ -43,22 +43,30 @@ namespace GameSnake.Components {
             return false;
         }
 
-        public void Move(ref Food food) {
+        public void Move() {
             var tail = _body.First();
             _body.Add(_head);
+            _body.Remove(tail);
+            tail.Clear();
+            _head.Draw();
+        }
 
-            if (food.Eat.EqualsCoordinate(_head)) {
+        public bool EatFood(ref Food food) {
+            var foodPoint = food.Eat;
+
+            if (foodPoint.EqualsCoordinate(_head)) {
                 _length++;
-                while (PointBusyItBody(food.Eat)) {
+                _body.Add(_head);
+                _head.Draw();
+
+                while (IsFreePoint(food.Eat)) {
                     food.Draw();
                 }
-            }
-            else {
-                _body.Remove(tail);
-                tail.Clear();
+
+                return true;
             }
 
-            _head.Draw();
+            return false;
         }
 
         private Point NextPoint {
@@ -105,6 +113,6 @@ namespace GameSnake.Components {
             _head = _body.Last();
         }
 
-        private bool PointBusyItBody(Point food) => _body.Any(x => food.EqualsCoordinate(x));
+        private bool IsFreePoint(Point food) => _body.Any(x => food.EqualsCoordinate(x));
     }
 }

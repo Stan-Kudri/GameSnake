@@ -35,12 +35,12 @@ void Game(int height, int width) {
             food.Clear();
             gameOver = true;
         }
-        else {
-            snake.Move(ref food);
+        else if (!snake.EatFood(ref food)) {
+            snake.Move();
             Thread.Sleep(100);
         }
     }
-    WriteMessage(width, height); //Game Over
+    WriteMessage(width, height); //Massage "Game Over" 
 }
 
 static void WriteMessage(int fieldWidth, int fieldHeight) {
