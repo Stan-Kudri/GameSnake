@@ -18,9 +18,8 @@
         public void Draw() {
             Eat = new Point(
                 _random.Next(MinCoordinatePoint, _widthField - 1),
-                _random.Next(MinCoordinatePoint, _heightField - 1),
-                SymbolEat);
-            Eat.Draw();
+                _random.Next(MinCoordinatePoint, _heightField - 1));
+            Eat.Draw(SymbolEat);
         }
 
         public void Clear() => Eat.Clear();

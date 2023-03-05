@@ -48,16 +48,16 @@ namespace GameSnake.Components {
             _body.Add(_head);
             _body.Remove(tail);
             tail.Clear();
-            _head.Draw();
+            _head.Draw(SymbolSnake);
         }
 
         public bool EatFood(ref Food food) {
             var foodPoint = food.Eat;
 
-            if (foodPoint.EqualsCoordinate(_head)) {
+            if (foodPoint.Equals(_head)) {
                 _length++;
                 _body.Add(_head);
-                _head.Draw();
+                _head.Draw(SymbolSnake);
 
                 while (IsFreePoint(food.Eat)) {
                     food.Draw();
@@ -105,14 +105,14 @@ namespace GameSnake.Components {
 
             for (int i = 0; i < _length; i++) {
                 x++;
-                var point = new Point(x, y, SymbolSnake);
+                var point = new Point(x, y);
                 _body.Add(point);
-                point.Draw();
+                point.Draw(SymbolSnake);
             }
 
             _head = _body.Last();
         }
 
-        private bool IsFreePoint(Point food) => _body.Any(x => food.EqualsCoordinate(x));
+        private bool IsFreePoint(Point food) => _body.Any(x => food.Equals(x));
     }
 }

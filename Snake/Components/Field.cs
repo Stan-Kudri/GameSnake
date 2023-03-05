@@ -1,5 +1,6 @@
 ﻿namespace GameSnake.Components {
     public class Field {
+        public const char SymbolField = '*';
         private List<Point> _borders;
 
         public int Width { get; private set; }
@@ -24,17 +25,17 @@
 
         private void HorizontalBorder(int x, int y) {
             for (var i = 0; i <= x; i++) {
-                var point = new Point(i, y, '*');
+                var point = new Point(i, y);
                 _borders.Add(point);
-                point.Draw();
+                point.Draw(SymbolField);
             }
         }
 
         private void VerticalBorder(int x, int y) {
             for (var i = 1; i < y; i++) {
-                var point = new Point(x, i, '*');
+                var point = new Point(x, i);
                 _borders.Add(point);
-                point.Draw();
+                point.Draw(SymbolField);
             }
         }
 

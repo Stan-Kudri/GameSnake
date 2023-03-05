@@ -2,6 +2,8 @@
 using GameSnake.Components;
 using GameSnake.Extension;
 
+const char SymbolEat = '@';
+
 var gameOver = false;
 var height = 20;
 var width = 40;
@@ -19,7 +21,7 @@ void Game(int height, int width) {
     var food = new Food(field);
 
     food.Draw();
-    food.Eat.Draw();
+    food.Eat.Draw(SymbolEat);
 
     while (gameOver == false) {
         if (Console.KeyAvailable) {

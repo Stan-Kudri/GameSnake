@@ -2,21 +2,18 @@
     public class Point {
         private const char EmptyChar = ' ';
 
-        private readonly char _symbol;
-
-        public Point(int x, int y, char symbol) {
+        public Point(int x, int y) {
             X = x;
             Y = y;
-            _symbol = symbol;
         }
 
         public int X { get; set; }
         public int Y { get; set; }
 
-        public Point Get => new Point(X, Y, _symbol);
+        public Point Get => new Point(X, Y);
 
-        public void Draw() {
-            DrawPoint(_symbol);
+        public void Draw(char symbol) {
+            DrawPoint(symbol);
         }
 
         public void Clear() {
@@ -28,12 +25,8 @@
             Console.WriteLine(symbol);
         }
 
-        public bool EqualsCoordinate(Point point) {
-            return X == point.X && Y == point.Y;
-        }
-
         public override int GetHashCode() {
-            return HashCode.Combine(X, Y, _symbol);
+            return HashCode.Combine(X, Y);
         }
 
         public override bool Equals(object? obj) {
@@ -45,7 +38,7 @@
                 return false;
             }
 
-            return point.X == X && point.Y == Y && point._symbol == _symbol;
+            return point.X == X && point.Y == Y;
         }
     }
 }
