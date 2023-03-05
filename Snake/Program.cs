@@ -18,7 +18,26 @@ void Game(int height, int width) {
     var food = new Food(field);
 
     food.Draw();
+    Loop(snake, food, directory);
+}
 
+static void WriteMessage(int fieldWidth, int fieldHeight) {
+    string message = "Game Over";
+    int startWidthMessage = fieldWidth / 2 - message.Length / 2;
+    int startHeightMessage = fieldHeight / 2;
+
+    Console.SetCursorPosition(startWidthMessage, startHeightMessage);
+    Console.WriteLine(message);
+}
+
+static void ConsoleViewSetting(int width, int height) {
+    Console.SetWindowSize(width + 2, height + 2);
+    Console.SetBufferSize(width + 2, height + 2);
+    Console.CursorVisible = false;
+    Console.Title = "SNAKE";
+}
+
+static void Loop(Snake snake, Food food, Direct directory) {
     while (true) {
         if (Console.KeyAvailable) {
             ConsoleKey key = Console.ReadKey().Key;
@@ -43,23 +62,7 @@ void Game(int height, int width) {
         else {
             snake.Move();
             Thread.Sleep(100);
-
         }
     }
-}
 
-static void WriteMessage(int fieldWidth, int fieldHeight) {
-    string message = "Game Over";
-    int startWidthMessage = fieldWidth / 2 - message.Length / 2;
-    int startHeightMessage = fieldHeight / 2;
-
-    Console.SetCursorPosition(startWidthMessage, startHeightMessage);
-    Console.WriteLine(message);
-}
-
-static void ConsoleViewSetting(int width, int height) {
-    Console.SetWindowSize(width + 2, height + 2);
-    Console.SetBufferSize(width + 2, height + 2);
-    Console.CursorVisible = false;
-    Console.Title = "SNAKE";
 }
