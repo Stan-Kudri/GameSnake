@@ -1,6 +1,5 @@
 ﻿namespace GameSnake {
     public class Point {
-        private const char EmptyChar = ' ';
 
         public Point(int x, int y) {
             X = x;
@@ -11,19 +10,6 @@
         public int Y { get; set; }
 
         public Point Get => new Point(X, Y);
-
-        public void Draw(char symbol) {
-            DrawPoint(symbol);
-        }
-
-        public void Clear() {
-            DrawPoint(EmptyChar);
-        }
-
-        private void DrawPoint(char symbol) {
-            Console.SetCursorPosition(X, Y);
-            Console.WriteLine(symbol);
-        }
 
         public override int GetHashCode() {
             return HashCode.Combine(X, Y);

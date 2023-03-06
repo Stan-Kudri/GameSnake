@@ -1,4 +1,5 @@
 ﻿using GameSnake.Enum;
+using GameSnake.Extension;
 
 namespace GameSnake.Components {
     public class Snake {
@@ -65,7 +66,7 @@ namespace GameSnake.Components {
             return false;
         }
 
-        public bool IsFreePoint(Food food) => _body.Contains(food.Value);
+        public bool IntersectBody(Food food) => _body.Contains(food.Point);
 
         private Point NextPoint {
             get {

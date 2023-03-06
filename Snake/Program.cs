@@ -5,13 +5,13 @@ using GameSnake.Extension;
 var height = 20;
 var width = 40;
 
-ConsoleViewSetting(width, height);
+DisplaySettings(width, height);
 Game(height, width);
-WriteMessage(width, height); //Massage "Game Over" 
+DisplayGameOver(width, height); //Massage "Game Over" 
 Console.ReadKey();
 
 void Game(int height, int width) {
-    var directory = new Direct();
+    var directory = new Direction();
 
     var field = new Field(width, height);
     var snake = new Snake(width / 2, height / 2, field, 10);
@@ -21,7 +21,7 @@ void Game(int height, int width) {
     Loop(snake, food, directory);
 }
 
-static void WriteMessage(int fieldWidth, int fieldHeight) {
+static void DisplayGameOver(int fieldWidth, int fieldHeight) {
     string message = "Game Over";
     int startWidthMessage = fieldWidth / 2 - message.Length / 2;
     int startHeightMessage = fieldHeight / 2;
@@ -30,14 +30,14 @@ static void WriteMessage(int fieldWidth, int fieldHeight) {
     Console.WriteLine(message);
 }
 
-static void ConsoleViewSetting(int width, int height) {
+static void DisplaySettings(int width, int height) {
     Console.SetWindowSize(width + 2, height + 2);
     Console.SetBufferSize(width + 2, height + 2);
     Console.CursorVisible = false;
     Console.Title = "SNAKE";
 }
 
-static void Loop(Snake snake, Food food, Direct directory) {
+static void Loop(Snake snake, Food food, Direction directory) {
     while (true) {
         if (Console.KeyAvailable) {
             ConsoleKey key = Console.ReadKey().Key;
@@ -53,8 +53,8 @@ static void Loop(Snake snake, Food food, Direct directory) {
             break;
         }
 
-        if (snake.EatFood(food.Value)) {
-            while (snake.IsFreePoint(food)) {
+        if (snake.EatFood(food.Point)) {
+            while (snake.IntersectBody(food)) {
                 food.New();
             }
             food.Draw();

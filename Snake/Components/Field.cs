@@ -1,4 +1,6 @@
-﻿namespace GameSnake.Components {
+﻿using GameSnake.Extension;
+
+namespace GameSnake.Components {
     public class Field {
         public const char SymbolField = '*';
         private List<Point> _borders;

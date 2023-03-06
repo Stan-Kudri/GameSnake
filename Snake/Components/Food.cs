@@ -1,4 +1,6 @@
-﻿namespace GameSnake.Components {
+﻿using GameSnake.Extension;
+
+namespace GameSnake.Components {
     public class Food {
         public const char SymbolEat = '@';
         public const int MinCoordinatePoint = 1;//Because the border value is 0.
@@ -6,7 +8,7 @@
         private int _heightField;
         private int _widthField;
 
-        public Point Value { get; set; }
+        public Point Point { get; set; }
 
         private Random _random = new Random();
 
@@ -17,13 +19,13 @@
         }
 
         public void New() {
-            Value = new Point(
+            Point = new Point(
                 _random.Next(MinCoordinatePoint, _widthField - 1),
                 _random.Next(MinCoordinatePoint, _heightField - 1));
         }
 
-        public void Draw() => Value.Draw(SymbolEat);
+        public void Draw() => Point.Draw(SymbolEat);
 
-        public void Clear() => Value.Clear();
+        public void Clear() => Point.Clear();
     }
 }
