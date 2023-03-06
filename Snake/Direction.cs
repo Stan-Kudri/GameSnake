@@ -4,7 +4,7 @@ namespace GameSnake {
     internal class Direction {
         private Directions _currentDirection;
 
-        public Direction(Directions direction = Directions.Left) => _currentDirection = direction;
+        public Direction(Directions direction = Directions.Right) => _currentDirection = direction;
 
         public Directions Value => _currentDirection;
 

@@ -10,8 +10,8 @@ namespace GameSnake.Components {
 
         private List<Point> _body;
         private Point _head;
+        private Point _tail;
         private int _length = 1;
-        private Directions _directory = Directions.Right;
 
         public Snake(int x, int y, Field field) : this(x, y, field, 1) { }
 
@@ -23,10 +23,7 @@ namespace GameSnake.Components {
             BuildBody(x, y);
         }
 
-        public Directions Direction {
-            get => _directory;
-            set => _directory = value;
-        }
+        public Directions Direction { get; set; } = Directions.Right;
 
         public bool Intersect() {
             _head = NextPoint;
@@ -45,20 +42,15 @@ namespace GameSnake.Components {
         }
 
         public void Move() {
-            var tail = _body.First();
-
+            _tail = _body.First();
             _body.Add(_head);
-            _body.Remove(tail);
-
-            tail.Clear();
-            _head.Draw(SymbolSnake);
+            _body.Remove(_tail);
         }
 
         public bool EatFood(Point food) {
             if (food.Equals(_head)) {
                 _length++;
                 _body.Add(_head);
-                _head.Draw(SymbolSnake);
 
                 return true;
             }
@@ -66,13 +58,17 @@ namespace GameSnake.Components {
             return false;
         }
 
-        public bool IntersectBody(Food food) => _body.Contains(food.Point);
+        public void DrawHead() => _head.Draw(SymbolSnake);
+
+        public void ClearTail() => _tail.Clear();
+
+        public bool IntersectBody(Point food) => _body.Contains(food);
 
         private Point NextPoint {
             get {
                 Point point = _head.Get;
 
-                switch (_directory) {
+                switch (Direction) {
                     case Directions.Up:
                         --point.Y;
                         if (point.Y == 0)
@@ -109,6 +105,7 @@ namespace GameSnake.Components {
                 point.Draw(SymbolSnake);
             }
 
+            _tail = _body.First();
             _head = _body.Last();
         }
     }

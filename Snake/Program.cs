@@ -53,16 +53,18 @@ static void Loop(Snake snake, Food food, Direction directory) {
             break;
         }
 
-        if (snake.EatFood(food.Point)) {
-            while (snake.IntersectBody(food)) {
-                food.New();
+        if (snake.EatFood(food.Position)) {
+            while (snake.IntersectBody(food.Position)) {
+                food.SetPosition();
             }
             food.Draw();
         }
         else {
             snake.Move();
+            snake.ClearTail();
             Thread.Sleep(100);
         }
+        snake.DrawHead();
     }
 
 }
