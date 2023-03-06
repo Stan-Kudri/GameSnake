@@ -18,7 +18,7 @@ void Game(int height, int width) {
     var food = new Food(field);
 
     food.Draw();
-    Loop(snake, food, directory);
+    GameLoop(snake, food, directory);
 }
 
 static void DisplayGameOver(int fieldWidth, int fieldHeight) {
@@ -37,7 +37,7 @@ static void DisplaySettings(int width, int height) {
     Console.Title = "SNAKE";
 }
 
-static void Loop(Snake snake, Food food, Direction directory) {
+static void GameLoop(Snake snake, Food food, Direction directory) {
     while (true) {
         if (Console.KeyAvailable) {
             ConsoleKey key = Console.ReadKey().Key;

@@ -6,7 +6,7 @@ namespace GameSnake.Components {
 
         private Field _field;
 
-        public Point Position { get; set; }
+        public Point Position { get; private set; }
 
         public Food(Field field) {
             _field = field;
