@@ -19,12 +19,12 @@
             return Equals(obj as Point);
         }
 
-        private bool Equals(Point? point) {
-            if (point == null) {
+        private bool Equals(Point? position) {
+            if (position == null) {
                 return false;
             }
 
-            return point.X == X && point.Y == Y;
+            return position.X == X && position.Y == Y;
         }
     }
 }

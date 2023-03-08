@@ -10,10 +10,10 @@ namespace GameSnake.Components {
 
         public Food(Field field) {
             _field = field;
-            Position = field.NewPosition();
+            Position = field.GeneratePosition();
         }
 
-        public void SetPosition() => Position = _field.NewPosition();
+        public void SetPosition() => Position = _field.GeneratePosition();
 
         public void Draw() => Position.Draw(SymbolEat);
 

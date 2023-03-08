@@ -66,32 +66,32 @@ namespace GameSnake.Components {
 
         private Point NextPoint {
             get {
-                Point point = _head.Get;
+                Point position = _head.Get;
 
                 switch (Direction) {
                     case Directions.Up:
-                        --point.Y;
-                        if (point.Y == 0)
-                            point.Y = _heightField - 1;
+                        --position.Y;
+                        if (position.Y == 0)
+                            position.Y = _heightField - 1;
                         break;
                     case Directions.Down:
-                        ++point.Y;
-                        if (point.Y == _heightField)
-                            point.Y = 1;
+                        ++position.Y;
+                        if (position.Y == _heightField)
+                            position.Y = 1;
                         break;
                     case Directions.Right:
-                        ++point.X;
-                        if (point.X == _widthField - 1)
-                            point.X = 1;
+                        ++position.X;
+                        if (position.X == _widthField - 1)
+                            position.X = 1;
                         break;
                     case Directions.Left:
-                        --point.X;
-                        if (point.X == 0)
-                            point.X = _widthField - 1;
+                        --position.X;
+                        if (position.X == 0)
+                            position.X = _widthField - 1;
                         break;
                 }
 
-                return point;
+                return position;
             }
         }
 
@@ -100,9 +100,9 @@ namespace GameSnake.Components {
 
             for (int i = 0; i < _length; i++) {
                 x++;
-                var point = new Point(x, y);
-                _body.Add(point);
-                point.Draw(SymbolSnake);
+                var position = new Point(x, y);
+                _body.Add(position);
+                position.Draw(SymbolSnake);
             }
 
             _tail = _body.First();
