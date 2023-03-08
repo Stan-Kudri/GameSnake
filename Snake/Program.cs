@@ -43,7 +43,7 @@ static void GameLoop(Snake snake, Food food, Direction directory) {
             ConsoleKey key = Console.ReadKey().Key;
             var direct = key.ToDirection();
             if (directory.ChangeDirection(direct)) {
-                snake.Direction = directory.Value;
+                snake.Direction = directory.Turn;
             }
         }
 

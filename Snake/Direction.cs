@@ -6,7 +6,7 @@ namespace GameSnake {
 
         public Direction(Directions direction = Directions.Right) => _currentDirection = direction;
 
-        public Directions Value => _currentDirection;
+        public Directions Turn => _currentDirection;
 
 
         public bool ChangeDirection(Directions direction) {

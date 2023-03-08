@@ -3,6 +3,7 @@
 namespace GameSnake.Components {
     public class Field {
         public const char SymbolField = '*';
+
         private List<Point> _borders;
 
         public int Width { get; private set; }
