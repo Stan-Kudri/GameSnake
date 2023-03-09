@@ -25,6 +25,8 @@ namespace GameSnake.Components {
 
         public Directions Direction { get; set; } = Directions.Right;
 
+        public int Length => _length;
+
         public bool Intersect() {
             _head = NextPoint;
 

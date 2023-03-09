@@ -2,6 +2,8 @@
 using GameSnake.Components;
 using GameSnake.Extension;
 
+const int HeightForScore = 2;
+
 var height = 20;
 var width = 40;
 
@@ -16,9 +18,10 @@ void Game(int height, int width) {
     var field = new Field(width, height);
     var snake = new Snake(width / 2, height / 2, field, 10);
     var food = new Food(field);
+    var score = new Score(snake.Length, field);
 
     food.Draw();
-    GameLoop(snake, food, directory);
+    GameLoop(snake, food, directory, score);
 }
 
 static void DisplayGameOver(int fieldWidth, int fieldHeight) {
@@ -31,13 +34,13 @@ static void DisplayGameOver(int fieldWidth, int fieldHeight) {
 }
 
 static void DisplaySettings(int width, int height) {
-    Console.SetWindowSize(width + 2, height + 2);
-    Console.SetBufferSize(width + 2, height + 2);
+    Console.SetWindowSize(width + 1, height + 1 + HeightForScore);
+    Console.SetBufferSize(width + 1, height + 1 + HeightForScore);
     Console.CursorVisible = false;
     Console.Title = "SNAKE";
 }
 
-static void GameLoop(Snake snake, Food food, Direction directory) {
+static void GameLoop(Snake snake, Food food, Direction directory, Score score) {
     while (true) {
         if (Console.KeyAvailable) {
             ConsoleKey key = Console.ReadKey().Key;
@@ -55,6 +58,7 @@ static void GameLoop(Snake snake, Food food, Direction directory) {
 
         if (snake.EatFood(food.Position)) {
             while (snake.IntersectBody(food.Position)) {
+                score.Draw();
                 food.SetPosition();
             }
             food.Draw();
