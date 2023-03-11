@@ -68,7 +68,7 @@ namespace GameSnake.Components {
 
         private Point NextPoint {
             get {
-                Point position = _head.Get;
+                Point position = _head.Clone();
 
                 switch (Direction) {
                     case Directions.Up:

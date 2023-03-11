@@ -34,7 +34,7 @@ static void DisplayGameOver(int fieldWidth, int fieldHeight) {
 }
 
 static void DisplaySettings(int width, int height) {
-    Console.SetWindowSize(width + 1, height + 1 + HeightForScore);
+    Console.SetWindowSize(width + 2, height + 2 + HeightForScore);
     Console.SetBufferSize(width + 2, height + 2 + HeightForScore);
     Console.CursorVisible = false;
     Console.Title = "SNAKE";
