@@ -3,7 +3,7 @@ using GameSnake.Extension;
 
 namespace GameSnake.Components {
     public class Snake {
-        public const char SymbolSnake = 'o';
+        public const char SymbolSnake = 'О';
 
         private int _heightField;
         private int _widthField;

@@ -15,7 +15,7 @@ Console.ReadKey();
 void Game(int height, int width) {
     var directory = new Direction();
 
-    var field = new Field(width, height);
+    var field = new Field(width + 1, height + 1);
     var snake = new Snake(width / 2, height / 2, field, 10);
     var food = new Food(field);
     var score = new Score(snake.Length, field);
@@ -35,7 +35,7 @@ static void DisplayGameOver(int fieldWidth, int fieldHeight) {
 
 static void DisplaySettings(int width, int height) {
     Console.SetWindowSize(width + 1, height + 1 + HeightForScore);
-    Console.SetBufferSize(width + 1, height + 1 + HeightForScore);
+    Console.SetBufferSize(width + 2, height + 2 + HeightForScore);
     Console.CursorVisible = false;
     Console.Title = "SNAKE";
 }
