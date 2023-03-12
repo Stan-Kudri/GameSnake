@@ -44,13 +44,13 @@ static void DisplaySettings(int width, int height) {
     Console.Title = "SNAKE";
 }
 
-static void GameLoop(Snake snake, Food food, Direction directory, Score score) {
+static void GameLoop(Snake snake, Food food, Direction direction, Score score) {
     while (true) {
         if (Console.KeyAvailable) {
             ConsoleKey key = Console.ReadKey().Key;
             var direct = key.ToDirection();
-            if (directory.ChangeDirection(direct)) {
-                snake.Direction = directory.Turn;
+            if (direction.ChangeDirection(direct)) {
+                snake.Direction = direction.Value;
             }
         }
 
