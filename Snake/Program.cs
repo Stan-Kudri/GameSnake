@@ -19,11 +19,12 @@ void Game(int height, int width) {
     var snakeLen = 10;
     var snake = new Snake((width / 2) - snakeLen, height / 2, field, snakeLen);
     var food = new Food(field);
-    var score = new Score(snake.Length, field);
+    var score = new Score(snake.Length, height);
 
     field.Draw();
     food.Draw();
     snake.Draw();
+    score.Draw();
 
     GameLoop(snake, food, directory, score);
 }
@@ -66,6 +67,8 @@ static void GameLoop(Snake snake, Food food, Direction direction, Score score) {
                 score.Draw();
                 food.GeneratePosition();
             }
+            score.Add();
+            score.Draw();
             food.Draw();
         }
         else {

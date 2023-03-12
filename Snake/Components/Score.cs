@@ -1,32 +1,27 @@
 ﻿namespace GameSnake.Components {
     public class Score {
         public const string TitleScoreLine = "Score : ";
+        public const int StartWidthDisplay = 0;
 
-        private int _startWidthDisplay;
         private int _startHeightDisplay;
 
-        public Score(int points, Field field) {
+        public Score(int points, int height) {
             if (points == 0) {
                 throw new ArgumentException("Points greater than zero.");
             }
 
-            Points = points - 1;
-            _startWidthDisplay = TitleScoreLine.Length;
-            _startHeightDisplay = field.Height + 1;
-            DrawTitleLine();
-            Draw();
+            _startHeightDisplay = height + 2;
+            Points = points;
         }
 
         public int Points { get; private set; }
 
         public void Draw() {
-            Console.SetCursorPosition(_startWidthDisplay, _startHeightDisplay);
-            Console.Write(++Points);
+            Console.SetCursorPosition(0, _startHeightDisplay);
+            var scoreLine = $"{TitleScoreLine}{Points}";
+            Console.Write(scoreLine);
         }
 
-        private void DrawTitleLine() {
-            Console.SetCursorPosition(0, _startHeightDisplay);
-            Console.Write(TitleScoreLine);
-        }
+        public void Add(int points = 1) => Points += points;
     }
 }
