@@ -19,28 +19,20 @@ namespace GameSnake.Components {
             Height = height;
 
             _borders = new List<Point>();
-
-            HorizontalBorder(Width, 0);
-            HorizontalBorder(Width, Height);
-            VerticalBorder(0, Height);
-            VerticalBorder(Width, Height);
+            Border();
         }
 
-        private void HorizontalBorder(int x, int y) {
-            for (var i = 0; i <= x; i++) {
-                var position = new Point(i, y);
-                _borders.Add(position);
-                position.Draw(SymbolField);
+        public void Draw() => _borders.ForEach(x => x.Draw(SymbolField));
+
+        private void Border() {
+            for (var x = 0; x <= Width; x++) {
+                for (var y = 0; y <= Height; y++) {
+                    if (y == 0 || y == Height || x == 0 || x == Width) {
+                        var position = new Point(x, y);
+                        _borders.Add(position);
+                    }
+                }
             }
         }
-
-        private void VerticalBorder(int x, int y) {
-            for (var i = 1; i < y; i++) {
-                var position = new Point(x, i);
-                _borders.Add(position);
-                position.Draw(SymbolField);
-            }
-        }
-
     }
 }

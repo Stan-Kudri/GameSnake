@@ -21,6 +21,7 @@ void Game(int height, int width) {
     var food = new Food(field);
     var score = new Score(snake.Length, field);
 
+    field.Draw();
     food.Draw();
     snake.Draw();
 
