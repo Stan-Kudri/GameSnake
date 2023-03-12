@@ -5,13 +5,12 @@ namespace GameSnake.Components {
     public class Snake {
         public const char SymbolSnake = 'О';
 
-        private int _heightField;
-        private int _widthField;
+        private readonly int _heightField;
+        private readonly int _widthField;
+        private readonly List<Point> _body;
 
-        private List<Point> _body;
         private Point _head;
-        private Point _tail;
-        private int _length = 1;
+        private int _length;
 
         public Snake(int x, int y, Field field) : this(x, y, field, 1) { }
 
@@ -25,17 +24,37 @@ namespace GameSnake.Components {
 
         public Directions Direction { get; set; } = Directions.Right;
 
+        private Point NextPoint {
+            get {
+                Point position = _head.Clone();
+
+                switch (Direction) {
+                    case Directions.Up:
+                        --position.Y;
+                        break;
+                    case Directions.Down:
+                        ++position.Y;
+                        break;
+                    case Directions.Right:
+                        ++position.X;
+                        break;
+                    case Directions.Left:
+                        --position.X;
+                        break;
+                }
+
+                position.X = ClampInverted(position.X, 1, _widthField - 1);
+                position.Y = ClampInverted(position.Y, 1, _heightField - 1);
+
+                return position;
+            }
+        }
+
         public int Length => _length;
 
         public bool Intersect() {
-            _head = NextPoint;
-
             for (var i = 1; i < _length - 1; i++) {
                 if (_head.Equals(_body[i])) {
-                    foreach (var point in _body) {
-                        point.Clear();
-                    }
-
                     return true;
                 }
             }
@@ -44,13 +63,16 @@ namespace GameSnake.Components {
         }
 
         public void Move() {
-            _tail = _body.First();
+            _head = NextPoint;
             _body.Add(_head);
-            _body.Remove(_tail);
+            _body.Remove(_body.First());
         }
 
         public bool EatFood(Point food) {
-            if (food.Equals(_head)) {
+            var nextHeadPosition = NextPoint;
+
+            if (food.Equals(nextHeadPosition)) {
+                _head = nextHeadPosition;
                 _length++;
                 _body.Add(_head);
 
@@ -60,54 +82,34 @@ namespace GameSnake.Components {
             return false;
         }
 
+        public void Draw() => _body.ForEach(x => x.Draw(SymbolSnake));
+
+        public void Clear() => _body.ForEach(x => x.Clear());
+
         public void DrawHead() => _head.Draw(SymbolSnake);
 
-        public void ClearTail() => _tail.Clear();
+        public void ClearTail() => _body.First().Clear();
 
         public bool IntersectBody(Point food) => _body.Contains(food);
 
-        private Point NextPoint {
-            get {
-                Point position = _head.Clone();
-
-                switch (Direction) {
-                    case Directions.Up:
-                        --position.Y;
-                        if (position.Y == 0)
-                            position.Y = _heightField - 1;
-                        break;
-                    case Directions.Down:
-                        ++position.Y;
-                        if (position.Y == _heightField)
-                            position.Y = 1;
-                        break;
-                    case Directions.Right:
-                        ++position.X;
-                        if (position.X == _widthField - 1)
-                            position.X = 1;
-                        break;
-                    case Directions.Left:
-                        --position.X;
-                        if (position.X == 0)
-                            position.X = _widthField - 1;
-                        break;
-                }
-
-                return position;
+        private int ClampInverted(int position, int min, int max) {
+            if (position < min) {
+                return max;
             }
+            else if (position > max) {
+                return min;
+            }
+
+            return position;
         }
 
         private void BuildBody(int x, int y) {
-            x -= _length;
-
             for (int i = 0; i < _length; i++) {
                 x++;
                 var position = new Point(x, y);
                 _body.Add(position);
-                position.Draw(SymbolSnake);
             }
 
-            _tail = _body.First();
             _head = _body.Last();
         }
     }

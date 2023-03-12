@@ -16,11 +16,14 @@ void Game(int height, int width) {
     var directory = new Direction();
 
     var field = new Field(width + 1, height + 1);
-    var snake = new Snake(width / 2, height / 2, field, 10);
+    var snakeLen = 10;
+    var snake = new Snake((width / 2) - snakeLen, height / 2, field, snakeLen);
     var food = new Food(field);
     var score = new Score(snake.Length, field);
 
     food.Draw();
+    snake.Draw();
+
     GameLoop(snake, food, directory, score);
 }
 
@@ -53,6 +56,7 @@ static void GameLoop(Snake snake, Food food, Direction directory, Score score) {
         //Game over
         if (snake.Intersect()) {
             food.Clear();
+            snake.Clear();
             break;
         }
 
@@ -64,11 +68,10 @@ static void GameLoop(Snake snake, Food food, Direction directory, Score score) {
             food.Draw();
         }
         else {
-            snake.Move();
             snake.ClearTail();
+            snake.Move();
             Thread.Sleep(100);
         }
         snake.DrawHead();
     }
-
 }
