@@ -3,7 +3,7 @@ using GameSnake.Extension;
 
 namespace GameSnake.Components {
     public class Snake {
-        public const char SymbolSnake = 'o';
+        public const char SymbolSnake = 'О';
 
         private int _heightField;
         private int _widthField;
@@ -24,6 +24,8 @@ namespace GameSnake.Components {
         }
 
         public Directions Direction { get; set; } = Directions.Right;
+
+        public int Length => _length;
 
         public bool Intersect() {
             _head = NextPoint;
@@ -66,7 +68,7 @@ namespace GameSnake.Components {
 
         private Point NextPoint {
             get {
-                Point position = _head.Get;
+                Point position = _head.Clone();
 
                 switch (Direction) {
                     case Directions.Up:
