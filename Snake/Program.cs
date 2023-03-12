@@ -7,7 +7,7 @@ const int HeightForScore = 2;
 var height = 20;
 var width = 40;
 
-DisplaySettings(width, height);
+WindowSetting(width, height);
 Game(height, width);
 DisplayGameOver(width, height); //Massage "Game Over" 
 Console.ReadKey();
@@ -37,7 +37,7 @@ static void DisplayGameOver(int fieldWidth, int fieldHeight) {
     Console.WriteLine(message);
 }
 
-static void DisplaySettings(int width, int height) {
+static void WindowSetting(int width, int height) {
     Console.SetWindowSize(width + 2, height + 2 + HeightForScore);
     Console.SetBufferSize(width + 2, height + 2 + HeightForScore);
     Console.CursorVisible = false;
@@ -64,7 +64,7 @@ static void GameLoop(Snake snake, Food food, Direction direction, Score score) {
         if (snake.EatFood(food.Position)) {
             while (snake.IntersectBody(food.Position)) {
                 score.Draw();
-                food.SetPosition();
+                food.GeneratePosition();
             }
             food.Draw();
         }

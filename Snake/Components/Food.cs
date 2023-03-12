@@ -13,7 +13,7 @@ namespace GameSnake.Components {
             Position = field.GeneratePosition();
         }
 
-        public void SetPosition() => Position = _field.GeneratePosition();
+        public void GeneratePosition() => Position = _field.GeneratePosition();
 
         public void Draw() => Position.Draw(SymbolEat);
 
