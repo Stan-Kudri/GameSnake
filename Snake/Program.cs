@@ -7,21 +7,57 @@ const int HeightForScore = 2;
 var height = 20;
 var width = 40;
 
-DisplaySettings(width, height);
+WindowSetting(width, height);
 Game(height, width);
 DisplayGameOver(width, height); //Massage "Game Over" 
+
 Console.ReadKey();
 
 void Game(int height, int width) {
     var directory = new Direction();
+    var gameMap = new GameMap(width, height);
+    var score = new Score(gameMap.SnakeLength(), height);
 
-    var field = new Field(width + 1, height + 1);
-    var snake = new Snake(width / 2, height / 2, field, 10);
-    var food = new Food(field);
-    var score = new Score(snake.Length, field);
+    gameMap.DrawBoarder();
+    gameMap.Draw();
+    score.Draw();
 
-    food.Draw();
-    GameLoop(snake, food, directory, score);
+    GameLoop(gameMap, directory, score);
+}
+
+static void WindowSetting(int width, int height) {
+    Console.SetWindowSize(width + 2, height + 2 + HeightForScore);
+    Console.SetBufferSize(width + 2, height + 2 + HeightForScore);
+    Console.CursorVisible = false;
+    Console.Title = "SNAKE";
+}
+
+static void GameLoop(GameMap gameMap, Direction direction, Score score) {
+    while (true) {
+        if (Console.KeyAvailable) {
+            ConsoleKey key = Console.ReadKey().Key;
+            var direct = key.ToDirection();
+            if (direction.ChangeDirection(direct)) {
+                gameMap.ChangeSnakeDirection(direction);
+            }
+        }
+
+        //Game over
+        if (gameMap.GameOver) {
+            gameMap.Clear();
+            break;
+        }
+
+        gameMap.Clear();
+
+        gameMap.Movie(out var scoreFood);
+        gameMap.Draw();
+
+        score.Increase(scoreFood);
+        score.Draw();
+
+        Thread.Sleep(100);
+    }
 }
 
 static void DisplayGameOver(int fieldWidth, int fieldHeight) {
@@ -31,44 +67,4 @@ static void DisplayGameOver(int fieldWidth, int fieldHeight) {
 
     Console.SetCursorPosition(startWidthMessage, startHeightMessage);
     Console.WriteLine(message);
-}
-
-static void DisplaySettings(int width, int height) {
-    Console.SetWindowSize(width + 2, height + 2 + HeightForScore);
-    Console.SetBufferSize(width + 2, height + 2 + HeightForScore);
-    Console.CursorVisible = false;
-    Console.Title = "SNAKE";
-}
-
-static void GameLoop(Snake snake, Food food, Direction directory, Score score) {
-    while (true) {
-        if (Console.KeyAvailable) {
-            ConsoleKey key = Console.ReadKey().Key;
-            var direct = key.ToDirection();
-            if (directory.ChangeDirection(direct)) {
-                snake.Direction = directory.Turn;
-            }
-        }
-
-        //Game over
-        if (snake.Intersect()) {
-            food.Clear();
-            break;
-        }
-
-        if (snake.EatFood(food.Position)) {
-            while (snake.IntersectBody(food.Position)) {
-                score.Draw();
-                food.SetPosition();
-            }
-            food.Draw();
-        }
-        else {
-            snake.Move();
-            snake.ClearTail();
-            Thread.Sleep(100);
-        }
-        snake.DrawHead();
-    }
-
 }

@@ -9,7 +9,7 @@
 
         public int Y { get; set; }
 
-        public Point Clone() => new Point(X, Y);
+        public Point Clone() => new(X, Y);
 
         public override int GetHashCode() {
             return HashCode.Combine(X, Y);
