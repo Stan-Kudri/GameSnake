@@ -1,7 +1,7 @@
 ﻿using GameSnake.Extension;
 
 namespace GameSnake.Components {
-    public class Field {
+    public class Border {
         public const char SymbolField = '*';
 
         private List<Point> _borders;
@@ -10,7 +10,7 @@ namespace GameSnake.Components {
 
         public int Height { get; private set; }
 
-        public Field(int width, int height) {
+        public Border(int width, int height) {
             if (width < 1 || height < 1) {
                 throw new ArgumentException("Invalid board size.");
             }
@@ -19,12 +19,12 @@ namespace GameSnake.Components {
             Height = height;
 
             _borders = new List<Point>();
-            Border();
+            Create();
         }
 
         public void Draw() => _borders.ForEach(x => x.Draw(SymbolField));
 
-        private void Border() {
+        private void Create() {
             for (var x = 0; x <= Width; x++) {
                 for (var y = 0; y <= Height; y++) {
                     if (y == 0 || y == Height || x == 0 || x == Width) {

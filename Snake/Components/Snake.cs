@@ -12,9 +12,9 @@ namespace GameSnake.Components {
         private Point _head;
         private int _length;
 
-        public Snake(int x, int y, Field field) : this(x, y, field, 1) { }
+        public Snake(int x, int y, Border field) : this(x, y, field, 1) { }
 
-        public Snake(int x, int y, Field field, int length) {
+        public Snake(int x, int y, Border field, int length) {
             _length = length;
             _body = new List<Point>(_length);
             _heightField = field.Height;
@@ -69,10 +69,8 @@ namespace GameSnake.Components {
         }
 
         public bool EatFood(Point food) {
-            var nextHeadPosition = NextPoint;
-
-            if (food.Equals(nextHeadPosition)) {
-                _head = nextHeadPosition;
+            if (food.Equals(NextPoint)) {
+                _head = NextPoint;
                 _length++;
                 _body.Add(_head);
 

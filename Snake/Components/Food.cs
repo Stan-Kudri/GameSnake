@@ -4,11 +4,11 @@ namespace GameSnake.Components {
     public class Food {
         public const char SymbolEat = '@';
 
-        private Field _field;
+        private Border _field;
 
         public Point Position { get; private set; }
 
-        public Food(Field field) {
+        public Food(Border field) {
             _field = field;
             Position = field.GeneratePosition();
         }

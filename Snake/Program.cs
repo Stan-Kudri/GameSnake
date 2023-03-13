@@ -15,7 +15,7 @@ Console.ReadKey();
 void Game(int height, int width) {
     var directory = new Direction();
 
-    var field = new Field(width + 1, height + 1);
+    var field = new Border(width + 1, height + 1);
     var snakeLen = 10;
     var snake = new Snake((width / 2) - snakeLen, height / 2, field, snakeLen);
     var food = new Food(field);
@@ -67,7 +67,7 @@ static void GameLoop(Snake snake, Food food, Direction direction, Score score) {
                 score.Draw();
                 food.GeneratePosition();
             }
-            score.Add();
+            score.Increase();
             score.Draw();
             food.Draw();
         }

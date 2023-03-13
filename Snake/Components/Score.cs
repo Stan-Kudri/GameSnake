@@ -1,9 +1,8 @@
 ﻿namespace GameSnake.Components {
     public class Score {
-        public const string TitleScoreLine = "Score : ";
         public const int StartWidthDisplay = 0;
 
-        private int _startHeightDisplay;
+        private readonly int _startHeightDisplay;
 
         public Score(int points, int height) {
             if (points == 0) {
@@ -17,11 +16,12 @@
         public int Points { get; private set; }
 
         public void Draw() {
+            var scoreLine = $"Score : {Points}";
+
             Console.SetCursorPosition(0, _startHeightDisplay);
-            var scoreLine = $"{TitleScoreLine}{Points}";
             Console.Write(scoreLine);
         }
 
-        public void Add(int points = 1) => Points += points;
+        public void Increase(int points = 1) => Points += points;
     }
 }
