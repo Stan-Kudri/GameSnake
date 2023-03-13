@@ -1,7 +1,7 @@
 ﻿using GameSnake.Enum;
 
 namespace GameSnake {
-    internal class Direction {
+    public class Direction {
         private Directions _currentDirection;
 
         public Direction(Directions direction = Directions.Right) => _currentDirection = direction;

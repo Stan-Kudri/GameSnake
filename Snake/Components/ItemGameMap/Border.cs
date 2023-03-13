@@ -1,6 +1,6 @@
 ﻿using GameSnake.Extension;
 
-namespace GameSnake.Components {
+namespace GameSnake.Components.ItemGameMap {
     public class Border {
         public const char SymbolField = '*';
 

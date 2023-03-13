@@ -1,7 +1,7 @@
 ﻿using GameSnake.Enum;
 using GameSnake.Extension;
 
-namespace GameSnake.Components {
+namespace GameSnake.Components.ItemGameMap {
     public class Snake {
         public const char SymbolSnake = 'О';
 
@@ -10,19 +10,20 @@ namespace GameSnake.Components {
         private readonly List<Point> _body;
 
         private Point _head;
-        private int _length;
 
         public Snake(int x, int y, Border field) : this(x, y, field, 1) { }
 
         public Snake(int x, int y, Border field, int length) {
-            _length = length;
-            _body = new List<Point>(_length);
+            Length = length;
+            _body = new List<Point>(Length);
             _heightField = field.Height;
             _widthField = field.Width;
             BuildBody(x, y);
         }
 
         public Directions Direction { get; set; } = Directions.Right;
+
+        public int Length { get; private set; }
 
         private Point NextPoint {
             get {
@@ -50,18 +51,6 @@ namespace GameSnake.Components {
             }
         }
 
-        public int Length => _length;
-
-        public bool Intersect() {
-            for (var i = 1; i < _length - 1; i++) {
-                if (_head.Equals(_body[i])) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         public void Move() {
             _head = NextPoint;
             _body.Add(_head);
@@ -71,7 +60,7 @@ namespace GameSnake.Components {
         public bool EatFood(Point food) {
             if (food.Equals(NextPoint)) {
                 _head = NextPoint;
-                _length++;
+                Length++;
                 _body.Add(_head);
 
                 return true;
@@ -84,9 +73,15 @@ namespace GameSnake.Components {
 
         public void Clear() => _body.ForEach(x => x.Clear());
 
-        public void DrawHead() => _head.Draw(SymbolSnake);
+        public bool Intersect() {
+            for (var i = 1; i < Length - 1; i++) {
+                if (_head.Equals(_body[i])) {
+                    return true;
+                }
+            }
 
-        public void ClearTail() => _body.First().Clear();
+            return false;
+        }
 
         public bool IntersectBody(Point food) => _body.Contains(food);
 
@@ -102,7 +97,7 @@ namespace GameSnake.Components {
         }
 
         private void BuildBody(int x, int y) {
-            for (int i = 0; i < _length; i++) {
+            for (int i = 0; i < Length; i++) {
                 x++;
                 var position = new Point(x, y);
                 _body.Add(position);

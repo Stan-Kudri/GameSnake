@@ -1,19 +1,17 @@
 ﻿using GameSnake.Extension;
 
-namespace GameSnake.Components {
+namespace GameSnake.Components.ItemGameMap {
     public class Food {
         public const char SymbolEat = '@';
 
-        private Border _field;
+        public Food(Point position, int scorePoint = 1) {
+            Position = position;
+            Score = scorePoint;
+        }
 
         public Point Position { get; private set; }
 
-        public Food(Border field) {
-            _field = field;
-            Position = field.GeneratePosition();
-        }
-
-        public void GeneratePosition() => Position = _field.GeneratePosition();
+        public int Score { get; private set; }
 
         public void Draw() => Position.Draw(SymbolEat);
 
