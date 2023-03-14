@@ -13,10 +13,11 @@ DisplayGameOver(width, height); //Massage "Game Over"
 
 Console.ReadKey();
 
-void Game(int height, int width) {
+void Game(int height, int width)
+{
     var directory = new Direction();
     var gameMap = new GameMap(width, height);
-    var score = new Score(gameMap.SnakeLength(), height);
+    var score = new Score(gameMap);
 
     gameMap.DrawBoarder();
     gameMap.Draw();
@@ -25,42 +26,47 @@ void Game(int height, int width) {
     GameLoop(gameMap, directory, score);
 }
 
-static void WindowSetting(int width, int height) {
+static void WindowSetting(int width, int height)
+{
     Console.SetWindowSize(width + 2, height + 2 + HeightForScore);
     Console.SetBufferSize(width + 2, height + 2 + HeightForScore);
     Console.CursorVisible = false;
     Console.Title = "SNAKE";
 }
 
-static void GameLoop(GameMap gameMap, Direction direction, Score score) {
-    while (true) {
-        if (Console.KeyAvailable) {
+static void GameLoop(GameMap gameMap, Direction direction, Score score)
+{
+    while (true)
+    {
+        if (Console.KeyAvailable)
+        {
             ConsoleKey key = Console.ReadKey().Key;
             var direct = key.ToDirection();
-            if (direction.ChangeDirection(direct)) {
+            if (direction.ChangeDirection(direct))
+            {
                 gameMap.ChangeSnakeDirection(direction);
             }
         }
 
+        gameMap.Clear();
+
         //Game over
-        if (gameMap.GameOver) {
-            gameMap.Clear();
+        if (gameMap.GameOver)
+        {
             break;
         }
 
-        gameMap.Clear();
-
-        gameMap.Movie(out var scoreFood);
+        gameMap.Move();
         gameMap.Draw();
 
-        score.Increase(scoreFood);
         score.Draw();
 
         Thread.Sleep(100);
     }
 }
 
-static void DisplayGameOver(int fieldWidth, int fieldHeight) {
+static void DisplayGameOver(int fieldWidth, int fieldHeight)
+{
     string message = "Game Over";
     int startWidthMessage = fieldWidth / 2 - message.Length / 2;
     int startHeightMessage = fieldHeight / 2;
