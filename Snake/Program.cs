@@ -6,9 +6,11 @@ var height = 20;
 var width = 40;
 
 WindowSetting(width, height);
+
 var game = new Game(width, height);
 game.DrawMap();
 game.Run();
+
 DisplayGameOver(width, height); //Massage "Game Over" 
 
 Console.ReadKey();
