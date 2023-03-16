@@ -5,6 +5,8 @@ namespace GameSnake.Components
 {
     public class GameMap
     {
+        public const int NumberRandomSearchPosition = 3;
+
         public event Action<Food>? OnEatScore;
 
         private readonly Border _border;
@@ -28,9 +30,10 @@ namespace GameSnake.Components
             if (_snake.EatFood(_food.Position))
             {
                 OnEatScore?.Invoke(_food);
-                while (_snake.IntersectBody(_food.Position))
+
+                if (!RandomSearchCellForFood())
                 {
-                    _food = new Food(_border.GenerateFoodPosition());
+                    SearchCellForFood();
                 }
             }
             else
@@ -51,6 +54,39 @@ namespace GameSnake.Components
         {
             _snake.Clear();
             _food.Clear();
+        }
+
+        private bool RandomSearchCellForFood()
+        {
+            for (var i = 0; i < NumberRandomSearchPosition; i++)
+            {
+                var newPositionFood = _border.GenerateFoodPosition();
+                if (!_snake.IntersectBody(newPositionFood))
+                {
+                    _food = new Food(newPositionFood);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool SearchCellForFood()
+        {
+            for (var x = 1; x < _border.Width - 1; x++)
+            {
+                for (var y = 1; y < _border.Height - 1; y++)
+                {
+                    var newPositionFood = new Point(x, y);
+                    if (!_snake.IntersectBody(newPositionFood))
+                    {
+                        _food = new Food(newPositionFood);
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }
