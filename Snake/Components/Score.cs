@@ -8,10 +8,9 @@ namespace GameSnake.Components
 
         private readonly int _startHeightDisplay;
 
-        public Score(GameMap map)
+        public Score(int height)
         {
-            _startHeightDisplay = map.HeightBoard() + 2;
-            map.OnEatScore += Increase;
+            _startHeightDisplay = height + 2;
         }
 
         public int Points { get; private set; } = 0;
@@ -24,6 +23,6 @@ namespace GameSnake.Components
             Console.Write(scoreLine);
         }
 
-        private void Increase(Food food) => Points += food.Score;
+        public void Increase(Food food) => Points += food.Score;
     }
 }

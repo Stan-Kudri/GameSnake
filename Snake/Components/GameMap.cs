@@ -19,10 +19,10 @@ namespace GameSnake.Components
             _snake = new Snake((width / 2) - snakeLength, height / 2, _border, snakeLength);
         }
 
+
         public bool GameOver => _snake.Intersect();
 
         public int HeightBoard() => _border.Height;
-
 
         public void ChangeSnakeDirection(Direction direction) => _snake.Direction = direction.Value;
 

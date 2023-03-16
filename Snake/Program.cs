@@ -17,10 +17,12 @@ void Game(int height, int width)
 {
     var directory = new Direction();
     var gameMap = new GameMap(width, height);
-    var score = new Score(gameMap);
+    var score = new Score(height);
 
     gameMap.DrawBoarder();
     gameMap.Draw();
+
+    gameMap.OnEatScore += score.Increase;
     score.Draw();
 
     GameLoop(gameMap, directory, score);
