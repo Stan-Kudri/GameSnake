@@ -54,9 +54,11 @@ namespace GameSnake.Components.ItemGameMap
 
         public bool Intersect()
         {
-            for (var i = 1; i < _length - 1; i++)
+            var newPositionHead = NextPoint();
+
+            for (var i = _length - 1; i > 0; i--)
             {
-                if (_head.Equals(_body[i]))
+                if (newPositionHead.Equals(_body[i]))
                 {
                     return true;
                 }
