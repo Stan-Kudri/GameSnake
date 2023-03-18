@@ -5,15 +5,15 @@ namespace GameSnake
     public class Game
     {
         private GameMap _gameMap;
-        private UserInput _direction;
+        private UserInput _userInput;
         private Score _score;
 
         public Game(int weight, int height)
         {
-            _direction = new UserInput();
+            _userInput = new UserInput();
             _gameMap = new GameMap(weight, height);
             _score = new Score(height);
-            _direction.OnChangedDirection += _gameMap.ChangeSnakeDirection;
+            _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
             _gameMap.OnEatScore += _score.Increase;
         }
 
@@ -23,7 +23,7 @@ namespace GameSnake
             {
                 _gameMap.Clear();
 
-                _direction.Update();
+                _userInput.Update();
                 _gameMap.Move();
 
                 _gameMap.Draw();

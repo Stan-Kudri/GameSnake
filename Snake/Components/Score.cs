@@ -5,12 +5,13 @@ namespace GameSnake.Components
     public class Score
     {
         public const int StartWidthDisplay = 0;
+        public const int OffsetPositionHeight = 2;
 
         private readonly int _startHeightDisplay;
 
         public Score(int height, int points = 0)
         {
-            _startHeightDisplay = height + 2;
+            _startHeightDisplay = height + OffsetPositionHeight;
             Points = points;
         }
 
