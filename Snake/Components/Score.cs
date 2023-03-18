@@ -8,9 +8,10 @@ namespace GameSnake.Components
 
         private readonly int _startHeightDisplay;
 
-        public Score(int height)
+        public Score(int height, int points = 0)
         {
             _startHeightDisplay = height + 2;
+            Points = points;
         }
 
         public int Points { get; private set; } = 0;

@@ -11,7 +11,7 @@ namespace GameSnake
 
         public Directions CurrentDirection { get; private set; }
 
-        public void UseKey()
+        public void Update()
         {
             if (Console.KeyAvailable)
             {

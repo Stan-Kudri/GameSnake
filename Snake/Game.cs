@@ -4,34 +4,26 @@ namespace GameSnake
 {
     public class Game
     {
-        private bool GameOver = false;
         private GameMap _gameMap;
-        private UserInput _directory;
+        private UserInput _direction;
         private Score _score;
 
         public Game(int weight, int height)
         {
-            _directory = new UserInput();
+            _direction = new UserInput();
             _gameMap = new GameMap(weight, height);
             _score = new Score(height);
-            _directory.OnChangedDirection += _gameMap.ChangeSnakeDirection;
+            _direction.OnChangedDirection += _gameMap.ChangeSnakeDirection;
             _gameMap.OnEatScore += _score.Increase;
         }
 
         public void Run()
         {
-            while (!GameOver)
+            while (!_gameMap.GameOver)
             {
                 _gameMap.Clear();
 
-                //Game over
-                if (_gameMap.GameOver)
-                {
-                    GameOver = true;
-                    break;
-                }
-
-                _directory.UseKey();
+                _direction.Update();
                 _gameMap.Move();
 
                 _gameMap.Draw();
@@ -39,13 +31,8 @@ namespace GameSnake
 
                 Thread.Sleep(100);
             }
-        }
 
-        public void DrawMap()
-        {
-            _gameMap.DrawBoarder();
-            _gameMap.Draw();
-            _score.Draw();
+            _gameMap.Clear();
         }
     }
 }

@@ -30,11 +30,7 @@ namespace GameSnake.Components
             if (_snake.EatFood(_food.Position))
             {
                 OnEatScore?.Invoke(_food);
-
-                if (!RandomSearchCellForFood())
-                {
-                    SearchCellForFood();
-                }
+                _food = RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
             }
             else
             {
@@ -42,10 +38,9 @@ namespace GameSnake.Components
             }
         }
 
-        public void DrawBoarder() => _border.Draw();
-
         public void Draw()
         {
+            _border.Draw();
             _snake.Draw();
             _food.Draw();
         }
@@ -56,22 +51,21 @@ namespace GameSnake.Components
             _food.Clear();
         }
 
-        private bool RandomSearchCellForFood()
+        private Food? RandomCellForFood()
         {
             for (var i = 0; i < NumberRandomSearchPosition; i++)
             {
                 var newPositionFood = _border.GenerateFoodPosition();
                 if (!_snake.IntersectBody(newPositionFood))
                 {
-                    _food = new Food(newPositionFood);
-                    return true;
+                    return new Food(newPositionFood);
                 }
             }
 
-            return false;
+            return null;
         }
 
-        private bool SearchCellForFood()
+        private Food? SearchCellForFood()
         {
             for (var x = 1; x < _border.Width - 1; x++)
             {
@@ -80,13 +74,12 @@ namespace GameSnake.Components
                     var newPositionFood = new Point(x, y);
                     if (!_snake.IntersectBody(newPositionFood))
                     {
-                        _food = new Food(newPositionFood);
-                        return true;
+                        return new Food(newPositionFood);
                     }
                 }
             }
 
-            return false;
+            return null;
         }
     }
 }
