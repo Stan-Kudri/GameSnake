@@ -1,4 +1,5 @@
 ﻿using GameSnake.Components;
+using GameSnake.ComponentsGame;
 
 namespace GameSnake
 {

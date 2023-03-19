@@ -1,4 +1,5 @@
 ﻿using GameSnake.Components.ItemGameMap;
+using GameSnake.ComponentsGame;
 using GameSnake.Extension;
 
 namespace GameSnake.Components
