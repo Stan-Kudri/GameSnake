@@ -1,32 +1,30 @@
-﻿namespace GameSnake.Components {
-    public class Score {
-        public const string TitleScoreLine = "Score : ";
+﻿using GameSnake.Components.ItemGameMap;
 
-        private int _startWidthDisplay;
-        private int _startHeightDisplay;
+namespace GameSnake.Components
+{
+    public class Score
+    {
+        public const int StartWidthDisplay = 0;
+        public const int OffsetPositionHeight = 2;
 
-        public Score(int points, Field field) {
-            if (points == 0) {
-                throw new ArgumentException("Points greater than zero.");
-            }
+        private readonly int _startHeightDisplay;
 
-            Points = points - 1;
-            _startWidthDisplay = TitleScoreLine.Length;
-            _startHeightDisplay = field.Height + 1;
-            DrawTitleLine();
-            Draw();
+        public Score(int height, int points = 0)
+        {
+            _startHeightDisplay = height + OffsetPositionHeight;
+            Points = points;
         }
 
-        public int Points { get; private set; }
+        public int Points { get; private set; } = 0;
 
-        public void Draw() {
-            Console.SetCursorPosition(_startWidthDisplay, _startHeightDisplay);
-            Console.Write(++Points);
-        }
+        public void Draw()
+        {
+            var scoreLine = $"Score : {Points}";
 
-        private void DrawTitleLine() {
             Console.SetCursorPosition(0, _startHeightDisplay);
-            Console.Write(TitleScoreLine);
+            Console.Write(scoreLine);
         }
+
+        public void Increase(Food food) => Points += food.Score;
     }
 }

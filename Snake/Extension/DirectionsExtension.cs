@@ -13,7 +13,7 @@ namespace GameSnake.Extension {
                 case ConsoleKey.RightArrow:
                     return Directions.Right;
                 default:
-                    return Directions.Other;
+                    return Directions.Unknown;
             }
         }
     }
