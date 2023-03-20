@@ -1,5 +1,6 @@
 ﻿using GameSnake.Components;
 using GameSnake.ComponentsGame;
+using GameSnake.Enum;
 
 namespace GameSnake
 {
@@ -10,10 +11,10 @@ namespace GameSnake
         private Score _score;
         private Speed _speed;
 
-        public Game(int weight, int height)
+        public Game(int weight, int height, TypeSnake type)
         {
             _userInput = new UserInput();
-            _gameMap = new GameMap(weight, height);
+            _gameMap = new GameMap(weight, height, type);
             _score = new Score(height);
             _speed = new Speed();
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
