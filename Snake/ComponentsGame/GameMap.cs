@@ -1,5 +1,6 @@
 ﻿using GameSnake.Components.ItemGameMap;
 using GameSnake.ComponentsGame;
+using GameSnake.ComponentsGame.ItemGameMap.SnakeType;
 using GameSnake.Extension;
 
 namespace GameSnake.Components
@@ -11,7 +12,7 @@ namespace GameSnake.Components
         public event Action<Food>? OnEatScore;
 
         private readonly Border _border;
-        private readonly Snake _snake;
+        private readonly ISnake _snake;
 
         private Food _food;
 
@@ -19,7 +20,7 @@ namespace GameSnake.Components
         {
             _border = new Border(width, height);
             _food = new Food(_border.GenerateFoodPosition());
-            _snake = new Snake((width / 2) - snakeLength, height / 2, _border, snakeLength);
+            _snake = new SnakeNotPassingBorders((width / 2) - snakeLength, height / 2, _border, snakeLength);
         }
 
         public bool GameOver => _snake.Intersect();
@@ -41,9 +42,9 @@ namespace GameSnake.Components
 
         public void Draw()
         {
-            _border.Draw();
             _snake.Draw();
             _food.Draw();
+            _border.Draw();
         }
 
         public void Clear()

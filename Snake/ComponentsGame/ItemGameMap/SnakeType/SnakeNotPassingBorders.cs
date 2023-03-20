@@ -1,9 +1,10 @@
-﻿using GameSnake.Enum;
+﻿using GameSnake.Components.ItemGameMap;
+using GameSnake.Enum;
 using GameSnake.Extension;
 
-namespace GameSnake.Components.ItemGameMap
+namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 {
-    public class Snake
+    public class SnakeNotPassingBorders : ISnake
     {
         public const char SymbolSnake = 'О';
 
@@ -14,9 +15,9 @@ namespace GameSnake.Components.ItemGameMap
         private int _length;
         private Point _head;
 
-        public Snake(int x, int y, Border field) : this(x, y, field, 1) { }
+        public SnakeNotPassingBorders(int x, int y, Border field) : this(x, y, field, 1) { }
 
-        public Snake(int x, int y, Border field, int length)
+        public SnakeNotPassingBorders(int x, int y, Border field, int length)
         {
             _length = length;
             _body = new List<Point>(_length);
@@ -56,6 +57,11 @@ namespace GameSnake.Components.ItemGameMap
         {
             var newPositionHead = NextPoint();
 
+            if (IsEncounterTheBorder(newPositionHead))
+            {
+                return true;
+            }
+
             for (var i = _length - 1; i > 0; i--)
             {
                 if (newPositionHead.Equals(_body[i]))
@@ -89,25 +95,10 @@ namespace GameSnake.Components.ItemGameMap
                     break;
             }
 
-            position.X = ClampInverted(position.X, 1, _widthField - 1);
-            position.Y = ClampInverted(position.Y, 1, _heightField - 1);
-
             return position;
         }
 
-        private int ClampInverted(int position, int min, int max)
-        {
-            if (position < min)
-            {
-                return max;
-            }
-            else if (position > max)
-            {
-                return min;
-            }
-
-            return position;
-        }
+        private bool IsEncounterTheBorder(Point point) => point.Y > _heightField || point.Y < 0 || point.X > _widthField || point.X < 0;
 
         private void BuildBody(int x, int y)
         {
