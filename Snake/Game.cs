@@ -33,7 +33,7 @@ namespace GameSnake
                 _gameMap.Draw();
                 _score.Draw();
 
-                Thread.Sleep(_speed.Value);
+                _speed.Apply();
             }
 
             _gameMap.Clear();

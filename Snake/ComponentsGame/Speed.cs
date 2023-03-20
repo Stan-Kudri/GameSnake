@@ -12,5 +12,7 @@
         public int Value { get; private set; }
 
         public void Increase() => Value = Value - ValueIncreaseSpeed > 0 ? Value - ValueIncreaseSpeed : Value;
+
+        public void Apply() => Thread.Sleep(Value);
     }
 }
