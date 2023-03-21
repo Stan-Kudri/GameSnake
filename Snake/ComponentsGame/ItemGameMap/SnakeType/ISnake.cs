@@ -4,8 +4,6 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 {
     public interface ISnake
     {
-        public const char SymbolSnake = 'О';
-
         public Directions Direction { get; set; }
 
         public void Move();

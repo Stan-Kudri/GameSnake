@@ -22,18 +22,7 @@ namespace GameSnake.Components
             _border = new Border(width, height);
             _food = new Food(_border.GenerateFoodPosition());
 
-            if (type == TypeSnake.NotPassingBorders)
-            {
-                _snake = new SnakeNotPassingBorders((width / 2) - snakeLength, height / 2, _border, snakeLength);
-            }
-            else if (type == TypeSnake.PassingBorders)
-            {
-                _snake = new SnakePassingBorders((width / 2) - snakeLength, height / 2, _border, snakeLength);
-            }
-            else if (type == TypeSnake.Unknown)
-            {
-                throw new ArgumentException("Unknown type of snake.");
-            }
+            _snake = CreatSnake(type, _border) ?? throw new ArgumentException("Unknown type of snake.");
 
         }
 
@@ -96,6 +85,23 @@ namespace GameSnake.Components
             }
 
             return null;
+        }
+
+        private static ISnake? CreatSnake(TypeSnake type, Border border, int snakeLength = 10)
+        {
+            if (type == TypeSnake.NotPassingBorders)
+            {
+                return new SnakeNotPassingBorders((border.Height / 2) - snakeLength, border.Height / 2, border, snakeLength);
+            }
+            else if (type == TypeSnake.PassingBorders)
+            {
+                return new SnakePassingBorders((border.Width / 2) - snakeLength, border.Height / 2, border, snakeLength);
+            }
+            else
+            {
+                return null;
+            }
+
         }
     }
 }
