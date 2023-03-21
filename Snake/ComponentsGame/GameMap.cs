@@ -13,7 +13,7 @@ namespace GameSnake.Components
         public event Action<Food>? OnEatScore;
 
         private readonly Border _border;
-        private readonly ISnake _snake;
+        private readonly Snake _snake;
 
         private Food _food;
 
@@ -22,7 +22,7 @@ namespace GameSnake.Components
             _border = new Border(width, height);
             _food = new Food(_border.GenerateFoodPosition());
 
-            _snake = CreatSnake(type, _border) ?? throw new ArgumentException("Unknown type of snake.");
+            _snake = CreateSnake(type, _border) ?? throw new ArgumentException("Unknown type of snake.");
 
         }
 
@@ -87,7 +87,7 @@ namespace GameSnake.Components
             return null;
         }
 
-        private static ISnake? CreatSnake(TypeSnake type, Border border, int snakeLength = 10)
+        private static Snake? CreateSnake(TypeSnake type, Border border, int snakeLength = 10)
         {
             if (type == TypeSnake.NotPassingBorders)
             {
