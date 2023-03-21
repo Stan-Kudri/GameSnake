@@ -32,16 +32,9 @@ static TypeSnake TypeSnakeSelection()
     while (type == TypeSnake.Unknown)
     {
         var key = Console.ReadKey(true);
-        if (int.TryParse(key.KeyChar.ToString(), out var numberType))
+        if (Enum.TryParse(key.KeyChar.ToString(), out TypeSnake numberType))
         {
-            if (numberType == 1)
-            {
-                type = TypeSnake.NotPassingBorders;
-            }
-            else if (numberType == 2)
-            {
-                type = TypeSnake.PassingBorders;
-            }
+            type = numberType;
         }
     }
 
