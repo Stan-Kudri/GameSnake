@@ -27,16 +27,16 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 
         public void Move()
         {
-            _head = NextPoint();
+            _head = GetNewHeadPosition();
             _body.Add(_head);
             _body.Remove(_body.First());
         }
 
         public bool EatFood(Point food)
         {
-            if (food.Equals(NextPoint()))
+            if (food.Equals(GetNewHeadPosition()))
             {
-                _head = NextPoint();
+                _head = GetNewHeadPosition();
                 _length++;
                 _body.Add(_head);
 
@@ -54,7 +54,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 
         public bool IntersectBody(Point food) => _body.Contains(food);
 
-        private protected abstract Point NextPoint();
+        private protected abstract Point GetNewHeadPosition();
 
         private protected void BuildBody(int x, int y)
         {

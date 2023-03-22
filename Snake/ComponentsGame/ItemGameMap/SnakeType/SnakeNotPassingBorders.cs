@@ -18,7 +18,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 
         public override bool Intersect()
         {
-            var newPositionHead = NextPoint();
+            var newPositionHead = GetNewHeadPosition();
 
             if (IsEncounterTheBorder(newPositionHead))
             {
@@ -36,7 +36,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
             return false;
         }
 
-        private protected override Point NextPoint()
+        private protected override Point GetNewHeadPosition()
         {
             Point position = _head.Clone();
 
