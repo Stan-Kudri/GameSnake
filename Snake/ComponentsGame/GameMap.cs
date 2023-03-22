@@ -21,7 +21,6 @@ namespace GameSnake.Components
             _border = border;
             _food = new Food(_border.GenerateFoodPosition());
             _snake = snake;
-
         }
 
         public bool GameOver => _snake.Intersect();
