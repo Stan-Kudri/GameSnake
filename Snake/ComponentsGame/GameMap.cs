@@ -1,7 +1,6 @@
 ﻿using GameSnake.Components.ItemGameMap;
 using GameSnake.ComponentsGame;
 using GameSnake.ComponentsGame.ItemGameMap.SnakeType;
-using GameSnake.Enum;
 using GameSnake.Extension;
 
 namespace GameSnake.Components
@@ -17,12 +16,11 @@ namespace GameSnake.Components
 
         private Food _food;
 
-        public GameMap(int width, int height, TypeSnake type, int snakeLength = 10)
+        public GameMap(Border border, ISnake snake)
         {
-            _border = new Border(width, height);
+            _border = border;
             _food = new Food(_border.GenerateFoodPosition());
-
-            _snake = CreateSnake(type, _border) ?? throw new ArgumentException("Unknown type of snake.");
+            _snake = snake;
 
         }
 
@@ -85,23 +83,6 @@ namespace GameSnake.Components
             }
 
             return null;
-        }
-
-        private static Snake? CreateSnake(TypeSnake type, Border border, int snakeLength = 10)
-        {
-            if (type == TypeSnake.NotPassingBorders)
-            {
-                return new SnakeNotPassingBorders((border.Height / 2) - snakeLength, border.Height / 2, border, snakeLength);
-            }
-            else if (type == TypeSnake.PassingBorders)
-            {
-                return new SnakePassingBorders((border.Width / 2) - snakeLength, border.Height / 2, border, snakeLength);
-            }
-            else
-            {
-                return null;
-            }
-
         }
     }
 }
