@@ -3,7 +3,7 @@ using GameSnake.Extension;
 
 namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 {
-    public abstract class Snake
+    public abstract class Snake : ISnake
     {
         public const char SymbolSnake = 'О';
 

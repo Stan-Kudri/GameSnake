@@ -13,7 +13,7 @@ namespace GameSnake.Components
         public event Action<Food>? OnEatScore;
 
         private readonly Border _border;
-        private readonly Snake _snake;
+        private readonly ISnake _snake;
 
         private Food _food;
 
