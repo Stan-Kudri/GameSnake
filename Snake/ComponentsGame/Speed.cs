@@ -2,29 +2,16 @@
 {
     public class Speed
     {
-        public const int ValueIncreaseSpeed = 25;
+        public const int ValueIncreaseSpeed = 20;
 
-        private readonly int _startSpeed;
-        private readonly int _speedUpInterval;
-
-        private int _numberInterval = 0;
-
-        public Speed(int speed = 100, int speedUpInterval = 5)
+        public Speed(int speed = 100)
         {
-            Value = _startSpeed = speed;
-            _speedUpInterval = speedUpInterval;
+            Value = speed;
         }
 
         public int Value { get; private set; }
 
-        public void Increase(int score)
-        {
-            if (Value - ValueIncreaseSpeed > 0)
-            {
-                _numberInterval = score / _speedUpInterval;//Point interval number.
-                Value = _startSpeed - _numberInterval * ValueIncreaseSpeed;
-            }
-        }
+        public void Increase() => Value = Value - ValueIncreaseSpeed > 0 ? Value - ValueIncreaseSpeed : Value;
 
         public void Apply() => Thread.Sleep(Value);
     }
