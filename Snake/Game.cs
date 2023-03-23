@@ -20,7 +20,7 @@ namespace GameSnake
             _speed = new Speed();
 
             var border = new Border(width, height);
-            var snake = type.CreateTypeSnakeGame(border) ?? throw new ArgumentException("Unknown type of snake.");
+            var snake = type.CreateSnake(border);
 
             _gameMap = new GameMap(border, snake);
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;

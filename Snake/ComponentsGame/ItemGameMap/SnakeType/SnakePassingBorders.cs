@@ -18,11 +18,9 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 
         public override bool Intersect()
         {
-            var newPositionHead = GetNewHeadPosition();
-
-            for (var i = _length - 1; i > 0; i--)
+            for (var i = _length - 2; i > 0; i--)
             {
-                if (newPositionHead.Equals(_body[i]))
+                if (_head.Equals(_body[i]))
                 {
                     return true;
                 }

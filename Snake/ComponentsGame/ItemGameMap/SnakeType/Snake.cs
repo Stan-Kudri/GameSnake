@@ -1,4 +1,5 @@
-﻿using GameSnake.Enum;
+﻿
+using GameSnake.Enum;
 using GameSnake.Extension;
 
 namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
@@ -27,16 +28,16 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 
         public void Move()
         {
-            _head = GetNewHeadPosition();
             _body.Add(_head);
             _body.Remove(_body.First());
         }
 
         public bool EatFood(Point food)
         {
-            if (food.Equals(GetNewHeadPosition()))
+            _head = GetNewHeadPosition();
+
+            if (food.Equals(_head))
             {
-                _head = GetNewHeadPosition();
                 _length++;
                 _body.Add(_head);
 

@@ -6,7 +6,7 @@ namespace GameSnake.Extension
 {
     public static class SnakeTypeExtension
     {
-        public static Snake? CreateTypeSnakeGame(this TypeSnake type, Border border, int snakeLength = 10)
+        public static Snake CreateSnake(this TypeSnake type, Border border, int snakeLength = 10)
         {
             if (type == TypeSnake.NotPassingBorders)
             {
@@ -18,7 +18,7 @@ namespace GameSnake.Extension
             }
             else
             {
-                return null;
+                throw new ArgumentException("Unknown type of snake.");
             }
         }
     }
