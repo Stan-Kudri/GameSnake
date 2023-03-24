@@ -57,6 +57,6 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
             return position;
         }
 
-        private bool IsEncounterTheBorder(Point point) => point.Y > _heightField || point.Y < 0 || point.X > _widthField || point.X < 0;
+        private bool IsEncounterTheBorder(Point point) => point.Y > _heightField || point.Y <= 0 || point.X > _widthField || point.X <= 0;
     }
 }

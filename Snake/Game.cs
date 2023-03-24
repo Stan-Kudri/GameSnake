@@ -11,13 +11,11 @@ namespace GameSnake
         private GameMap _gameMap;
         private UserInput _userInput;
         private Score _score;
-        private Speed _speed;
 
         public Game(int width, int height, TypeSnake type)
         {
             _userInput = new UserInput();
             _score = new Score(height);
-            _speed = new Speed();
 
             var border = new Border(width, height);
             var snake = type.CreateSnake(border);
@@ -25,7 +23,6 @@ namespace GameSnake
             _gameMap = new GameMap(border, snake);
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
             _gameMap.OnEatScore += _score.Increase;
-            _score.OnUpIntervalScore += _speed.Increase;
         }
 
         public void Run()
@@ -40,7 +37,7 @@ namespace GameSnake
                 _gameMap.Draw();
                 _score.Draw();
 
-                _speed.Apply();
+                Thread.Sleep(100);
             }
 
             _gameMap.Clear();
