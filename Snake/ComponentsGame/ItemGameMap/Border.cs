@@ -12,6 +12,8 @@ namespace GameSnake.Components.ItemGameMap
 
         public int Height { get; private set; }
 
+        public List<Point> Borders => _border;
+
         public Border(int width, int height)
         {
             if (width < 1 || height < 1)

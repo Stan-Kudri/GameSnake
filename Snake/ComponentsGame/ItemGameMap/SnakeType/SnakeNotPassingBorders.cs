@@ -5,20 +5,18 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 {
     public class SnakeNotPassingBorders : Snake
     {
-        private readonly int _heightField;
-        private readonly int _widthField;
+        private protected readonly List<Point> _border;
 
-        public SnakeNotPassingBorders(int x, int y, Border field) : this(x, y, field, 1) { }
+        public SnakeNotPassingBorders(int x, int y, Border border) : this(x, y, border, 1) { }
 
-        public SnakeNotPassingBorders(int x, int y, Border field, int length) : base(x, y, length)
+        public SnakeNotPassingBorders(int x, int y, Border border, int length) : base(x, y, length)
         {
-            _heightField = field.Height;
-            _widthField = field.Width;
+            _border = border.Borders;
         }
 
         public override bool Intersect()
         {
-            if (IsEncounterTheBorder(_head))
+            if (ObstacleCollision())
             {
                 return true;
             }
@@ -57,6 +55,17 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
             return position;
         }
 
-        private bool IsEncounterTheBorder(Point point) => point.Y > _heightField || point.Y <= 0 || point.X > _widthField || point.X <= 0;
+        private bool ObstacleCollision()
+        {
+            foreach (var obstacle in _border)
+            {
+                if (obstacle.Equals(_head))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

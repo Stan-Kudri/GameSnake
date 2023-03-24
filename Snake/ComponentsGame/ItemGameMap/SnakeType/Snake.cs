@@ -1,5 +1,4 @@
-﻿
-using GameSnake.Enum;
+﻿using GameSnake.Enum;
 using GameSnake.Extension;
 
 namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
