@@ -1,4 +1,5 @@
 ﻿using GameSnake.Components.ItemGameMap;
+using GameSnake.ComponentsGame;
 using GameSnake.Extension;
 
 namespace GameSnake.Components
@@ -10,9 +11,9 @@ namespace GameSnake.Components
         public event Action<Food>? OnEatScore;
 
         private readonly Border _border;
+        private readonly Snake _snake;
 
         private Food _food;
-        private Snake _snake;
 
         public GameMap(int width, int height, int snakeLength = 10)
         {

@@ -1,4 +1,5 @@
 ﻿using GameSnake.Components;
+using GameSnake.ComponentsGame;
 
 namespace GameSnake
 {
@@ -7,14 +8,17 @@ namespace GameSnake
         private GameMap _gameMap;
         private UserInput _userInput;
         private Score _score;
+        private Speed _speed;
 
         public Game(int weight, int height)
         {
             _userInput = new UserInput();
             _gameMap = new GameMap(weight, height);
             _score = new Score(height);
+            _speed = new Speed();
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
             _gameMap.OnEatScore += _score.Increase;
+            _score.OnUpIntervalScore += _speed.Increase;
         }
 
         public void Run()
@@ -29,7 +33,7 @@ namespace GameSnake
                 _gameMap.Draw();
                 _score.Draw();
 
-                Thread.Sleep(100);
+                _speed.Apply();
             }
 
             _gameMap.Clear();
