@@ -6,12 +6,6 @@ namespace GameSnake.Components.ItemGameMap
     {
         public const char SymbolField = '*';
 
-        public int Width { get; private set; }
-
-        public int Height { get; private set; }
-
-        public List<Point> Borders { get; private set; }
-
         public Border(int width, int height)
         {
             if (width < 1 || height < 1)
@@ -24,6 +18,12 @@ namespace GameSnake.Components.ItemGameMap
 
             Borders = Create();
         }
+
+        public int Width { get; private set; }
+
+        public int Height { get; private set; }
+
+        public List<Point> Borders { get; private set; }
 
         public void Draw() => Borders.ForEach(x => x.Draw(SymbolField));
 

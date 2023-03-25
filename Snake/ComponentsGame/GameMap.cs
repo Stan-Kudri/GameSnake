@@ -58,6 +58,7 @@ namespace GameSnake.Components
             for (var i = 0; i < NumberRandomSearchPosition; i++)
             {
                 var newPositionFood = _border.GenerateFoodPosition();
+
                 if (!_snake.IntersectBody(newPositionFood))
                 {
                     return new Food(newPositionFood);
@@ -74,6 +75,7 @@ namespace GameSnake.Components
                 for (var y = 1; y < _border.Height - 1; y++)
                 {
                     var newPositionFood = new Point(x, y);
+
                     if (!_snake.IntersectBody(newPositionFood))
                     {
                         return new Food(newPositionFood);
