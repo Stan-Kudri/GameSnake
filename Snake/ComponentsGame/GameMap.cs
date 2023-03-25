@@ -23,7 +23,7 @@ namespace GameSnake.Components
             _snake = snake;
         }
 
-        public bool GameOver => _snake.ObstacleCollision() && _snake.Intersect();
+        public bool GameOver => _snake.ObstacleCollision() || _snake.Intersect();
 
         public void ChangeSnakeDirection(UserInput direction) => _snake.Direction = direction.CurrentDirection;
 
