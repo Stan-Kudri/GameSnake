@@ -1,5 +1,6 @@
 ﻿using GameSnake.Components.ItemGameMap;
 using GameSnake.ComponentsGame;
+using GameSnake.ComponentsGame.ItemGameMap.SnakeType;
 using GameSnake.Extension;
 
 namespace GameSnake.Components
@@ -15,14 +16,14 @@ namespace GameSnake.Components
 
         private Food _food;
 
-        public GameMap(int width, int height, int snakeLength = 10)
+        public GameMap(Border border, Snake snake)
         {
-            _border = new Border(width, height);
+            _border = border;
             _food = new Food(_border.GenerateFoodPosition());
-            _snake = new Snake((width / 2) - snakeLength, height / 2, _border, snakeLength);
+            _snake = snake;
         }
 
-        public bool GameOver => _snake.Intersect();
+        public bool GameOver => _snake.ObstacleCollision() && _snake.Intersect();
 
         public void ChangeSnakeDirection(UserInput direction) => _snake.Direction = direction.CurrentDirection;
 
@@ -41,9 +42,9 @@ namespace GameSnake.Components
 
         public void Draw()
         {
-            _border.Draw();
             _snake.Draw();
             _food.Draw();
+            _border.Draw();
         }
 
         public void Clear()
@@ -57,6 +58,7 @@ namespace GameSnake.Components
             for (var i = 0; i < NumberRandomSearchPosition; i++)
             {
                 var newPositionFood = _border.GenerateFoodPosition();
+
                 if (!_snake.IntersectBody(newPositionFood))
                 {
                     return new Food(newPositionFood);
@@ -73,6 +75,7 @@ namespace GameSnake.Components
                 for (var y = 1; y < _border.Height - 1; y++)
                 {
                     var newPositionFood = new Point(x, y);
+
                     if (!_snake.IntersectBody(newPositionFood))
                     {
                         return new Food(newPositionFood);

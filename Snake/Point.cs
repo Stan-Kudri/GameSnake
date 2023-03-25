@@ -1,6 +1,9 @@
-﻿namespace GameSnake {
-    public class Point {
-        public Point(int x, int y) {
+﻿namespace GameSnake
+{
+    public class Point
+    {
+        public Point(int x, int y)
+        {
             X = x;
             Y = y;
         }
@@ -11,16 +14,14 @@
 
         public Point Clone() => new(X, Y);
 
-        public override int GetHashCode() {
-            return HashCode.Combine(X, Y);
-        }
+        public override int GetHashCode() => HashCode.Combine(X, Y);
 
-        public override bool Equals(object? obj) {
-            return Equals(obj as Point);
-        }
+        public override bool Equals(object? obj) => Equals(obj as Point);
 
-        private bool Equals(Point? position) {
-            if (position == null) {
+        private bool Equals(Point? position)
+        {
+            if (position == null)
+            {
                 return false;
             }
 

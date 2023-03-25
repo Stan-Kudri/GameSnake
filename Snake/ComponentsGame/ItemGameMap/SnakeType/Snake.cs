@@ -1,27 +1,28 @@
-﻿using GameSnake.Enum;
+﻿using GameSnake.Components.ItemGameMap;
+using GameSnake.Enum;
 using GameSnake.Extension;
 
-namespace GameSnake.Components.ItemGameMap
+namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 {
     public class Snake
     {
         public const char SymbolSnake = 'О';
 
+        private readonly List<Point> _body;
+        private readonly List<Point> _border;
         private readonly int _heightField;
         private readonly int _widthField;
-        private readonly List<Point> _body;
 
         private int _length;
         private Point _head;
 
-        public Snake(int x, int y, Border field) : this(x, y, field, 1) { }
-
-        public Snake(int x, int y, Border field, int length)
+        public Snake(int x, int y, Border border, int length)
         {
             _length = length;
             _body = new List<Point>(_length);
-            _heightField = field.Height;
-            _widthField = field.Width;
+            _border = border.Borders;
+            _widthField = border.Width;
+            _heightField = border.Height;
             BuildBody(x, y);
         }
 
@@ -29,16 +30,16 @@ namespace GameSnake.Components.ItemGameMap
 
         public void Move()
         {
-            _head = NextPoint();
             _body.Add(_head);
             _body.Remove(_body.First());
         }
 
         public bool EatFood(Point food)
         {
-            if (food.Equals(NextPoint()))
+            _head = GetNewHeadPosition();
+
+            if (food.Equals(_head))
             {
-                _head = NextPoint();
                 _length++;
                 _body.Add(_head);
 
@@ -52,13 +53,27 @@ namespace GameSnake.Components.ItemGameMap
 
         public void Clear() => _body.ForEach(x => x.Clear());
 
+        public bool ObstacleCollision()
+        {
+            foreach (var obstacle in _border)
+            {
+                if (obstacle.Equals(_head))
+                {
+                    return true;
+                }
+            }
+
+            _head.X = ClampInverted(_head.X, 1, _widthField - 1);
+            _head.Y = ClampInverted(_head.Y, 1, _heightField - 1);
+
+            return false;
+        }
+
         public bool Intersect()
         {
-            var newPositionHead = NextPoint();
-
-            for (var i = _length - 1; i > 0; i--)
+            for (var i = _length - 2; i > 0; i--)
             {
-                if (newPositionHead.Equals(_body[i]))
+                if (_head.Equals(_body[i]))
                 {
                     return true;
                 }
@@ -69,7 +84,7 @@ namespace GameSnake.Components.ItemGameMap
 
         public bool IntersectBody(Point food) => _body.Contains(food);
 
-        private Point NextPoint()
+        private Point GetNewHeadPosition()
         {
             Point position = _head.Clone();
 
@@ -88,9 +103,6 @@ namespace GameSnake.Components.ItemGameMap
                     --position.X;
                     break;
             }
-
-            position.X = ClampInverted(position.X, 1, _widthField - 1);
-            position.Y = ClampInverted(position.Y, 1, _heightField - 1);
 
             return position;
         }

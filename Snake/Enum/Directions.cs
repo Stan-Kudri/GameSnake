@@ -1,5 +1,7 @@
-﻿namespace GameSnake.Enum {
-    public enum Directions {
+﻿namespace GameSnake.Enum
+{
+    public enum Directions
+    {
         Unknown,
         Left,
         Right,
