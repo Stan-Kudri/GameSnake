@@ -6,13 +6,11 @@ namespace GameSnake.Components.ItemGameMap
     {
         public const char SymbolField = '*';
 
-        private List<Point> _border;
-
         public int Width { get; private set; }
 
         public int Height { get; private set; }
 
-        public List<Point> Borders => _border;
+        public List<Point> Borders { get; private set; }
 
         public Border(int width, int height)
         {
@@ -24,10 +22,10 @@ namespace GameSnake.Components.ItemGameMap
             Width = width;
             Height = height;
 
-            _border = Create();
+            Borders = Create();
         }
 
-        public void Draw() => _border.ForEach(x => x.Draw(SymbolField));
+        public void Draw() => Borders.ForEach(x => x.Draw(SymbolField));
 
         private List<Point> Create()
         {

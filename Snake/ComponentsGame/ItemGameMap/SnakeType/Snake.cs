@@ -1,25 +1,28 @@
-﻿using GameSnake.Enum;
+﻿using GameSnake.Components.ItemGameMap;
+using GameSnake.Enum;
 using GameSnake.Extension;
 
 namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 {
-    public abstract class Snake : ISnake
+    public class Snake : ISnake
     {
         public const char SymbolSnake = 'О';
 
-        private protected readonly List<Point> _body;
+        private readonly List<Point> _body;
+        private readonly List<Point> _border;
+        private readonly int _heightField;
+        private readonly int _widthField;
 
-        private protected int _length;
-        private protected Point _head;
+        private int _length;
+        private Point _head;
 
-        public Snake()
-        {
-        }
-
-        public Snake(int x, int y, int length)
+        public Snake(int x, int y, Border border, int length)
         {
             _length = length;
             _body = new List<Point>(_length);
+            _border = border.Borders;
+            _widthField = border.Width;
+            _heightField = border.Height;
             BuildBody(x, y);
         }
 
@@ -50,13 +53,65 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 
         public void Clear() => _body.ForEach(x => x.Clear());
 
-        public abstract bool Intersect();
+        public bool Intersect()
+        {
+            if (ObstacleCollision())
+            {
+                return true;
+            }
+
+            for (var i = _length - 2; i > 0; i--)
+            {
+                if (_head.Equals(_body[i]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         public bool IntersectBody(Point food) => _body.Contains(food);
 
-        private protected abstract Point GetNewHeadPosition();
+        private Point GetNewHeadPosition()
+        {
+            Point position = _head.Clone();
 
-        private protected void BuildBody(int x, int y)
+            switch (Direction)
+            {
+                case Directions.Up:
+                    --position.Y;
+                    break;
+                case Directions.Down:
+                    ++position.Y;
+                    break;
+                case Directions.Right:
+                    ++position.X;
+                    break;
+                case Directions.Left:
+                    --position.X;
+                    break;
+            }
+
+
+            return position;
+        }
+
+        private int ClampInverted(int position, int min, int max)
+        {
+            if (position < min)
+            {
+                return max;
+            }
+            else if (position > max)
+            {
+                return min;
+            }
+
+            return position;
+        }
+
+        private void BuildBody(int x, int y)
         {
             for (int i = 0; i < _length; i++)
             {
@@ -66,6 +121,22 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
             }
 
             _head = _body.Last();
+        }
+
+        private bool ObstacleCollision()
+        {
+            foreach (var obstacle in _border)
+            {
+                if (obstacle.Equals(_head))
+                {
+                    return true;
+                }
+            }
+
+            _head.X = ClampInverted(_head.X, 1, _widthField - 1);
+            _head.Y = ClampInverted(_head.Y, 1, _heightField - 1);
+
+            return false;
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using GameSnake;
-using GameSnake.Enum;
 
 const int HeightForScore = 2;
 
@@ -8,8 +7,7 @@ var width = 40;
 
 WindowSetting(width, height);
 
-var type = TypeSnakeSelection();
-var game = new Game(width, height, type);
+var game = new Game(width, height);
 game.Run();
 
 DisplayGameOver(width, height); //Massage "Game Over" 
@@ -22,25 +20,6 @@ static void WindowSetting(int width, int height)
     Console.SetBufferSize(width + 2, height + 2 + HeightForScore);
     Console.CursorVisible = false;
     Console.Title = "SNAKE";
-}
-
-static TypeSnake TypeSnakeSelection()
-{
-    Console.WriteLine("Types of snake game:\n1-The snake does not passing the borders;\n2-The snake passes through the borders.\n\nInput of the selected type:");
-    var type = TypeSnake.Unknown;
-
-    while (type == TypeSnake.Unknown)
-    {
-        var key = Console.ReadKey(true);
-        if (Enum.TryParse(key.KeyChar.ToString(), out TypeSnake numberType))
-        {
-            type = numberType;
-        }
-    }
-
-    Console.Clear();
-
-    return type;
 }
 
 static void DisplayGameOver(int fieldWidth, int fieldHeight)
