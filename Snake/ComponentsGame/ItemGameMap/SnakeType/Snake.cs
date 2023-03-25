@@ -4,7 +4,7 @@ using GameSnake.Extension;
 
 namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 {
-    public class Snake : ISnake
+    public class Snake
     {
         public const char SymbolSnake = 'О';
 
@@ -53,13 +53,24 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 
         public void Clear() => _body.ForEach(x => x.Clear());
 
-        public bool Intersect()
+        public bool ObstacleCollision()
         {
-            if (ObstacleCollision())
+            foreach (var obstacle in _border)
             {
-                return true;
+                if (obstacle.Equals(_head))
+                {
+                    return true;
+                }
             }
 
+            _head.X = ClampInverted(_head.X, 1, _widthField - 1);
+            _head.Y = ClampInverted(_head.Y, 1, _heightField - 1);
+
+            return false;
+        }
+
+        public bool Intersect()
+        {
             for (var i = _length - 2; i > 0; i--)
             {
                 if (_head.Equals(_body[i]))
@@ -120,22 +131,6 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
             }
 
             _head = _body.Last();
-        }
-
-        private bool ObstacleCollision()
-        {
-            foreach (var obstacle in _border)
-            {
-                if (obstacle.Equals(_head))
-                {
-                    return true;
-                }
-            }
-
-            _head.X = ClampInverted(_head.X, 1, _widthField - 1);
-            _head.Y = ClampInverted(_head.Y, 1, _heightField - 1);
-
-            return false;
         }
     }
 }

@@ -12,18 +12,18 @@ namespace GameSnake.Components
         public event Action<Food>? OnEatScore;
 
         private readonly Border _border;
-        private readonly ISnake _snake;
+        private readonly Snake _snake;
 
         private Food _food;
 
-        public GameMap(Border border, ISnake snake)
+        public GameMap(Border border, Snake snake)
         {
             _border = border;
             _food = new Food(_border.GenerateFoodPosition());
             _snake = snake;
         }
 
-        public bool GameOver => _snake.Intersect();
+        public bool GameOver => _snake.ObstacleCollision() && _snake.Intersect();
 
         public void ChangeSnakeDirection(UserInput direction) => _snake.Direction = direction.CurrentDirection;
 
