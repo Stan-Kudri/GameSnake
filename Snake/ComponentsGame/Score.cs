@@ -7,6 +7,8 @@ namespace GameSnake.Components
         public const int StartWidthDisplay = 0;
         public const int OffsetPositionHeight = 2;
 
+        public event Action<int>? OnUpIntervalScore;
+
         private readonly int _startHeightDisplay;
 
         public Score(int height, int points = 0)
@@ -25,6 +27,10 @@ namespace GameSnake.Components
             Console.Write(scoreLine);
         }
 
-        public void Increase(Food food) => Points += food.Score;
+        public void Increase(Food food)
+        {
+            Points += food.Score;
+            OnUpIntervalScore?.Invoke(Points);
+        }
     }
 }
