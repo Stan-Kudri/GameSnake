@@ -35,7 +35,10 @@ namespace GameSnake.Components.ItemGameMap
             {
                 for (var y = 0; y <= Height; y++)
                 {
-                    if (y == 0 || y == Height || x == 0 || x == Width)
+                    if (y == 0 ||
+                        y == Height ||
+                        x == 0 ||
+                        x == Width)
                     {
                         var position = new Point(x, y);
                         border.Add(position);
