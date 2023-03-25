@@ -93,7 +93,6 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
                     break;
             }
 
-
             return position;
         }
 
