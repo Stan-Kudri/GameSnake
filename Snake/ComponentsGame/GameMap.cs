@@ -1,6 +1,6 @@
 ﻿using GameSnake.Components.ItemGameMap;
 using GameSnake.ComponentsGame;
-using GameSnake.ComponentsGame.ItemGameMap.SnakeType;
+using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.Extension;
 
 namespace GameSnake.Components
@@ -29,15 +29,13 @@ namespace GameSnake.Components
 
         public void Move()
         {
-            if (_snake.EatFood(_food.Position))
+            if (_snake.TrueAteFood(_food.Position))
             {
                 OnEatScore?.Invoke(_food);
                 _food = RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
             }
-            else
-            {
-                _snake.Move();
-            }
+
+            _snake.Move();
         }
 
         public void Draw()

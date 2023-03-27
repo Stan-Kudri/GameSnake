@@ -1,7 +1,7 @@
 ﻿using GameSnake.Components;
 using GameSnake.Components.ItemGameMap;
 using GameSnake.ComponentsGame;
-using GameSnake.ComponentsGame.ItemGameMap.SnakeType;
+using GameSnake.ComponentsGame.ItemGameMap;
 
 namespace GameSnake
 {

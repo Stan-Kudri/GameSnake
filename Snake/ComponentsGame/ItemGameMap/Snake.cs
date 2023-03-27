@@ -2,7 +2,7 @@
 using GameSnake.Enum;
 using GameSnake.Extension;
 
-namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
+namespace GameSnake.ComponentsGame.ItemGameMap
 {
     public class Snake
     {
@@ -15,6 +15,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
 
         private int _length;
         private Point _head;
+        private Point _oldTail;
 
         public Snake(int x, int y, Border border, int length)
         {
@@ -23,26 +24,34 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
             _border = border.Borders;
             _widthField = border.Width;
             _heightField = border.Height;
-            BuildBody(x, y);
+            (_head, _oldTail) = BuildBody(x, y);
         }
 
         public Directions Direction { get; set; } = Directions.Right;
 
         public void Move()
         {
+            _head = GetNewHeadPosition();
+            _oldTail = _body.First();
+
+            if (ObstacleCollision())
+            {
+                return;
+            }
+
+            _head.X = ClampInverted(_head.X, 1, _widthField - 1);
+            _head.Y = ClampInverted(_head.Y, 1, _heightField - 1);
+
             _body.Add(_head);
             _body.Remove(_body.First());
         }
 
-        public bool EatFood(Point food)
+        public bool TrueAteFood(Point food)
         {
-            _head = GetNewHeadPosition();
-
             if (food.Equals(_head))
             {
                 _length++;
-                _body.Add(_head);
-
+                _body.Insert(0, _oldTail);
                 return true;
             }
 
@@ -62,9 +71,6 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
                     return true;
                 }
             }
-
-            _head.X = ClampInverted(_head.X, 1, _widthField - 1);
-            _head.Y = ClampInverted(_head.Y, 1, _heightField - 1);
 
             return false;
         }
@@ -121,7 +127,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
             return position;
         }
 
-        private void BuildBody(int x, int y)
+        private (Point Head, Point Tail) BuildBody(int x, int y)
         {
             for (int i = 0; i < _length; i++)
             {
@@ -130,7 +136,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap.SnakeType
                 _body.Add(position);
             }
 
-            _head = _body.Last();
+            return (_body.Last(), _body.First());
         }
     }
 }
