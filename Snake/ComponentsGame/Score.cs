@@ -13,6 +13,11 @@ namespace GameSnake.Components
 
         public Score(int height, int points = 0)
         {
+            if (points < 0)
+            {
+                throw new ArgumentException("Points are not negative.", nameof(points));
+            }
+
             _startHeightDisplay = height + OffsetPositionHeight;
             Points = points;
         }
