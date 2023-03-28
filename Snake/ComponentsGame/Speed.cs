@@ -2,27 +2,42 @@
 {
     public class Speed
     {
-        public const int ValueIncreaseSpeed = 25;
-
         private readonly int _startSpeed;
-        private readonly int _speedUpInterval;
+        private readonly int _thresholdPoints;
+        private readonly int _valueIncreaseSpeed;
 
         private int _numberInterval = 0;
 
-        public Speed(int speed = 100, int speedUpInterval = 5)
+        public Speed(int speed = 100, int thresholdPoints = 5, int valueIncreaseSpeed = 25)
         {
+            if (speed <= 0)
+            {
+                throw new ArgumentException("Speed greater than zero.", nameof(speed));
+            }
+
+            if (thresholdPoints <= 0)
+            {
+                throw new ArgumentException("Interval points greater than zero.", nameof(thresholdPoints));
+            }
+
+            if (thresholdPoints <= 0)
+            {
+                throw new ArgumentException("Increase speed greater than zero.", nameof(valueIncreaseSpeed));
+            }
+
             Value = _startSpeed = speed;
-            _speedUpInterval = speedUpInterval;
+            _thresholdPoints = thresholdPoints;
+            _valueIncreaseSpeed = valueIncreaseSpeed;
         }
 
         public int Value { get; private set; }
 
         public void Increase(int score)
         {
-            if (Value - ValueIncreaseSpeed > 0)
+            if (Value - _valueIncreaseSpeed > 0)
             {
-                _numberInterval = score / _speedUpInterval;//Point interval number.
-                Value = _startSpeed - _numberInterval * ValueIncreaseSpeed;
+                _numberInterval = score / _thresholdPoints;//Point interval number.
+                Value = _startSpeed - _numberInterval * _valueIncreaseSpeed;
             }
         }
 

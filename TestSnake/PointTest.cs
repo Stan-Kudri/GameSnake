@@ -5,16 +5,16 @@ namespace TestSnake
     public class PointTest
     {
         public static IEnumerable<object[]> TwoPoints() => new List<object[]>
+        {
+            new object[]
             {
-                new object[]
+                new List<Point>()
                 {
-                    new List<Point>()
-                    {
-                        new Point(5,1),
-                        new Point(1,5)
-                    },
+                    new Point(5,1),
+                    new Point(1,5)
                 },
-            };
+            },
+        };
 
         [Theory]
         [MemberData(nameof(TwoPoints))]
