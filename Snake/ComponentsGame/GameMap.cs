@@ -29,7 +29,7 @@ namespace GameSnake.Components
 
         public void Move()
         {
-            if (_snake.TrueAteFood(_food.Position))
+            if (_snake.TryEatFood(_food.Position))
             {
                 OnEatScore?.Invoke(_food);
                 _food = RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");

@@ -24,7 +24,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap
             _border = border.Borders;
             _widthField = border.Width;
             _heightField = border.Height;
-            (_head, _oldTail) = BuildBody(x, y);
+            (_body, _head, _oldTail) = BuildBody(x, y);
         }
 
         public Directions Direction { get; set; } = Directions.Right;
@@ -46,7 +46,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap
             _body.Remove(_body.First());
         }
 
-        public bool TrueAteFood(Point food)
+        public bool TryEatFood(Point food)
         {
             if (food.Equals(_head))
             {
@@ -127,16 +127,18 @@ namespace GameSnake.ComponentsGame.ItemGameMap
             return position;
         }
 
-        private (Point Head, Point Tail) BuildBody(int x, int y)
+        private (List<Point> Body, Point Head, Point Tail) BuildBody(int x, int y)
         {
+            var body = new List<Point>();
+
             for (int i = 0; i < _length; i++)
             {
                 x++;
                 var position = new Point(x, y);
-                _body.Add(position);
+                body.Add(position);
             }
 
-            return (_body.Last(), _body.First());
+            return (body, body.Last(), body.First());
         }
     }
 }
