@@ -1,6 +1,6 @@
 ﻿using GameSnake;
 
-namespace TestSnake
+namespace TestSnake.TestComponentsGame
 {
     public class SpeedTest
     {

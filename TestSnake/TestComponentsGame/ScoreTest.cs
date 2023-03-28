@@ -2,7 +2,7 @@
 using GameSnake.Components;
 using GameSnake.Components.ItemGameMap;
 
-namespace TestSnake
+namespace TestSnake.TestComponentsGame
 {
     public class ScoreTest
     {
