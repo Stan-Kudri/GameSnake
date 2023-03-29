@@ -20,11 +20,11 @@ namespace TestSnake.TestComponentsGame
         public static IEnumerable<object[]> ClassNotEmptyPosition()
         {
             var border = new Border(3, 3);
-            var snake = new Snake(1, 1, border, 1);
 
             yield return new object[]
             {
-                new GameMap(border, snake)
+                border,
+                new Snake(1, 1, border, 1)
             };
 
         }
@@ -44,13 +44,9 @@ namespace TestSnake.TestComponentsGame
         }
 
         [Theory]
-        [InlineData()]
-        public void No_Food_Cell()
+        [MemberData(nameof(ClassNotEmptyPosition))]
+        public void No_Food_Cell(Border border, Snake snake)
         {
-            //Act
-            var border = new Border(2, 2);
-            var snake = new Snake(1, 1, border, 1);
-
             //Assert
             Assert.Throws<Exception>(() => { new GameMap(border, snake); });
         }
