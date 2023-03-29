@@ -131,11 +131,18 @@ namespace GameSnake.ComponentsGame.ItemGameMap
         {
             var body = new List<Point>();
 
-            for (int i = 0; i < _length; i++)
+            if (_length == 1)
             {
-                x++;
-                var position = new Point(x, y);
-                body.Add(position);
+                body.Add(new Point(x, y));
+            }
+            else
+            {
+                for (int i = 0; i < _length; i++)
+                {
+                    x++;
+                    var position = new Point(x, y);
+                    body.Add(position);
+                }
             }
 
             return (body, body.Last(), body.First());

@@ -19,11 +19,11 @@ namespace GameSnake.Components
         public GameMap(Border border, Snake snake)
         {
             _border = border;
-            _food = new Food(_border.GenerateFoodPosition());
             _snake = snake;
+            _food = RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
         }
 
-        public bool GameOver => _snake.ObstacleCollision() || _snake.Intersect();
+        public bool GameOver() => _snake.ObstacleCollision() || _snake.Intersect();
 
         public void ChangeSnakeDirection(UserInput direction) => _snake.Direction = direction.CurrentDirection;
 

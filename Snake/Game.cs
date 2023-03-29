@@ -1,7 +1,7 @@
 ﻿using GameSnake.Components;
 using GameSnake.Components.ItemGameMap;
 using GameSnake.ComponentsGame;
-using GameSnake.ComponentsGame.ItemGameMap;
+using GameSnake.Extension;
 
 namespace GameSnake
 {
@@ -19,7 +19,7 @@ namespace GameSnake
             _speed = new Speed();
 
             var border = new Border(width, height);
-            var snake = new Snake((border.Width / 2) - snakeLength, border.Height / 2, border, snakeLength);
+            var snake = snakeLength.Create(border);
 
             _gameMap = new GameMap(border, snake);
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
@@ -29,7 +29,7 @@ namespace GameSnake
 
         public void Run()
         {
-            while (!_gameMap.GameOver)
+            while (!_gameMap.GameOver())
             {
                 _gameMap.Clear();
 
