@@ -20,11 +20,12 @@ namespace GameSnake.ComponentsGame.ItemGameMap
         public Snake(int x, int y, Border border, int length)
         {
             _length = length;
-            _body = new List<Point>(_length);
             _border = border.Borders;
             _widthField = border.Width;
             _heightField = border.Height;
-            (_body, _head, _oldTail) = BuildBody(x, y);
+            _body = BuildBody(x, y);
+            _head = _body.First();
+            _oldTail = _body.Last();
         }
 
         public Directions Direction { get; set; } = Directions.Right;
@@ -127,7 +128,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap
             return position;
         }
 
-        private (List<Point> Body, Point Head, Point Tail) BuildBody(int x, int y)
+        private List<Point> BuildBody(int x, int y)
         {
             var body = new List<Point>();
 
@@ -145,7 +146,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap
                 }
             }
 
-            return (body, body.Last(), body.First());
+            return body;
         }
     }
 }

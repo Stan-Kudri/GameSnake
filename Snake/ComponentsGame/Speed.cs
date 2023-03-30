@@ -36,7 +36,8 @@
         {
             if (Value - _valueIncreaseSpeed > 0)
             {
-                _numberInterval = score / _thresholdPoints;//Point interval number.
+                //Point interval number.
+                _numberInterval = score / _thresholdPoints;
                 Value = _startSpeed - _numberInterval * _valueIncreaseSpeed;
             }
         }

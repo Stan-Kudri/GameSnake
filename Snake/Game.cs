@@ -29,7 +29,7 @@ namespace GameSnake
 
         public void Run()
         {
-            while (!_gameMap.GameOver())
+            while (!_gameMap.IsGameOver())
             {
                 _gameMap.Clear();
 

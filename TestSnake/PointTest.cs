@@ -4,17 +4,20 @@ namespace TestSnake
 {
     public class PointTest
     {
-        public static IEnumerable<object[]> TwoPoints() => new List<object[]>
+        public static IEnumerable<object[]> TwoPoints()
         {
-            new object[]
+            var positionX = 5;
+            var positionY = 1;
+
+            yield return new object[]
             {
                 new List<Point>()
                 {
-                    new Point(5,1),
-                    new Point(1,5)
+                    new Point(positionX, positionY),
+                    new Point(positionY, positionX)
                 },
-            },
-        };
+            };
+        }
 
         [Theory]
         [MemberData(nameof(TwoPoints))]

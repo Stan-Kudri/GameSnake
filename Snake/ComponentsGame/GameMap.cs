@@ -23,7 +23,7 @@ namespace GameSnake.Components
             _food = RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
         }
 
-        public bool GameOver() => _snake.ObstacleCollision() || _snake.Intersect();
+        public bool IsGameOver() => _snake.ObstacleCollision() || _snake.Intersect();
 
         public void ChangeSnakeDirection(UserInput direction) => _snake.Direction = direction.CurrentDirection;
 

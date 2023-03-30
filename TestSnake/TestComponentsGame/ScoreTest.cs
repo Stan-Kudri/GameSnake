@@ -6,23 +6,15 @@ namespace TestSnake.TestComponentsGame
 {
     public class ScoreTest
     {
-        public static IEnumerable<object[]> ItemScore()
-        {
-            yield return new object[]
-            {
-                new Score(10, 0),
-                20,
-                20,
-            };
-        }
-
         [Theory]
-        [MemberData(nameof(ItemScore))]
-        public void Add_Points_To_Score(Score score, int points, int expectScore)
+        [InlineData(10, 10)]
+        public void Add_Points_To_Score(int startHeightDisplay, int expectScore)
         {
-            //Actual
+            //Arrange
+            var startScore = 0;
+            var score = new Score(startHeightDisplay, startScore);
             var positionFood = new Point(2, 2);
-            var food = new Food(positionFood, points);
+            var food = new Food(positionFood, expectScore);
 
             //Act
             score.Increase(food);
