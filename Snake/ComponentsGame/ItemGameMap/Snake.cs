@@ -17,18 +17,30 @@ namespace GameSnake.ComponentsGame.ItemGameMap
         private Point _head;
         private Point _oldTail;
 
-        public Snake(int x, int y, Border border, int length)
+        public Snake(int x, int y, Border border, int length, Directions directions = Directions.Right)
         {
+            if (x >= border.Width)
+            {
+                throw new ArgumentException("The position X of the snake is incorrect.", nameof(x));
+            }
+            if (y >= border.Height)
+            {
+                throw new ArgumentException("The position Y of the snake is incorrect.", nameof(y));
+            }
+
             _length = length;
             _border = border.Borders;
             _widthField = border.Width;
             _heightField = border.Height;
+            Direction = directions;
             _body = BuildBody(x, y);
             _head = _body.First();
             _oldTail = _body.Last();
         }
 
-        public Directions Direction { get; set; } = Directions.Right;
+        public Directions Direction { get; set; }
+
+        public Point Head => _head;
 
         public void Move()
         {
