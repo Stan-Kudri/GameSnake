@@ -14,6 +14,16 @@ namespace GameSnake
 
         public Game(int width, int height, int snakeLength = 5)
         {
+            if (snakeLength <= 0)
+            {
+                throw new ArgumentException("Length snake more zero.", nameof(snakeLength));
+            }
+
+            if (width < 1 || height < 1)
+            {
+                throw new ArgumentException("Invalid board size.");
+            }
+
             _userInput = new UserInput();
             _score = new Score(height);
             _speed = new Speed();
