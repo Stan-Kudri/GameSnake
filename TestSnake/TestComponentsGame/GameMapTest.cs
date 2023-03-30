@@ -14,7 +14,7 @@ namespace TestSnake.TestComponentsGame
             var border = new Border(width, height);
             var snakePositionX = width / 2;
             var snakePositionY = height / 2;
-            var snake = new Snake(snakePositionX, snakePositionY, border, 2);
+            var snake = new Snake(snakePositionX, snakePositionY, border, length);
             var gameMap = new GameMap(border, snake);
 
             //Act
