@@ -4,34 +4,32 @@ namespace TestSnake
 {
     public class PointTest
     {
-        public static IEnumerable<object[]> TwoPoints()
+        [Theory]
+        [InlineData(5, 10)]
+        [InlineData(2, 40)]
+        [InlineData(3, 5)]
+        public void Not_Equals_Point(int firstPosition, int secondPosition)
         {
-            var positionX = 5;
-            var positionY = 1;
+            //Arrange
+            var firstPoint = new Point(firstPosition, secondPosition);
+            var secondPoint = new Point(secondPosition, firstPosition);
 
-            yield return new object[]
-            {
-                new List<Point>()
-                {
-                    new Point(positionX, positionY),
-                    new Point(positionY, positionX)
-                },
-            };
+            //Assert
+            Assert.NotEqual(firstPoint, secondPoint);
         }
 
         [Theory]
-        [MemberData(nameof(TwoPoints))]
-        public void Not_Equals_Point(List<Point> points)
+        [InlineData(5, 10)]
+        [InlineData(2, 40)]
+        [InlineData(3, 5)]
+        public void Equals_Point(int firstPosition, int secondPosition)
         {
-            Assert.NotEqual(points[0], points[1]);
-        }
+            //Arrange
+            var firstPoint = new Point(firstPosition, secondPosition);
+            var secondPoint = new Point(firstPosition, secondPosition);
 
-        [Theory]
-        [MemberData(nameof(TwoPoints))]
-        public void Equals_Point(List<Point> points)
-        {
-            Assert.Equal(points[0], points[0]);
-            Assert.Equal(points[1], points[1]);
+            //Assert
+            Assert.Equal(firstPoint, secondPoint);
         }
     }
 }

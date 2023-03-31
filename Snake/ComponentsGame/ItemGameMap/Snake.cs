@@ -17,7 +17,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap
         private Point _head;
         private Point _oldTail;
 
-        public Snake(int x, int y, Border border, int length, Directions directions = Directions.Right)
+        public Snake(int x, int y, Border border, int length = 1, Directions directions = Directions.Right)
         {
             if (x >= border.Width)
             {

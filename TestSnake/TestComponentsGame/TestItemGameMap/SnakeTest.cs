@@ -20,18 +20,16 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
         }
 
         [Theory]
-        [InlineData(20, 20, 5)]
-        public void Move_Snake_At_New_Position(int width, int height, int countMoveSnakeByX)
+        [InlineData(20, 20, 10, 10, 5, 15, 10)]
+        [InlineData(10, 10, 3, 3, 2, 5, 3)]
+        public void Move_Snake_At_New_Position(int width, int height, int startPositionX, int startPositionY, int countMoveSnakeByX, int expectHeadPositionX, int expectHeadPositionY)
         {
             //Arrange
             var border = new Border(width, height);
-            var startPositionX = border.Width / 2;
-            var startPositionY = border.Height / 2;
-            var length = 1;
-            var snake = new Snake(startPositionX, startPositionY, border, length);
+            var snake = new Snake(startPositionX, startPositionY, border);
 
             //Act
-            var expectHeadPosition = new Point(snake.Head.X + countMoveSnakeByX, snake.Head.Y);
+            var expectHeadPosition = new Point(expectHeadPositionX, expectHeadPositionY);
             for (var i = 0; i < countMoveSnakeByX; i++)
             {
                 snake.Move();
@@ -43,18 +41,15 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
         }
 
         [Theory]
-        [InlineData(20, 20)]
-        public void Wall_Collision_While_Moving(int width, int height)
+        [InlineData(20, 20, 10, 10, 10)]
+        [InlineData(5, 5, 2, 2, 3)]
+        public void Wall_Collision_While_Moving(int width, int height, int startPositionX, int startPositionY, int countMoveSnakeToCollision)
         {
             //Arrange
             var border = new Border(width, height);
-            var startPositionX = border.Width / 2;
-            var startPositionY = border.Height / 2;
-            var length = 1;
-            var snake = new Snake(startPositionX, startPositionY, border, length);
+            var snake = new Snake(startPositionX, startPositionY, border);
 
             //Act
-            var countMoveSnakeToCollision = border.Width - startPositionX;
             for (var i = 0; i < countMoveSnakeToCollision; i++)
             {
                 snake.Move();
