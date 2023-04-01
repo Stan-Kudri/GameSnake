@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33417.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSnake", "GameSnake\GameSnake.csproj", "{4447456F-4EBF-4130-86B0-EEE08A35BD01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSnake", "Snake\GameSnake.csproj", "{4447456F-4EBF-4130-86B0-EEE08A35BD01}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSnake", "TestSnake\TestSnake.csproj", "{1926B3A1-A041-4F93-949E-ED9EE0060448}"
 EndProject
