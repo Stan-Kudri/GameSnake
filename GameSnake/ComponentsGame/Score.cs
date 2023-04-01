@@ -1,4 +1,4 @@
-﻿using GameSnake.Components.ItemGameMap;
+using GameSnake.Components.ItemGameMap;
 
 namespace GameSnake.Components
 {
@@ -6,8 +6,6 @@ namespace GameSnake.Components
     {
         public const int StartWidthDisplay = 0;
         public const int OffsetPositionHeight = 2;
-
-        public event Action<int>? OnUpIntervalScore;
 
         private readonly int _startHeightDisplay;
 
@@ -21,6 +19,8 @@ namespace GameSnake.Components
             _startHeightDisplay = height + OffsetPositionHeight;
             Points = points;
         }
+
+        public event Action<int>? OnUpIntervalScore;
 
         public int Points { get; private set; }
 

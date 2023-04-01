@@ -1,4 +1,4 @@
-﻿namespace GameSnake.Extension
+namespace GameSnake.Extension
 {
     public static class PointExtension
     {

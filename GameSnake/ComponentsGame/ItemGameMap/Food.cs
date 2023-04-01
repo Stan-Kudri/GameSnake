@@ -1,4 +1,4 @@
-﻿using GameSnake.Extension;
+using GameSnake.Extension;
 
 namespace GameSnake.Components.ItemGameMap
 {

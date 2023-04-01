@@ -1,4 +1,4 @@
-﻿using GameSnake.Components.ItemGameMap;
+using GameSnake.Components.ItemGameMap;
 using GameSnake.Enum;
 using GameSnake.Extension;
 
@@ -23,6 +23,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap
             {
                 throw new ArgumentException("The position X of the snake is incorrect.", nameof(x));
             }
+
             if (y >= border.Height)
             {
                 throw new ArgumentException("The position Y of the snake is incorrect.", nameof(y));

@@ -1,4 +1,4 @@
-﻿using GameSnake.Components;
+using GameSnake.Components;
 using GameSnake.Components.ItemGameMap;
 using GameSnake.ComponentsGame;
 using GameSnake.Extension;
@@ -7,10 +7,10 @@ namespace GameSnake
 {
     public class Game
     {
-        private GameMap _gameMap;
-        private UserInput _userInput;
-        private Score _score;
-        private Speed _speed;
+        private readonly GameMap _gameMap;
+        private readonly UserInput _userInput;
+        private readonly Score _score;
+        private readonly Speed _speed;
 
         public Game(int width, int height, int snakeLength = 5)
         {

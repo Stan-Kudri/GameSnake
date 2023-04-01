@@ -1,4 +1,4 @@
-﻿namespace GameSnake
+namespace GameSnake
 {
     public class Speed
     {
@@ -36,9 +36,9 @@
         {
             if (Value - _valueIncreaseSpeed > 0)
             {
-                //Point interval number.
+                // Point interval number.
                 _numberInterval = score / _thresholdPoints;
-                Value = _startSpeed - _numberInterval * _valueIncreaseSpeed;
+                Value = _startSpeed - (_numberInterval * _valueIncreaseSpeed);
             }
         }
 

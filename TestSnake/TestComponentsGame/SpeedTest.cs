@@ -1,4 +1,4 @@
-﻿using GameSnake;
+using GameSnake;
 
 namespace TestSnake.TestComponentsGame
 {

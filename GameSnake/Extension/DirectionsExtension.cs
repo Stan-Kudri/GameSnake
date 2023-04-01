@@ -1,4 +1,4 @@
-﻿using GameSnake.Enum;
+using GameSnake.Enum;
 
 namespace GameSnake.Extension
 {

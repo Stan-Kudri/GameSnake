@@ -1,4 +1,4 @@
-﻿using GameSnake.Components;
+using GameSnake.Components;
 using GameSnake.Components.ItemGameMap;
 using GameSnake.ComponentsGame.ItemGameMap;
 
