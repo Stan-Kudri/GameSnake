@@ -1,4 +1,5 @@
-﻿using GameSnake;
+using System.Runtime.InteropServices;
+using GameSnake;
 
 const int HeightForScore = 2;
 
@@ -16,8 +17,11 @@ Console.ReadKey();
 
 static void WindowSetting(int width, int height)
 {
-    Console.SetWindowSize(width + 2, height + 2 + HeightForScore);
-    Console.SetBufferSize(width + 2, height + 2 + HeightForScore);
+    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+    {
+        Console.SetWindowSize(width + 2, height + 2 + HeightForScore);
+        Console.SetBufferSize(width + 2, height + 2 + HeightForScore);
+    }
     Console.CursorVisible = false;
     Console.Title = "SNAKE";
 }
