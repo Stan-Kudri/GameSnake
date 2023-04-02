@@ -1,13 +1,13 @@
-﻿using GameSnake.Enum;
+using GameSnake.Enum;
 using GameSnake.Extension;
 
 namespace GameSnake.ComponentsGame
 {
     public class UserInput
     {
-        public event Action<UserInput>? OnChangedDirection;
-
         public UserInput(Directions direction = Directions.Right) => CurrentDirection = direction;
+
+        public event Action<UserInput>? OnChangedDirection;
 
         public Directions CurrentDirection { get; private set; }
 
@@ -35,6 +35,7 @@ namespace GameSnake.ComponentsGame
                         CurrentDirection = direction;
                         return true;
                     }
+
                     return false;
                 case Directions.Right:
                 case Directions.Left:
@@ -43,8 +44,10 @@ namespace GameSnake.ComponentsGame
                         CurrentDirection = direction;
                         return true;
                     }
+
                     return false;
             }
+
             return false;
         }
     }

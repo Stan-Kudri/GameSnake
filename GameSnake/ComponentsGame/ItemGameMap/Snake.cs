@@ -1,4 +1,4 @@
-﻿using GameSnake.Components.ItemGameMap;
+using GameSnake.Components.ItemGameMap;
 using GameSnake.Enum;
 using GameSnake.Extension;
 
@@ -17,17 +17,31 @@ namespace GameSnake.ComponentsGame.ItemGameMap
         private Point _head;
         private Point _oldTail;
 
-        public Snake(int x, int y, Border border, int length)
+        public Snake(int x, int y, Border border, int length = 1, Directions directions = Directions.Right)
         {
+            if (x >= border.Width)
+            {
+                throw new ArgumentException("The position X of the snake is incorrect.", nameof(x));
+            }
+
+            if (y >= border.Height)
+            {
+                throw new ArgumentException("The position Y of the snake is incorrect.", nameof(y));
+            }
+
             _length = length;
-            _body = new List<Point>(_length);
             _border = border.Borders;
             _widthField = border.Width;
             _heightField = border.Height;
-            (_head, _oldTail) = BuildBody(x, y);
+            Direction = directions;
+            _body = BuildBody(x, y);
+            _head = _body.First();
+            _oldTail = _body.Last();
         }
 
-        public Directions Direction { get; set; } = Directions.Right;
+        public Directions Direction { get; set; }
+
+        public Point Head => _head;
 
         public void Move()
         {
@@ -46,7 +60,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap
             _body.Remove(_body.First());
         }
 
-        public bool TrueAteFood(Point food)
+        public bool TryEatFood(Point food)
         {
             if (food.Equals(_head))
             {
@@ -127,16 +141,25 @@ namespace GameSnake.ComponentsGame.ItemGameMap
             return position;
         }
 
-        private (Point Head, Point Tail) BuildBody(int x, int y)
+        private List<Point> BuildBody(int x, int y)
         {
-            for (int i = 0; i < _length; i++)
+            var body = new List<Point>();
+
+            if (_length == 1)
             {
-                x++;
-                var position = new Point(x, y);
-                _body.Add(position);
+                body.Add(new Point(x, y));
+            }
+            else
+            {
+                for (int i = 0; i < _length; i++)
+                {
+                    x++;
+                    var position = new Point(x, y);
+                    body.Add(position);
+                }
             }
 
-            return (_body.Last(), _body.First());
+            return body;
         }
     }
 }

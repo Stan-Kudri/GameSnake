@@ -1,4 +1,4 @@
-﻿using GameSnake.Extension;
+using GameSnake.Extension;
 
 namespace GameSnake.Components.ItemGameMap
 {
@@ -8,6 +8,11 @@ namespace GameSnake.Components.ItemGameMap
 
         public Food(Point position, int scorePoint = 1)
         {
+            if (scorePoint <= 0)
+            {
+                throw new ArgumentException("Points for food are greater than zero.", nameof(scorePoint));
+            }
+
             Position = position;
             Score = scorePoint;
         }

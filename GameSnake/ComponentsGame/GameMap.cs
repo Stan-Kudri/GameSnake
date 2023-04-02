@@ -1,4 +1,4 @@
-﻿using GameSnake.Components.ItemGameMap;
+using GameSnake.Components.ItemGameMap;
 using GameSnake.ComponentsGame;
 using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.Extension;
@@ -9,9 +9,8 @@ namespace GameSnake.Components
     {
         public const int NumberRandomSearchPosition = 3;
 
-        public event Action<Food>? OnEatScore;
-
         private readonly Border _border;
+
         private readonly Snake _snake;
 
         private Food _food;
@@ -19,17 +18,19 @@ namespace GameSnake.Components
         public GameMap(Border border, Snake snake)
         {
             _border = border;
-            _food = new Food(_border.GenerateFoodPosition());
             _snake = snake;
+            _food = RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
         }
 
-        public bool GameOver => _snake.ObstacleCollision() || _snake.Intersect();
+        public event Action<Food>? OnEatScore;
+
+        public bool IsGameOver() => _snake.ObstacleCollision() || _snake.Intersect();
 
         public void ChangeSnakeDirection(UserInput direction) => _snake.Direction = direction.CurrentDirection;
 
         public void Move()
         {
-            if (_snake.TrueAteFood(_food.Position))
+            if (_snake.TryEatFood(_food.Position))
             {
                 OnEatScore?.Invoke(_food);
                 _food = RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");

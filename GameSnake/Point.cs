@@ -1,4 +1,4 @@
-﻿namespace GameSnake
+namespace GameSnake
 {
     public class Point
     {
@@ -12,7 +12,7 @@
 
         public int Y { get; set; }
 
-        public Point Clone() => new(X, Y);
+        public Point Clone() => new Point(X, Y);
 
         public override int GetHashCode() => HashCode.Combine(X, Y);
 
