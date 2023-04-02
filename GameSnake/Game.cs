@@ -29,7 +29,7 @@ namespace GameSnake
             _speed = new Speed();
 
             var border = new Border(width, height);
-            var snake = snakeLength.Create(border);
+            var snake = border.Create(snakeLength);
 
             _gameMap = new GameMap(border, snake);
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
