@@ -1,15 +1,16 @@
-using GameSnake;
+using GameSnake.ComponentsGame;
 
 namespace TestSnake.TestComponentsGame
 {
     public class SpeedTest
     {
         [Theory]
-        [InlineData(100, 5, 25, 13, 50)]
-        public void Speed_Up(int speed, int thresholdPoints, int valueIncreaseSpeed, int score, int expectSpeed)
+        [InlineData(20, 5, 20, 100, 13, 60)]
+        [InlineData(20, 5, 20, 100, 18, 80)]
+        public void Speed_Up(int speed, int thresholdPoints, int valueIncreaseSpeed, int maxSpeed, int score, int expectSpeed)
         {
             //Arrange
-            var speedSnake = new Speed(speed, thresholdPoints, valueIncreaseSpeed);
+            var speedSnake = new Speed(speed, thresholdPoints, valueIncreaseSpeed, maxSpeed);
 
             //Act
             speedSnake.Increase(score);
