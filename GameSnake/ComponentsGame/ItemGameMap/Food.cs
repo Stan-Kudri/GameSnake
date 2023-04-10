@@ -1,6 +1,6 @@
 using GameSnake.Extension;
 
-namespace GameSnake.Components.ItemGameMap
+namespace GameSnake.ComponentsGame.ItemGameMap
 {
     public class Food
     {

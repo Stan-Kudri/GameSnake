@@ -1,6 +1,6 @@
-using GameSnake.Components.ItemGameMap;
+using GameSnake.ComponentsGame.ItemGameMap;
 
-namespace GameSnake.Components
+namespace GameSnake.ComponentsGame
 {
     public class Score
     {

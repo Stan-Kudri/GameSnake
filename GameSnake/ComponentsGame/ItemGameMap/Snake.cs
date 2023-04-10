@@ -1,4 +1,3 @@
-using GameSnake.Components.ItemGameMap;
 using GameSnake.Enum;
 using GameSnake.Extension;
 

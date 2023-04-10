@@ -1,18 +1,24 @@
-namespace GameSnake
+namespace GameSnake.ComponentsGame
 {
     public class Speed
     {
         private readonly int _startSpeed;
         private readonly int _thresholdPoints;
         private readonly int _valueIncreaseSpeed;
+        private readonly int _maxSpeed;
 
         private int _numberInterval = 0;
 
-        public Speed(int speed = 100, int thresholdPoints = 5, int valueIncreaseSpeed = 25)
+        public Speed(int speed = 20, int thresholdPoints = 5, int valueIncreaseSpeed = 20, int maxSpeed = 100)
         {
             if (speed <= 0)
             {
                 throw new ArgumentException("Speed greater than zero.", nameof(speed));
+            }
+
+            if (speed > maxSpeed)
+            {
+                throw new ArgumentException("The maximum speed is higher than the initial speed.", nameof(maxSpeed));
             }
 
             if (thresholdPoints <= 0)
@@ -26,6 +32,7 @@ namespace GameSnake
             }
 
             Value = _startSpeed = speed;
+            _maxSpeed = maxSpeed;
             _thresholdPoints = thresholdPoints;
             _valueIncreaseSpeed = valueIncreaseSpeed;
         }
@@ -34,14 +41,14 @@ namespace GameSnake
 
         public void Increase(int score)
         {
-            if (Value - _valueIncreaseSpeed > 0)
+            if (_maxSpeed - Value - _valueIncreaseSpeed > 0)
             {
                 // Point interval number.
                 _numberInterval = score / _thresholdPoints;
-                Value = _startSpeed - (_numberInterval * _valueIncreaseSpeed);
+                Value = _startSpeed + (_numberInterval * _valueIncreaseSpeed);
             }
         }
 
-        public void Apply() => Thread.Sleep(Value);
+        public void Apply() => Thread.Sleep(_maxSpeed - Value);
     }
 }

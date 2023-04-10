@@ -1,6 +1,5 @@
-using GameSnake.Components;
-using GameSnake.Components.ItemGameMap;
 using GameSnake.ComponentsGame;
+using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.Extension;
 
 namespace GameSnake
