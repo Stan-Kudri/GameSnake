@@ -1,7 +1,7 @@
+using Core.Extension;
 using GameSnake.Enum;
-using GameSnake.Extension;
 
-namespace GameSnake.ComponentsGame
+namespace Core
 {
     public class UserInput
     {

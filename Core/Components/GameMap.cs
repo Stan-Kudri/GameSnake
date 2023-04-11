@@ -1,17 +1,17 @@
-using GameSnake.ComponentsGame.ItemGameMap;
-using GameSnake.Extension;
+using Core.Components.GameMapItems;
+using Core.Extension;
 
-namespace GameSnake.ComponentsGame
+namespace Core.Components
 {
-    public class GameMap
+    public abstract class GameMap
     {
         public const int NumberRandomSearchPosition = 3;
 
-        private readonly Border _border;
+        protected readonly Border _border;
 
-        private readonly Snake _snake;
+        protected readonly Snake _snake;
 
-        private Food _food;
+        protected Food _food;
 
         public GameMap(Border border, Snake snake)
         {
@@ -37,18 +37,9 @@ namespace GameSnake.ComponentsGame
             _snake.Move();
         }
 
-        public void Draw()
-        {
-            _snake.Draw();
-            _food.Draw();
-            _border.Draw();
-        }
+        public abstract void Draw();
 
-        public void Clear()
-        {
-            _snake.Clear();
-            _food.Clear();
-        }
+        public abstract void Clear();
 
         private Food? RandomCellForFood()
         {

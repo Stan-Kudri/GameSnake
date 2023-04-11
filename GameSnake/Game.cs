@@ -1,3 +1,4 @@
+using Core;
 using GameSnake.ComponentsGame;
 using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.Extension;
@@ -6,10 +7,10 @@ namespace GameSnake
 {
     public class Game
     {
-        private readonly GameMap _gameMap;
+        private readonly GameMapConsole _gameMap;
         private readonly UserInput _userInput;
-        private readonly Score _score;
-        private readonly Speed _speed;
+        private readonly ScoreConsole _score;
+        private readonly SpeedConsole _speed;
 
         public Game(int width, int height, int snakeLength = 5)
         {
@@ -24,13 +25,13 @@ namespace GameSnake
             }
 
             _userInput = new UserInput();
-            _score = new Score(height);
-            _speed = new Speed();
+            _score = new ScoreConsole(height);
+            _speed = new SpeedConsole();
 
-            var border = new Border(width, height);
+            var border = new BorderConsole(width, height);
             var snake = border.Create(snakeLength);
 
-            _gameMap = new GameMap(border, snake);
+            _gameMap = new GameMapConsole(border, snake);
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
             _gameMap.OnEatScore += _score.Increase;
             _score.OnUpIntervalScore += _speed.Increase;

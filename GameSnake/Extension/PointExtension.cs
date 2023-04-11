@@ -1,3 +1,5 @@
+using Core;
+
 namespace GameSnake.Extension
 {
     public static class PointExtension

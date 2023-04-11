@@ -1,6 +1,6 @@
-using GameSnake.ComponentsGame.ItemGameMap;
+using Core.Components.GameMapItems;
 
-namespace GameSnake.Extension
+namespace Core.Extension
 {
     public static class FoodExtension
     {

@@ -1,4 +1,4 @@
-using GameSnake;
+using Core;
 using GameSnake.ComponentsGame.ItemGameMap;
 
 namespace TestSnake.TestComponentsGame.TestItemGameMap
@@ -7,14 +7,14 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
     {
         public static IEnumerable<object[]> TrueSnakePattern()
         {
-            var border = new Border(20, 20);
+            var border = new BorderConsole(20, 20);
             var startPositionX = border.Width / 2;
             var startPositionY = border.Height / 2;
             var length = 5;
 
             yield return new object[]
             {
-                new Snake(startPositionX, startPositionY, border, length)
+                new SnakeConsole(startPositionX, startPositionY, border, length)
             };
         }
 
@@ -24,8 +24,8 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
         public void Move_Snake_At_New_Position(int width, int height, int startPositionX, int startPositionY, int countMoveSnakeByX, int expectHeadPositionX, int expectHeadPositionY)
         {
             //Arrange
-            var border = new Border(width, height);
-            var snake = new Snake(startPositionX, startPositionY, border);
+            var border = new BorderConsole(width, height);
+            var snake = new SnakeConsole(startPositionX, startPositionY, border);
 
             //Act
             var expectHeadPosition = new Point(expectHeadPositionX, expectHeadPositionY);
@@ -45,8 +45,8 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
         public void Wall_Collision_While_Moving(int width, int height, int startPositionX, int startPositionY, int countMoveSnakeToCollision)
         {
             //Arrange
-            var border = new Border(width, height);
-            var snake = new Snake(startPositionX, startPositionY, border);
+            var border = new BorderConsole(width, height);
+            var snake = new SnakeConsole(startPositionX, startPositionY, border);
 
             //Act
             for (var i = 0; i < countMoveSnakeToCollision; i++)
@@ -61,7 +61,7 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
 
         [Theory]
         [MemberData(nameof(TrueSnakePattern))]
-        public void Snake_Eat_Food(Snake snake)
+        public void Snake_Eat_Food(SnakeConsole snake)
         {
             //Arrange
             var expectFoodPosition = snake.Head;
@@ -75,7 +75,7 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
 
         [Theory]
         [MemberData(nameof(TrueSnakePattern))]
-        public void Equals_Position_Food_And_Snake(Snake snake)
+        public void Equals_Position_Food_And_Snake(SnakeConsole snake)
         {
             //Arrange
             var expectFoodPosition = snake.Head;

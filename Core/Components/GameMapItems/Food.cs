@@ -1,11 +1,7 @@
-using GameSnake.Extension;
-
-namespace GameSnake.ComponentsGame.ItemGameMap
+namespace Core.Components.GameMapItems
 {
     public class Food
     {
-        public const char SymbolEat = '@';
-
         public Food(Point position, int scorePoint = 1)
         {
             if (scorePoint <= 0)
@@ -20,9 +16,5 @@ namespace GameSnake.ComponentsGame.ItemGameMap
         public Point Position { get; private set; }
 
         public int Score { get; private set; }
-
-        public void Draw() => Position.Draw(SymbolEat);
-
-        public void Clear() => Position.Clear();
     }
 }

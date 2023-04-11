@@ -1,4 +1,4 @@
-namespace GameSnake
+namespace Core
 {
     public class Point
     {

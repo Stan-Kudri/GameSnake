@@ -1,4 +1,4 @@
-using GameSnake;
+using Core;
 using GameSnake.ComponentsGame;
 using GameSnake.ComponentsGame.ItemGameMap;
 
@@ -12,9 +12,9 @@ namespace TestSnake.TestComponentsGame
         {
             //Arrange
             var startScore = 0;
-            var score = new Score(startHeightDisplay, startScore);
+            var score = new ScoreConsole(startHeightDisplay, startScore);
             var positionFood = new Point(2, 2);
-            var food = new Food(positionFood, expectScore);
+            var food = new FoodConsole(positionFood, expectScore);
 
             //Act
             score.Increase(food);
@@ -28,7 +28,7 @@ namespace TestSnake.TestComponentsGame
         [InlineData(-20)]
         public void Exception_The_Points_Constructor_By_Negative_Value(int points)
         {
-            Assert.Throws<ArgumentException>(() => { new Score(10, points); });
+            Assert.Throws<ArgumentException>(() => { new ScoreConsole(10, points); });
         }
     }
 }

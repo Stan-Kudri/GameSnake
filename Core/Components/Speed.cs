@@ -1,13 +1,13 @@
-namespace GameSnake.ComponentsGame
+namespace Core.Components
 {
     public class Speed
     {
-        private readonly int _startSpeed;
-        private readonly int _thresholdPoints;
-        private readonly int _valueIncreaseSpeed;
-        private readonly int _maxSpeed;
+        protected readonly int _startSpeed;
+        protected readonly int _thresholdPoints;
+        protected readonly int _valueIncreaseSpeed;
+        protected readonly int _maxSpeed;
 
-        private int _numberInterval = 0;
+        protected int _numberInterval = 0;
 
         public Speed(int speed = 20, int thresholdPoints = 5, int valueIncreaseSpeed = 20, int maxSpeed = 100)
         {
@@ -48,7 +48,5 @@ namespace GameSnake.ComponentsGame
                 Value = _startSpeed + (_numberInterval * _valueIncreaseSpeed);
             }
         }
-
-        public void Apply() => Thread.Sleep(_maxSpeed - Value);
     }
 }
