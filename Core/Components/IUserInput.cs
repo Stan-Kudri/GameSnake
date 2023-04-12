@@ -7,5 +7,7 @@ namespace Core.Components
         public event Action<IUserInput>? OnChangedDirection;
 
         public Directions CurrentDirection { get; }
+
+        public void UpDate();
     }
 }

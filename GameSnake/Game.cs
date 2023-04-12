@@ -1,4 +1,4 @@
-using Core;
+using Core.Components;
 using GameSnake.ComponentsGame;
 using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.Extension;
@@ -7,9 +7,9 @@ namespace GameSnake
 {
     public class Game
     {
-        private readonly GameMapConsole _gameMap;
-        private readonly UserInput _userInput;
-        private readonly ScoreConsole _score;
+        private readonly GameMap _gameMap;
+        private readonly IUserInput _userInput;
+        private readonly Score _score;
         private readonly SpeedConsole _speed;
 
         public Game(int width, int height, int snakeLength = 5)
@@ -43,7 +43,7 @@ namespace GameSnake
             {
                 _gameMap.Clear();
 
-                _userInput.Update();
+                _userInput.UpDate();
                 _gameMap.Move();
 
                 _gameMap.Draw();

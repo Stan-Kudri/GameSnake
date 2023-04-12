@@ -18,7 +18,7 @@ namespace GameSnake.ComponentsGame
 
         public Directions CurrentDirection => _currentDirection;
 
-        public void Update()
+        public void UpDate()
         {
             if (Console.KeyAvailable)
             {
