@@ -1,6 +1,6 @@
 namespace Core.Components
 {
-    public class Speed
+    public abstract class Speed
     {
         protected readonly int _startSpeed;
         protected readonly int _thresholdPoints;
@@ -48,5 +48,7 @@ namespace Core.Components
                 Value = _startSpeed + (_numberInterval * _valueIncreaseSpeed);
             }
         }
+
+        public abstract void Apply();
     }
 }
