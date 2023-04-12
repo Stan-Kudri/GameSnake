@@ -1,15 +1,22 @@
+using Core.Components;
 using Core.Extension;
 using GameSnake.Enum;
 
-namespace Core
+namespace GameSnake.ComponentsGame
 {
-    public class UserInput
+    public class UserInput : IUserInput
     {
-        public UserInput(Directions direction = Directions.Right) => CurrentDirection = direction;
+        private Directions _currentDirection;
 
-        public event Action<UserInput>? OnChangedDirection;
+        public UserInput(Directions direction = Directions.Right) => _currentDirection = direction;
 
-        public Directions CurrentDirection { get; private set; }
+        public UserInput()
+        {
+        }
+
+        public event Action<IUserInput>? OnChangedDirection;
+
+        public Directions CurrentDirection => _currentDirection;
 
         public void Update()
         {
@@ -30,18 +37,18 @@ namespace Core
             {
                 case Directions.Up:
                 case Directions.Down:
-                    if (CurrentDirection != Directions.Up && CurrentDirection != Directions.Down)
+                    if (_currentDirection != Directions.Up && _currentDirection != Directions.Down)
                     {
-                        CurrentDirection = direction;
+                        _currentDirection = direction;
                         return true;
                     }
 
                     return false;
                 case Directions.Right:
                 case Directions.Left:
-                    if (CurrentDirection != Directions.Right && CurrentDirection != Directions.Left)
+                    if (_currentDirection != Directions.Right && _currentDirection != Directions.Left)
                     {
-                        CurrentDirection = direction;
+                        _currentDirection = direction;
                         return true;
                     }
 

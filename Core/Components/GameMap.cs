@@ -24,7 +24,7 @@ namespace Core.Components
 
         public bool IsGameOver() => _snake.ObstacleCollision() || _snake.Intersect();
 
-        public void ChangeSnakeDirection(UserInput direction) => _snake.Direction = direction.CurrentDirection;
+        public abstract void ChangeSnakeDirection(IUserInput direction);
 
         public void Move()
         {
