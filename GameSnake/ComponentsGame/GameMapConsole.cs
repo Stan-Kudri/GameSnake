@@ -1,29 +1,32 @@
 using Core.Components;
 using GameSnake.ComponentsGame.ItemGameMap;
-using GameSnake.Extension;
+using GameSnake.ComponentsGame.ItemGameMap.Foods;
 
 namespace GameSnake.ComponentsGame
 {
     public class GameMapConsole : GameMap
     {
-        public const char SymbolEat = '@';
-
         public GameMapConsole(BorderConsole border, SnakeConsole snake)
-            : base(border, snake)
+            : this(border, snake, new FoodFactoryConsole())
+        {
+        }
+
+        public GameMapConsole(BorderConsole border, SnakeConsole snake, FoodFactoryConsole foodFactory)
+            : base(border, snake, foodFactory)
         {
         }
 
         public override void Draw()
         {
             _snake.Draw();
-            _food.Position.Draw(SymbolEat);
+            _food.Draw();
             _border.Draw();
         }
 
         public override void Clear()
         {
             _snake.Clear();
-            _food.Position.Clear();
+            _food.Clear();
         }
     }
 }

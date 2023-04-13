@@ -1,5 +1,6 @@
 using GameSnake.ComponentsGame;
 using GameSnake.ComponentsGame.ItemGameMap;
+using GameSnake.ComponentsGame.ItemGameMap.Foods;
 
 namespace TestSnake.TestComponentsGame
 {
@@ -35,7 +36,7 @@ namespace TestSnake.TestComponentsGame
             var snake = new SnakeConsole(snakePositionX, snakePositionY, border, length);
 
             //Assert
-            Assert.Throws<Exception>(() => { new GameMapConsole(border, snake); });
+            Assert.Throws<Exception>(() => { new GameMapConsole(border, snake, new FoodFactoryConsole()); });
         }
     }
 }

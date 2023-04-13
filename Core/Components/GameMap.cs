@@ -1,4 +1,5 @@
 using Core.Components.GameMapItems;
+using Core.Components.GameMapItems.Foods;
 using Core.Extension;
 
 namespace Core.Components
@@ -7,14 +8,17 @@ namespace Core.Components
     {
         public const int NumberRandomSearchPosition = 3;
 
+        protected readonly FoodFactory _foodFactory;
+
         protected readonly Border _border;
 
         protected readonly Snake _snake;
 
         protected Food _food;
 
-        public GameMap(Border border, Snake snake)
+        public GameMap(Border border, Snake snake, FoodFactory foodFactory)
         {
+            _foodFactory = foodFactory;
             _border = border;
             _snake = snake;
             _food = RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
@@ -49,7 +53,7 @@ namespace Core.Components
 
                 if (!_snake.IntersectBody(newPositionFood))
                 {
-                    return new Food(newPositionFood);
+                    return _foodFactory.Create(newPositionFood);
                 }
             }
 
@@ -66,7 +70,7 @@ namespace Core.Components
 
                     if (!_snake.IntersectBody(newPositionFood))
                     {
-                        return new Food(newPositionFood);
+                        return _foodFactory.Create(newPositionFood);
                     }
                 }
             }

@@ -1,6 +1,6 @@
-namespace Core.Components.GameMapItems
+namespace Core.Components.GameMapItems.Foods
 {
-    public class Food
+    public abstract class Food
     {
         public Food(Point position, int scorePoint = 1)
         {
@@ -16,5 +16,9 @@ namespace Core.Components.GameMapItems
         public Point Position { get; private set; }
 
         public int Score { get; private set; }
+
+        public abstract void Draw();
+
+        public abstract void Clear();
     }
 }
