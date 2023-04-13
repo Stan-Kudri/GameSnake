@@ -43,7 +43,7 @@ namespace GameSnake
             {
                 _gameMap.Clear();
 
-                _userInput.UpDate();
+                _userInput.Update();
                 _gameMap.Move();
 
                 _gameMap.Draw();

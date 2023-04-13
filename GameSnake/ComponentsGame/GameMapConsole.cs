@@ -13,8 +13,6 @@ namespace GameSnake.ComponentsGame
         {
         }
 
-        public override void ChangeSnakeDirection(IUserInput direction) => _snake.Direction = direction.CurrentDirection;
-
         public override void Draw()
         {
             _snake.Draw();

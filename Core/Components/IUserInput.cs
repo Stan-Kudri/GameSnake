@@ -8,6 +8,6 @@ namespace Core.Components
 
         public Directions CurrentDirection { get; }
 
-        public void UpDate();
+        public void Update();
     }
 }
