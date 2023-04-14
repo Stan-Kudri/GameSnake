@@ -1,5 +1,7 @@
 using Core.Components;
+using Core.Components.GameMaps;
 using GameSnake.ComponentsGame;
+using GameSnake.ComponentsGame.GameMaps;
 using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.Extension;
 

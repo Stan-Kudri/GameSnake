@@ -1,8 +1,10 @@
-using Core.Components;
+using Core.Components.GameMapItems;
+using Core.Components.GameMapItems.Foods;
+using Core.Components.GameMaps;
 using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.ComponentsGame.ItemGameMap.Foods;
 
-namespace GameSnake.ComponentsGame
+namespace GameSnake.ComponentsGame.GameMaps
 {
     public class GameMapConsole : GameMap
     {
@@ -13,6 +15,11 @@ namespace GameSnake.ComponentsGame
 
         public GameMapConsole(BorderConsole border, SnakeConsole snake, FoodFactoryConsole foodFactory)
             : base(border, snake, foodFactory)
+        {
+        }
+
+        public GameMapConsole(Border border, Snake snake, FoodFactory foodFactoryConsole)
+            : base(border, snake, foodFactoryConsole)
         {
         }
 
