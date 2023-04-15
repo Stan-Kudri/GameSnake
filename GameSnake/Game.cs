@@ -1,12 +1,12 @@
-using Core.Components;
 using Core.Components.GameMaps;
 using Core.Components.Scores;
 using Core.Components.Speeds;
-using GameSnake.ComponentsGame;
+using Core.Components.UserInputs;
 using GameSnake.ComponentsGame.GameMaps;
 using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.ComponentsGame.Scores;
 using GameSnake.ComponentsGame.Speeds;
+using GameSnake.ComponentsGame.UserInputs;
 using GameSnake.Extension;
 
 namespace GameSnake

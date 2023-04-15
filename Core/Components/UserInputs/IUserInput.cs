@@ -1,6 +1,6 @@
 using GameSnake.Enum;
 
-namespace Core.Components
+namespace Core.Components.UserInputs
 {
     public interface IUserInput
     {

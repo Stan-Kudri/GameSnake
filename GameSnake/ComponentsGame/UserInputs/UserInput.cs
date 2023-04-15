@@ -1,8 +1,8 @@
-using Core.Components;
+using Core.Components.UserInputs;
 using Core.Extension;
 using GameSnake.Enum;
 
-namespace GameSnake.ComponentsGame
+namespace GameSnake.ComponentsGame.UserInputs
 {
     public class UserInput : IUserInput
     {
@@ -22,7 +22,7 @@ namespace GameSnake.ComponentsGame
         {
             if (Console.KeyAvailable)
             {
-                ConsoleKey key = Console.ReadKey().Key;
+                var key = Console.ReadKey().Key;
                 var direct = key.ToDirection();
                 if (ChangeDirection(direct))
                 {
