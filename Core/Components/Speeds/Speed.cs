@@ -1,4 +1,4 @@
-namespace Core.Components
+namespace Core.Components.Speeds
 {
     public abstract class Speed
     {
@@ -45,7 +45,7 @@ namespace Core.Components
             {
                 // Point interval number.
                 _numberInterval = score / _thresholdPoints;
-                Value = _startSpeed + (_numberInterval * _valueIncreaseSpeed);
+                Value = _startSpeed + _numberInterval * _valueIncreaseSpeed;
             }
         }
 

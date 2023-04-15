@@ -1,6 +1,6 @@
-using Core.Components;
+using Core.Components.Speeds;
 
-namespace GameSnake.ComponentsGame
+namespace GameSnake.ComponentsGame.Speeds
 {
     public class SpeedConsole : Speed
     {

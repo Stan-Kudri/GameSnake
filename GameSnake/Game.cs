@@ -1,8 +1,10 @@
 using Core.Components;
 using Core.Components.GameMaps;
+using Core.Components.Speeds;
 using GameSnake.ComponentsGame;
 using GameSnake.ComponentsGame.GameMaps;
 using GameSnake.ComponentsGame.ItemGameMap;
+using GameSnake.ComponentsGame.Speeds;
 using GameSnake.Extension;
 
 namespace GameSnake
