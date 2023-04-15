@@ -1,6 +1,6 @@
 using Core.Components.GameMapItems.Foods;
 
-namespace Core.Components
+namespace Core.Components.Scores
 {
     public abstract class Score
     {

@@ -1,6 +1,6 @@
 using Core;
-using GameSnake.ComponentsGame;
 using GameSnake.ComponentsGame.ItemGameMap.Foods;
+using GameSnake.ComponentsGame.Scores;
 
 namespace TestSnake.TestComponentsGame
 {

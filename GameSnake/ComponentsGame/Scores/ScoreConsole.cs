@@ -1,6 +1,6 @@
-using Core.Components;
+using Core.Components.Scores;
 
-namespace GameSnake.ComponentsGame
+namespace GameSnake.ComponentsGame.Scores
 {
     public class ScoreConsole : Score
     {
