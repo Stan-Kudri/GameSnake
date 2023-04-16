@@ -1,5 +1,5 @@
 using System.Runtime.InteropServices;
-using GameSnake;
+using GameSnake.Games;
 
 const int HeightForScore = 2;
 
@@ -8,7 +8,7 @@ var width = 40;
 
 WindowSetting(width, height);
 
-var game = new Game(width, height);
+var game = new GameFactoryConsole().Create(width, height);
 game.Run();
 
 DisplayGameOver(width, height); // Massage "Game Over"

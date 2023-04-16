@@ -1,15 +1,13 @@
+using Core.Components.GameMapItems.Borders;
+using Core.Components.GameMapItems.Foods;
+using Core.Components.GameMapItems.Snakes;
 using Core.Components.GameMaps;
 using Core.Components.Scores;
 using Core.Components.Speeds;
 using Core.Components.UserInputs;
-using GameSnake.ComponentsGame.GameMaps;
-using GameSnake.ComponentsGame.ItemGameMap;
-using GameSnake.ComponentsGame.Scores;
-using GameSnake.ComponentsGame.Speeds;
-using GameSnake.ComponentsGame.UserInputs;
-using GameSnake.Extension;
+using Core.Extension;
 
-namespace GameSnake
+namespace Core.Games
 {
     public class Game
     {
@@ -18,7 +16,15 @@ namespace GameSnake
         private readonly Score _score;
         private readonly Speed _speed;
 
-        public Game(int width, int height, int snakeLength = 5)
+        public Game(
+            int width, int height, int snakeLength,
+            UserInputFactory userInputFactory,
+            ScoreFactory scoreFactory,
+            SpeedFactory speedFactory,
+            BorderFactory borderFactory,
+            SnakeFactory snakeFactory,
+            FoodFactory foodFactory,
+            GameMapFactory gameMapFactory)
         {
             if (snakeLength <= 0)
             {
@@ -30,14 +36,14 @@ namespace GameSnake
                 throw new ArgumentException("Invalid board size.");
             }
 
-            _userInput = new UserInput();
-            _score = new ScoreConsole(height);
-            _speed = new SpeedConsole();
+            _userInput = userInputFactory.Create();
+            _score = scoreFactory.Create(height);
+            _speed = speedFactory.Create();
 
-            var border = new BorderConsole(width, height);
-            var snake = border.Create(snakeLength);
+            var border = borderFactory.Create(width, height);
+            var snake = snakeFactory.Creator(border, snakeLength);
 
-            _gameMap = new GameMapConsole(border, snake);
+            _gameMap = gameMapFactory.Create(border, snake, foodFactory);
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
             _gameMap.OnEatScore += _score.Increase;
             _score.OnUpIntervalScore += _speed.Increase;

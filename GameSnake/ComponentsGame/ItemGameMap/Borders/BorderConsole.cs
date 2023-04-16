@@ -1,7 +1,7 @@
-using Core.Components.GameMapItems;
+using Core.Components.GameMapItems.Borders;
 using GameSnake.Extension;
 
-namespace GameSnake.ComponentsGame.ItemGameMap
+namespace GameSnake.ComponentsGame.ItemGameMap.Borders
 {
     public class BorderConsole : Border
     {

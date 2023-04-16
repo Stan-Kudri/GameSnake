@@ -1,6 +1,7 @@
+using Core.Components.GameMapItems.Borders;
 using GameSnake.Enum;
 
-namespace Core.Components.GameMapItems
+namespace Core.Components.GameMapItems.Snakes
 {
     public abstract class Snake
     {
@@ -103,7 +104,7 @@ namespace Core.Components.GameMapItems
 
         private Point GetNewHeadPosition()
         {
-            Point position = _head.Clone();
+            var position = _head.Clone();
 
             switch (Direction)
             {
@@ -148,7 +149,7 @@ namespace Core.Components.GameMapItems
             }
             else
             {
-                for (int i = 0; i < _length; i++)
+                for (var i = 0; i < _length; i++)
                 {
                     x++;
                     var position = new Point(x, y);

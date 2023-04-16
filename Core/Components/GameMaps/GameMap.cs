@@ -1,5 +1,6 @@
-using Core.Components.GameMapItems;
+using Core.Components.GameMapItems.Borders;
 using Core.Components.GameMapItems.Foods;
+using Core.Components.GameMapItems.Snakes;
 using Core.Components.UserInputs;
 using Core.Extension;
 

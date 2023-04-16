@@ -1,4 +1,4 @@
-using GameSnake.ComponentsGame.ItemGameMap;
+using GameSnake.ComponentsGame.ItemGameMap.Borders;
 
 namespace TestSnake.TestComponentsGame.TestItemGameMap
 {

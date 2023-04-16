@@ -1,4 +1,4 @@
-using GameSnake;
+using GameSnake.Games;
 
 namespace TestSnake
 {
@@ -11,7 +11,7 @@ namespace TestSnake
         public void Exception_When_Create_Borders_In_Game_Map(int width, int height, int snakeLength)
         {
             //Assert
-            Assert.Throws<ArgumentException>(() => { new Game(width, height, snakeLength); });
+            Assert.Throws<ArgumentException>(() => { new GameFactoryConsole().Create(width, height, snakeLength); });
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace Core.Components.GameMapItems
+namespace Core.Components.GameMapItems.Borders
 {
     public abstract class Border
     {
@@ -15,15 +15,15 @@ namespace Core.Components.GameMapItems
             Borders = Create();
         }
 
-        public int Width { get; private set; }
+        public int Width { get; protected set; }
 
-        public int Height { get; private set; }
+        public int Height { get; protected set; }
 
-        public List<Point> Borders { get; private set; }
+        public List<Point> Borders { get; protected set; }
 
         public abstract void Draw();
 
-        private List<Point> Create()
+        protected List<Point> Create()
         {
             var border = new List<Point>();
 
