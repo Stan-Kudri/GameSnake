@@ -23,9 +23,6 @@ namespace GameSnake.Games
             var gameMapConsole = new GameMapConsole(borderConsole, snakeConsole, foodFactoryConsole);
 
             return new Game(
-                width,
-                height,
-                snakeLength,
                 userInput,
                 scoreConsole,
                 speedConsole,

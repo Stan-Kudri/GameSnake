@@ -11,22 +11,11 @@ namespace Core.Games
         private readonly Speed _speed;
 
         public Game(
-            int width, int height, int snakeLength,
             IUserInput userInput,
             Score score,
             Speed speed,
             GameMap gameMap)
         {
-            if (snakeLength <= 0)
-            {
-                throw new ArgumentException("Length snake more zero.", nameof(snakeLength));
-            }
-
-            if (width < 1 || height < 1)
-            {
-                throw new ArgumentException("Invalid board size.");
-            }
-
             _userInput = userInput;
             _score = score;
             _speed = speed;
