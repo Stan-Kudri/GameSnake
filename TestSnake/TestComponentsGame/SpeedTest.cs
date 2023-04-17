@@ -1,4 +1,4 @@
-using GameSnake.ComponentsGame.Speeds;
+using GameSnake.ComponentsGame;
 
 namespace TestSnake.TestComponentsGame
 {

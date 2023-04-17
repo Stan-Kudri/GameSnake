@@ -1,4 +1,4 @@
-namespace Core.Components.Speeds
+namespace Core.Components
 {
     public abstract class Speed
     {

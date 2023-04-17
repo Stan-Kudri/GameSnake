@@ -1,4 +1,4 @@
-using Core.Components.GameMapItems.Borders;
+using Core.Components.GameMapItems;
 using Core.Components.GameMapItems.Snakes;
 using GameSnake.Enum;
 using GameSnake.Extension;

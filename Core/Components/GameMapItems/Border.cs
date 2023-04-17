@@ -1,4 +1,4 @@
-namespace Core.Components.GameMapItems.Borders
+namespace Core.Components.GameMapItems
 {
     public abstract class Border
     {

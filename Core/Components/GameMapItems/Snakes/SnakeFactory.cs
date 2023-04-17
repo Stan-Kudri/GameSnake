@@ -1,4 +1,3 @@
-using Core.Components.GameMapItems.Borders;
 using GameSnake.Enum;
 
 namespace Core.Components.GameMapItems.Snakes

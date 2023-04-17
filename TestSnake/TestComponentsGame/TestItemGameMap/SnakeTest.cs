@@ -1,5 +1,5 @@
 using Core;
-using GameSnake.ComponentsGame.ItemGameMap.Borders;
+using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.ComponentsGame.ItemGameMap.Snakes;
 
 namespace TestSnake.TestComponentsGame.TestItemGameMap

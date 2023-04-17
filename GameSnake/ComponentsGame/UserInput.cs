@@ -1,8 +1,8 @@
-using Core.Components.UserInputs;
+using Core.Components;
 using Core.Extension;
 using GameSnake.Enum;
 
-namespace GameSnake.ComponentsGame.UserInputs
+namespace GameSnake.ComponentsGame
 {
     public class UserInput : IUserInput
     {

@@ -1,4 +1,4 @@
-using Core.Components.GameMapItems.Borders;
+using Core.Components.GameMapItems;
 
 namespace Core.Extension
 {
