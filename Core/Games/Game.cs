@@ -1,9 +1,5 @@
 using Core.Components;
-using Core.Components.GameMapItems;
-using Core.Components.GameMapItems.Foods;
-using Core.Components.GameMapItems.Snakes;
 using Core.Components.GameMaps;
-using Core.Extension;
 
 namespace Core.Games
 {
@@ -19,10 +15,7 @@ namespace Core.Games
             IUserInput userInput,
             Score score,
             Speed speed,
-            Border border,
-            SnakeFactory snakeFactory,
-            FoodFactory foodFactory,
-            GameMapFactory gameMapFactory)
+            GameMap gameMap)
         {
             if (snakeLength <= 0)
             {
@@ -37,10 +30,8 @@ namespace Core.Games
             _userInput = userInput;
             _score = score;
             _speed = speed;
+            _gameMap = gameMap;
 
-            var snake = snakeFactory.Creator(border, snakeLength);
-
-            _gameMap = gameMapFactory.Create(border, snake, foodFactory);
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
             _gameMap.OnEatScore += _score.Increase;
             _score.OnUpIntervalScore += _speed.Increase;

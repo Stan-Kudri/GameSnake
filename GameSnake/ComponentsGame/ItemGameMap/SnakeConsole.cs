@@ -1,9 +1,8 @@
 using Core.Components.GameMapItems;
-using Core.Components.GameMapItems.Snakes;
 using GameSnake.Enum;
 using GameSnake.Extension;
 
-namespace GameSnake.ComponentsGame.ItemGameMap.Snakes
+namespace GameSnake.ComponentsGame.ItemGameMap
 {
     public class SnakeConsole : Snake
     {

@@ -1,6 +1,6 @@
 using GameSnake.Enum;
 
-namespace Core.Components.GameMapItems.Snakes
+namespace Core.Components.GameMapItems
 {
     public abstract class Snake
     {
@@ -24,6 +24,10 @@ namespace Core.Components.GameMapItems.Snakes
             if (y >= border.Height)
             {
                 throw new ArgumentException("The position Y of the snake is incorrect.", nameof(y));
+            }
+            if (length <= 0)
+            {
+                throw new ArgumentException("The length of the snake is greater than zero.");
             }
 
             _length = length;

@@ -1,10 +1,8 @@
 using Core.Components.GameMapItems;
 using Core.Components.GameMapItems.Foods;
-using Core.Components.GameMapItems.Snakes;
 using Core.Components.GameMaps;
 using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.ComponentsGame.ItemGameMap.Foods;
-using GameSnake.ComponentsGame.ItemGameMap.Snakes;
 
 namespace GameSnake.ComponentsGame.GameMaps
 {

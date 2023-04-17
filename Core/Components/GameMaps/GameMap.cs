@@ -1,6 +1,5 @@
 using Core.Components.GameMapItems;
 using Core.Components.GameMapItems.Foods;
-using Core.Components.GameMapItems.Snakes;
 using Core.Extension;
 
 namespace Core.Components.GameMaps

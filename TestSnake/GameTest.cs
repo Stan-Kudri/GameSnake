@@ -7,7 +7,7 @@ namespace TestSnake
         [Theory]
         [InlineData(-5, 10, 2)]
         [InlineData(10, -2, 2)]
-        [InlineData(10, 10, 0)]
+        [InlineData(10, 10, -2)]
         public void Exception_When_Create_Borders_In_Game_Map(int width, int height, int snakeLength)
         {
             //Assert
