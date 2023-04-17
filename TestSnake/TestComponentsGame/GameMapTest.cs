@@ -1,4 +1,4 @@
-using GameSnake.ComponentsGame.GameMaps;
+using GameSnake.ComponentsGame;
 using GameSnake.ComponentsGame.ItemGameMap;
 
 namespace TestSnake.TestComponentsGame

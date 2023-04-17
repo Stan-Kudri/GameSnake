@@ -1,5 +1,4 @@
 using Core.Components;
-using Core.Components.GameMaps;
 
 namespace Core.Games
 {

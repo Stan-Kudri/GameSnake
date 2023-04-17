@@ -2,7 +2,7 @@ using Core.Components.GameMapItems;
 using Core.Components.GameMapItems.Foods;
 using Core.Extension;
 
-namespace Core.Components.GameMaps
+namespace Core.Components
 {
     public abstract class GameMap
     {

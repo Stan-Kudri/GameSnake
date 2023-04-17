@@ -1,10 +1,10 @@
+using Core.Components;
 using Core.Components.GameMapItems;
 using Core.Components.GameMapItems.Foods;
-using Core.Components.GameMaps;
 using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.ComponentsGame.ItemGameMap.Foods;
 
-namespace GameSnake.ComponentsGame.GameMaps
+namespace GameSnake.ComponentsGame
 {
     public class GameMapConsole : GameMap
     {
