@@ -1,6 +1,6 @@
 using Core.Components;
 
-namespace Core.Games
+namespace Core
 {
     public class Game
     {
