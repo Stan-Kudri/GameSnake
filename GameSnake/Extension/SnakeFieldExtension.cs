@@ -1,10 +1,13 @@
-using GameSnake.Components.ItemGameMap;
+using Core.Components.GameMapItems;
 using GameSnake.ComponentsGame.ItemGameMap;
 
 namespace GameSnake.Extension
 {
     public static class SnakeFieldExtension
     {
-        public static Snake Create(this Border border, int length) => new Snake((border.Width / 2) - length, border.Height / 2, border, length);
+        public const int DividerLengthHalf = 2;
+
+        public static SnakeConsole Creator(this Border border, int length)
+            => new SnakeConsole((border.Width / DividerLengthHalf) - length, border.Height / DividerLengthHalf, border, length);
     }
 }

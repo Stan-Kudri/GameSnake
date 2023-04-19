@@ -1,13 +1,13 @@
-using GameSnake.Components.ItemGameMap;
+using Core.Components.GameMapItems.Foods;
 
-namespace GameSnake.Components
+namespace Core.Components
 {
-    public class Score
+    public abstract class Score
     {
         public const int StartWidthDisplay = 0;
         public const int OffsetPositionHeight = 2;
 
-        private readonly int _startHeightDisplay;
+        protected int _startHeightDisplay;
 
         public Score(int height, int points = 0)
         {
@@ -24,13 +24,7 @@ namespace GameSnake.Components
 
         public int Points { get; private set; }
 
-        public void Draw()
-        {
-            var scoreLine = $"Score : {Points}";
-
-            Console.SetCursorPosition(0, _startHeightDisplay);
-            Console.Write(scoreLine);
-        }
+        public abstract void Draw();
 
         public void Increase(Food food)
         {

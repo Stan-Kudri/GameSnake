@@ -1,22 +1,24 @@
-using GameSnake.Components.ItemGameMap;
-using GameSnake.ComponentsGame;
-using GameSnake.ComponentsGame.ItemGameMap;
-using GameSnake.Extension;
+using Core.Components.GameMapItems;
+using Core.Components.GameMapItems.Foods;
+using Core.Extension;
 
-namespace GameSnake.Components
+namespace Core.Components
 {
-    public class GameMap
+    public abstract class GameMap
     {
         public const int NumberRandomSearchPosition = 3;
 
-        private readonly Border _border;
+        protected readonly FoodFactory _foodFactory;
 
-        private readonly Snake _snake;
+        protected readonly Border _border;
 
-        private Food _food;
+        protected readonly Snake _snake;
 
-        public GameMap(Border border, Snake snake)
+        protected Food _food;
+
+        public GameMap(Border border, Snake snake, FoodFactory foodFactory)
         {
+            _foodFactory = foodFactory;
             _border = border;
             _snake = snake;
             _food = RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
@@ -26,7 +28,7 @@ namespace GameSnake.Components
 
         public bool IsGameOver() => _snake.ObstacleCollision() || _snake.Intersect();
 
-        public void ChangeSnakeDirection(UserInput direction) => _snake.Direction = direction.CurrentDirection;
+        public void ChangeSnakeDirection(IUserInput direction) => _snake.Direction = direction.CurrentDirection;
 
         public void Move()
         {
@@ -39,18 +41,9 @@ namespace GameSnake.Components
             _snake.Move();
         }
 
-        public void Draw()
-        {
-            _snake.Draw();
-            _food.Draw();
-            _border.Draw();
-        }
+        public abstract void Draw();
 
-        public void Clear()
-        {
-            _snake.Clear();
-            _food.Clear();
-        }
+        public abstract void Clear();
 
         private Food? RandomCellForFood()
         {
@@ -60,7 +53,7 @@ namespace GameSnake.Components
 
                 if (!_snake.IntersectBody(newPositionFood))
                 {
-                    return new Food(newPositionFood);
+                    return _foodFactory.Create(newPositionFood);
                 }
             }
 
@@ -77,7 +70,7 @@ namespace GameSnake.Components
 
                     if (!_snake.IntersectBody(newPositionFood))
                     {
-                        return new Food(newPositionFood);
+                        return _foodFactory.Create(newPositionFood);
                     }
                 }
             }
