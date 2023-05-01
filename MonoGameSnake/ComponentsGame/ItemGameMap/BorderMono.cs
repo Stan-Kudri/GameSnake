@@ -4,15 +4,17 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGameSnake.ComponentsGame.ItemGameMap
 {
-    public class BoarderMono : Border
+    public class BorderMono : Border
     {
         private Color _color = Color.Salmon;
         private SpriteBatch _spriteBatch;
         private Texture2D _texture2D;
 
-        public BoarderMono(int width, int height) : base(width, height)
+        public BorderMono(int width, int height) : base(width, height)
         {
         }
+
+        public Texture2D Texture2D => _texture2D;
 
         public override void Draw()
         {

@@ -9,7 +9,7 @@ namespace MonoGameSnake.ComponentsGame
 {
     public class GameMapMono : GameMap
     {
-        public GameMapMono(BoarderMono border, SnakeMono snake, Texture2D texture2DFood, SpriteBatch spriteBatch)
+        public GameMapMono(BorderMono border, SnakeMono snake, Texture2D texture2DFood, SpriteBatch spriteBatch)
             : this(border, snake, new FoodFactoryMono(texture2DFood, spriteBatch))
         {
         }
