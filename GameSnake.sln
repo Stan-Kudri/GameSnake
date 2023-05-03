@@ -12,7 +12,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestSnake", "TestSnake\Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{85AE90D3-21F1-4F87-9821-803387E8523D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoGameSnake", "MonoGameSnake\MonoGameSnake.csproj", "{DFDEA1A3-BED2-49EC-8E55-DB2269BCED58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeMonoGame", "SnakeMonoGame\SnakeMonoGame.csproj", "{B2A17120-B29B-41B9-ACB3-21635D90FC69}"
 	ProjectSection(ProjectDependencies) = postProject
 		{85AE90D3-21F1-4F87-9821-803387E8523D} = {85AE90D3-21F1-4F87-9821-803387E8523D}
 	EndProjectSection
@@ -35,10 +35,10 @@ Global
 		{85AE90D3-21F1-4F87-9821-803387E8523D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85AE90D3-21F1-4F87-9821-803387E8523D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85AE90D3-21F1-4F87-9821-803387E8523D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DFDEA1A3-BED2-49EC-8E55-DB2269BCED58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DFDEA1A3-BED2-49EC-8E55-DB2269BCED58}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DFDEA1A3-BED2-49EC-8E55-DB2269BCED58}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DFDEA1A3-BED2-49EC-8E55-DB2269BCED58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A17120-B29B-41B9-ACB3-21635D90FC69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A17120-B29B-41B9-ACB3-21635D90FC69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A17120-B29B-41B9-ACB3-21635D90FC69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A17120-B29B-41B9-ACB3-21635D90FC69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
