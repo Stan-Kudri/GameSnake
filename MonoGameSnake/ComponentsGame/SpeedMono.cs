@@ -5,7 +5,7 @@ namespace MonoGameSnake.ComponentsGame
 {
     public class SpeedMono : Speed
     {
-        private readonly int _buttonPressPeriod = 250;
+        private readonly int _buttonPressPeriod = 200;
         private readonly int _period;
 
         public SpeedMono(int speed = 20, int thresholdPoints = 5, int valueIncreaseSpeed = 20, int maxSpeed = 100, int period = 5000)

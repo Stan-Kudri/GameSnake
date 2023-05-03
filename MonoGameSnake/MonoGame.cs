@@ -117,10 +117,9 @@ namespace MonoGameSnake
 
                     if (_oldKeyBoard != _keyboardState)
                     {
+                        _oldKeyBoard = _keyboardState;
                         _currentTimeButton = 0;
                     }
-
-                    _oldKeyBoard = _keyboardState;
                 }
 
                 if (_currentTimeMove >= _speed.TimeMove)

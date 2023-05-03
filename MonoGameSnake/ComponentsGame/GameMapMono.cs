@@ -21,8 +21,8 @@ namespace MonoGameSnake.ComponentsGame
 
         public override void Draw()
         {
-            _snake.Draw();
             _food.Draw();
+            _snake.Draw();
             _border.Draw();
         }
 
