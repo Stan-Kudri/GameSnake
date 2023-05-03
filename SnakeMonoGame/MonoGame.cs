@@ -58,7 +58,7 @@ namespace SnakeMonoGame
             var snakeTexture2D = Content.Load<Texture2D>("SnakeElement");
             var foodTexture2D = Content.Load<Texture2D>("Food");
             var gameOverTexture2D = Content.Load<Texture2D>("GameOver");
-            var font = Content.Load<SpriteFont>("SpriteFont");
+            var font = Content.Load<SpriteFont>("Arial");
 
             _border.Initialize(_spriteBatch);
             _snake.Initialize(_spriteBatch);
