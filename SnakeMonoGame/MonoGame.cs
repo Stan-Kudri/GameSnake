@@ -1,4 +1,3 @@
-using GameSnake.Enum;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -87,25 +86,9 @@ namespace SnakeMonoGame
             {
                 if (_currentTimeButton >= _speed.TimePressButton)
                 {
-                    if (_keyboardState.IsKeyDown(Keys.Up) && _keyboardState != _oldKeyBoard)
+                    if (_keyboardState != _oldKeyBoard)
                     {
-                        _userInput.Update(Directions.Up);
-                    }
-                    else if (_keyboardState.IsKeyDown(Keys.Down) && _keyboardState != _oldKeyBoard)
-                    {
-                        _userInput.Update(Directions.Down);
-                    }
-                    else if (_keyboardState.IsKeyDown(Keys.Left) && _keyboardState != _oldKeyBoard)
-                    {
-                        _userInput.Update(Directions.Left);
-                    }
-                    else if (_keyboardState.IsKeyDown(Keys.Right) && _keyboardState != _oldKeyBoard)
-                    {
-                        _userInput.Update(Directions.Right);
-                    }
-
-                    if (_oldKeyBoard != _keyboardState)
-                    {
+                        _userInput.Update(_keyboardState);
                         _oldKeyBoard = _keyboardState;
                         _currentTimeButton = 0;
                     }
