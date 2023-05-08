@@ -6,9 +6,9 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap
 {
     public class BorderMono : Border
     {
-        private Color _color = Color.Salmon;
-        private SpriteBatch _spriteBatch;
-        private Texture2D _texture2D;
+        private readonly Color _color = Color.Salmon;
+        private readonly SpriteBatch _spriteBatch;
+        private readonly Texture2D _texture2D;
 
         public BorderMono(int width, int height, SpriteBatch spriteBatch, Texture2D texture2D) : base(width, height)
         {
