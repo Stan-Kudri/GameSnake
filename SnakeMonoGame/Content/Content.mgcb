@@ -13,13 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Arial.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Arial.spritefont
-
 #begin BorderElement.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -67,4 +60,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:SnakeElement.png
+
+#begin TimesNewRoman.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:TimesNewRoman.spritefont
 
