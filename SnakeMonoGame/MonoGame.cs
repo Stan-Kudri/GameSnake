@@ -24,8 +24,6 @@ namespace SnakeMonoGame
         private SpeedMono _speed;
         private UserInput _userInput;
 
-        private KeyboardState _keyboardState, _oldKeyBoard;
-
         private int _currentTimeMove = 0; // The amount of elapsed time.
         private int _currentTimeButton = 0; // Time from button press.
 
@@ -75,7 +73,7 @@ namespace SnakeMonoGame
 
         protected override void Update(GameTime gameTime)
         {
-            _keyboardState = Keyboard.GetState();
+            var keyboardState = Keyboard.GetState();
             _currentTimeMove += gameTime.ElapsedGameTime.Milliseconds;
             _currentTimeButton += gameTime.ElapsedGameTime.Milliseconds;
 
@@ -84,14 +82,9 @@ namespace SnakeMonoGame
 
             if (!_gameMap.IsGameOver())
             {
-                if (_currentTimeButton >= _speed.TimePressButton)
+                if (_currentTimeButton >= _speed.TimePressButton && _userInput.Update(keyboardState))
                 {
-                    if (_keyboardState != _oldKeyBoard)
-                    {
-                        _userInput.Update(_keyboardState);
-                        _oldKeyBoard = _keyboardState;
-                        _currentTimeButton = 0;
-                    }
+                    _currentTimeButton = 0;
                 }
 
                 if (_currentTimeMove >= _speed.TimeMove)

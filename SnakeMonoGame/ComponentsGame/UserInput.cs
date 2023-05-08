@@ -9,6 +9,8 @@ namespace MonoGameSnake.ComponentsGame
     {
         private Directions _currentDirection = Directions.Right;
 
+        private KeyboardState _oldKeyBoard;
+
         public UserInput(Directions direction = Directions.Right) => _currentDirection = direction;
 
         public Directions CurrentDirection => _currentDirection;
@@ -19,12 +21,17 @@ namespace MonoGameSnake.ComponentsGame
         {
         }
 
-        public void Update(KeyboardState keyboardState)
+        public bool Update(KeyboardState keyboardState)
         {
-            if (ChangeDirection(keyboardState))
+            if (ChangeDirection(keyboardState) && keyboardState != _oldKeyBoard)
             {
+                _oldKeyBoard = keyboardState;
                 OnChangedDirection?.Invoke(this);
+
+                return true;
             }
+
+            return false;
         }
 
         private bool ChangeDirection(KeyboardState keyboardState)
