@@ -39,13 +39,6 @@ namespace SnakeMonoGame
 
         protected override void Initialize()
         {
-            _userInput = new UserInput();
-            _border = new BorderMono(20, 20);
-            _snake = _border.Creator();
-            _score = new ScoreMono(_border.Height);
-            _speed = new SpeedMono();
-            _gameOver = new GameOver(_border);
-
             // TODO: Add your initialization logic here
             base.Initialize();
         }
@@ -60,18 +53,14 @@ namespace SnakeMonoGame
             var gameOverTexture2D = Content.Load<Texture2D>("GameOver");
             var font = Content.Load<SpriteFont>("Arial");
 
-            _border.Initialize(_spriteBatch);
-            _snake.Initialize(_spriteBatch);
-            _gameOver.Initialize(_spriteBatch);
-
-            _score.UpdateHeight(boardTexture2D);
-            _score.Initialize(font, _spriteBatch);
-
-            _border.LoadContent(boardTexture2D);
-            _snake.LoadContent(snakeTexture2D);
-            _gameOver.LoadContent(gameOverTexture2D);
-
+            _border = new BorderMono(20, 20, _spriteBatch, boardTexture2D);
+            _snake = _border.Creator(_spriteBatch, snakeTexture2D);
             _gameMap = new GameMapMono(_border, _snake, foodTexture2D, _spriteBatch);
+
+            _userInput = new UserInput();
+            _speed = new SpeedMono();
+            _score = new ScoreMono(_border.Height, font, _spriteBatch, boardTexture2D);
+            _gameOver = new GameOver(_border, _spriteBatch, gameOverTexture2D);
 
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
             _gameMap.OnEatScore += _score.Increase;
@@ -138,13 +127,14 @@ namespace SnakeMonoGame
             GraphicsDevice.Clear(Color.SeaShell);
             _spriteBatch.Begin();
 
-            if (!_gameMap.IsGameOver())
+            if (_gameMap.IsGameOver())
             {
-                _gameMap.Draw();
+
+                _gameOver.Draw();
             }
             else
             {
-                _gameOver.Draw();
+                _gameMap.Draw();
             }
 
             _score.Draw();

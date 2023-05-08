@@ -10,8 +10,10 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap
         private SpriteBatch _spriteBatch;
         private Texture2D _texture2D;
 
-        public BorderMono(int width, int height) : base(width, height)
+        public BorderMono(int width, int height, SpriteBatch spriteBatch, Texture2D texture2D) : base(width, height)
         {
+            _spriteBatch = spriteBatch;
+            _texture2D = texture2D;
         }
 
         public Texture2D Texture2D => _texture2D;
@@ -23,9 +25,5 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap
                 new Vector2(x.X * _texture2D.Width, x.Y * _texture2D.Height),
                 _color));
         }
-
-        public void Initialize(SpriteBatch spriteBatch) => _spriteBatch = spriteBatch;
-
-        public void LoadContent(Texture2D texture2D) => _texture2D = texture2D;
     }
 }

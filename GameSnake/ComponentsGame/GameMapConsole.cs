@@ -18,13 +18,6 @@ namespace GameSnake.ComponentsGame
         {
         }
 
-        public override void Draw()
-        {
-            _snake.Draw();
-            _food.Draw();
-            _border.Draw();
-        }
-
         public override void Clear()
         {
             _snake.Clear();

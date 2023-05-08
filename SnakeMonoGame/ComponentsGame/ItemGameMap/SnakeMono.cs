@@ -8,12 +8,14 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap
     public class SnakeMono : Snake
     {
         private Color _color = Color.Red;
-        private SpriteBatch _spriteBatch;
-        private Texture2D _texture2D;
+        private readonly SpriteBatch _spriteBatch;
+        private readonly Texture2D _texture2D;
 
-        public SnakeMono(int x, int y, Border border, int length = 1, Directions directions = Directions.Right)
+        public SnakeMono(int x, int y, Border border, SpriteBatch spriteBatch, Texture2D texture2D, int length = 1, Directions directions = Directions.Right)
             : base(x, y, border, length, directions)
         {
+            _spriteBatch = spriteBatch;
+            _texture2D = texture2D;
         }
 
         public override void Draw()
@@ -26,11 +28,6 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap
 
         public override void Clear()
         {
-
         }
-
-        public void Initialize(SpriteBatch spriteBatch) => _spriteBatch = spriteBatch;
-
-        public void LoadContent(Texture2D texture2D) => _texture2D = texture2D;
     }
 }

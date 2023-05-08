@@ -41,7 +41,12 @@ namespace Core.Components
             _snake.Move();
         }
 
-        public abstract void Draw();
+        public void Draw()
+        {
+            _food.Draw();
+            _snake.Draw();
+            _border.Draw();
+        }
 
         public abstract void Clear();
 

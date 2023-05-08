@@ -2,14 +2,14 @@ using Core.Components;
 
 namespace Core
 {
-    public class GameCore
+    public class Game
     {
         private readonly GameMap _gameMap;
         private readonly IUserInput _userInput;
         private readonly Score _score;
         private readonly Speed _speed;
 
-        public GameCore(
+        public Game(
             IUserInput userInput,
             Score score,
             Speed speed,
