@@ -18,7 +18,7 @@ namespace SnakeMonoGame
         private SnakeMono _snake;
         private BorderMono _border;
 
-        private GameOver _gameOver;
+        private GameOverMono _gameOver;
         private ScoreMono _score;
         private GameMapMono _gameMap;
         private SpeedMono _speed;
@@ -57,7 +57,7 @@ namespace SnakeMonoGame
             _userInput = new UserInput();
             _speed = new SpeedMono();
             _score = new ScoreMono(_border.Height, font, _spriteBatch, boardTexture2D);
-            _gameOver = new GameOver(_border, _spriteBatch, gameOverTexture2D);
+            _gameOver = new GameOverMono(_border, _spriteBatch, gameOverTexture2D);
 
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
             _gameMap.OnEatScore += _score.Increase;

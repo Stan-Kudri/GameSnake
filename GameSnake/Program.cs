@@ -16,8 +16,6 @@ WindowSetting(width, height);
 var game = GameCreator(width, height, snakeLength);
 game.Run();
 
-DisplayGameOver(width, height); // Massage "Game Over"
-
 Console.ReadKey();
 
 static void WindowSetting(int width, int height)
@@ -43,16 +41,7 @@ static Game GameCreator(int width, int height, int snakeLength)
     var foodFactoryConsole = new FoodFactoryConsole();
 
     var gameMapConsole = new GameMapConsole(borderConsole, snakeConsole, foodFactoryConsole);
+    var gameOver = new GameOverConsole(borderConsole);
 
-    return new Game(userInput, scoreConsole, speedConsole, gameMapConsole);
-}
-
-static void DisplayGameOver(int fieldWidth, int fieldHeight)
-{
-    string message = "Game Over";
-    int startWidthMessage = (fieldWidth / 2) - (message.Length / 2);
-    int startHeightMessage = fieldHeight / 2;
-
-    Console.SetCursorPosition(startWidthMessage, startHeightMessage);
-    Console.WriteLine(message);
+    return new Game(userInput, scoreConsole, speedConsole, gameMapConsole, gameOver);
 }
