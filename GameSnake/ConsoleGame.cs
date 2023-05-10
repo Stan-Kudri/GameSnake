@@ -1,9 +1,9 @@
 using Core.Components;
 using GameSnake.ComponentsGame;
 
-namespace Core
+namespace GameSnake
 {
-    public class Game
+    public class ConsoleGame
     {
         private readonly GameMapConsole _gameMap;
         private readonly IUserInput _userInput;
@@ -11,7 +11,7 @@ namespace Core
         private readonly Speed _speed;
         private readonly GameOver _gameOver;
 
-        public Game(
+        public ConsoleGame(
             IUserInput userInput,
             Score score,
             Speed speed,

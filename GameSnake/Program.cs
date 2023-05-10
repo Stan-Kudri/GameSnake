@@ -1,5 +1,5 @@
 using System.Runtime.InteropServices;
-using Core;
+using GameSnake;
 using GameSnake.ComponentsGame;
 using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.ComponentsGame.ItemGameMap.Foods;
