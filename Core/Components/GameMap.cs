@@ -48,8 +48,6 @@ namespace Core.Components
             _border.Draw();
         }
 
-        public abstract void Clear();
-
         private Food? RandomCellForFood()
         {
             for (var i = 0; i < NumberRandomSearchPosition; i++)

@@ -18,11 +18,5 @@ namespace MonoGameSnake.ComponentsGame
             : base(border, snake, foodFactoryMono)
         {
         }
-
-        public override void Clear()
-        {
-            _snake.Clear();
-            _food.Clear();
-        }
     }
 }

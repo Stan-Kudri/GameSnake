@@ -30,7 +30,7 @@ static void WindowSetting(int width, int height)
     Console.Title = "SNAKE";
 }
 
-static Game GameCreator(int width, int height, int snakeLength)
+static ConsoleGame GameCreator(int width, int height, int snakeLength)
 {
     var userInput = new UserInput();
     var scoreConsole = new ScoreConsole(height);
@@ -43,5 +43,5 @@ static Game GameCreator(int width, int height, int snakeLength)
     var gameMapConsole = new GameMapConsole(borderConsole, snakeConsole, foodFactoryConsole);
     var gameOver = new GameOverConsole(borderConsole);
 
-    return new Game(userInput, scoreConsole, speedConsole, gameMapConsole, gameOver);
+    return new ConsoleGame(userInput, scoreConsole, speedConsole, gameMapConsole, gameOver);
 }

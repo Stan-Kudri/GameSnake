@@ -18,7 +18,7 @@ namespace GameSnake.ComponentsGame
         {
         }
 
-        public override void Clear()
+        public void Clear()
         {
             _snake.Clear();
             _food.Clear();

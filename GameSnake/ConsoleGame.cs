@@ -1,10 +1,11 @@
 using Core.Components;
+using GameSnake.ComponentsGame;
 
 namespace Core
 {
     public class Game
     {
-        private readonly GameMap _gameMap;
+        private readonly GameMapConsole _gameMap;
         private readonly IUserInput _userInput;
         private readonly Score _score;
         private readonly Speed _speed;
@@ -14,7 +15,7 @@ namespace Core
             IUserInput userInput,
             Score score,
             Speed speed,
-            GameMap gameMap,
+            GameMapConsole gameMap,
             GameOver gameOver)
         {
             _userInput = userInput;
