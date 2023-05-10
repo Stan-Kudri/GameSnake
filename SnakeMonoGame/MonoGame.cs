@@ -82,8 +82,9 @@ namespace SnakeMonoGame
 
             if (!_gameMap.IsGameOver())
             {
-                if (_currentTimeButton >= _speed.TimePressButton && _userInput.Update(keyboardState))
+                if (_currentTimeButton >= _speed.TimePressButton && _userInput.HasNewKey(keyboardState))
                 {
+                    _userInput.Update(keyboardState);
                     _currentTimeButton = 0;
                 }
 

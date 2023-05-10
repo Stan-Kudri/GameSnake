@@ -21,46 +21,48 @@ namespace MonoGameSnake.ComponentsGame
         {
         }
 
-        public bool Update(KeyboardState keyboardState)
+        public void Update(KeyboardState keyboardState)
         {
-            if (ChangeDirection(keyboardState) && keyboardState != _oldKeyBoard)
+            if (ChangeDirection(keyboardState))
             {
                 _oldKeyBoard = keyboardState;
                 OnChangedDirection?.Invoke(this);
-
-                return true;
             }
-
-            return false;
         }
+
+        public bool HasNewKey(KeyboardState keyboardState) => keyboardState != _oldKeyBoard;
 
         private bool ChangeDirection(KeyboardState keyboardState)
         {
-            if (_currentDirection == Directions.Right || _currentDirection == Directions.Left)
+            switch (_currentDirection)
             {
-                if (keyboardState.IsKeyDown(Keys.Up))
-                {
-                    _currentDirection = Directions.Up;
-                    return true;
-                }
-                else if (keyboardState.IsKeyDown(Keys.Down))
-                {
-                    _currentDirection = Directions.Down;
-                    return true;
-                }
-            }
-            else if (_currentDirection == Directions.Up || _currentDirection == Directions.Down)
-            {
-                if (keyboardState.IsKeyDown(Keys.Left))
-                {
-                    _currentDirection = Directions.Left;
-                    return true;
-                }
-                else if (keyboardState.IsKeyDown(Keys.Right))
-                {
-                    _currentDirection = Directions.Right;
-                    return true;
-                }
+                case Directions.Right:
+                case Directions.Left:
+                    if (keyboardState.IsKeyDown(Keys.Up))
+                    {
+                        _currentDirection = Directions.Up;
+                        return true;
+                    }
+                    else if (keyboardState.IsKeyDown(Keys.Down))
+                    {
+                        _currentDirection = Directions.Down;
+                        return true;
+                    }
+                    break;
+
+                case Directions.Up:
+                case Directions.Down:
+                    if (keyboardState.IsKeyDown(Keys.Left))
+                    {
+                        _currentDirection = Directions.Left;
+                        return true;
+                    }
+                    else if (keyboardState.IsKeyDown(Keys.Right))
+                    {
+                        _currentDirection = Directions.Right;
+                        return true;
+                    }
+                    break;
             }
 
             return false;
