@@ -8,13 +8,13 @@ namespace GameSnake
         private readonly GameMapConsole _gameMap;
         private readonly IUserInput _userInput;
         private readonly Score _score;
-        private readonly Speed _speed;
+        private readonly SpeedConsole _speed;
         private readonly GameOver _gameOver;
 
         public ConsoleGame(
             IUserInput userInput,
             Score score,
-            Speed speed,
+            SpeedConsole speed,
             GameMapConsole gameMap,
             GameOver gameOver)
         {

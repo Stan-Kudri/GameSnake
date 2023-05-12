@@ -20,14 +20,10 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap
 
         public override void Draw()
         {
-            Body.ForEach(x => _spriteBatch.Draw(
+            _body.ForEach(x => _spriteBatch.Draw(
                 _texture2D,
                 new Vector2(x.X * _texture2D.Width, x.Y * _texture2D.Height),
                 _color));
-        }
-
-        public override void Clear()
-        {
         }
     }
 }

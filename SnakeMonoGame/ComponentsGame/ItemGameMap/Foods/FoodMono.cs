@@ -16,11 +16,6 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap.Foods
         {
         }
 
-        public override void Clear()
-        {
-
-        }
-
         public override void Draw()
         {
             _spriteBatch.Draw(_texture2D, _position, _color);

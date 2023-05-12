@@ -12,7 +12,7 @@ namespace Core.Components.GameMapItems
         private Point _head;
         private Point _oldTail;
 
-        protected readonly List<Point> Body;
+        protected readonly List<Point> _body;
 
         public Snake(int x, int y, Border border, int length = 1, Directions directions = Directions.Right)
         {
@@ -35,19 +35,21 @@ namespace Core.Components.GameMapItems
             _widthField = border.Width;
             _heightField = border.Height;
             Direction = directions;
-            Body = BuildBody(x, y);
-            _head = Body.First();
-            _oldTail = Body.Last();
+            _body = BuildBody(x, y);
+            _head = _body.First();
+            _oldTail = _body.Last();
         }
 
         public Directions Direction { get; set; }
 
         public Point Head => _head;
 
+        public List<Point> Body => _body;
+
         public void Move()
         {
             _head = GetNewHeadPosition();
-            _oldTail = Body.First();
+            _oldTail = _body.First();
 
             if (ObstacleCollision())
             {
@@ -57,8 +59,8 @@ namespace Core.Components.GameMapItems
             _head.X = ClampInverted(_head.X, 1, _widthField - 1);
             _head.Y = ClampInverted(_head.Y, 1, _heightField - 1);
 
-            Body.Add(_head);
-            Body.Remove(Body.First());
+            _body.Add(_head);
+            _body.Remove(_body.First());
         }
 
         public bool TryEatFood(Point food)
@@ -66,7 +68,7 @@ namespace Core.Components.GameMapItems
             if (food.Equals(_head))
             {
                 _length++;
-                Body.Insert(0, _oldTail);
+                _body.Insert(0, _oldTail);
                 return true;
             }
 
@@ -74,8 +76,6 @@ namespace Core.Components.GameMapItems
         }
 
         public abstract void Draw();
-
-        public abstract void Clear();
 
         public bool ObstacleCollision()
         {
@@ -94,7 +94,7 @@ namespace Core.Components.GameMapItems
         {
             for (var i = _length - 2; i > 0; i--)
             {
-                if (_head.Equals(Body[i]))
+                if (_head.Equals(_body[i]))
                 {
                     return true;
                 }
@@ -103,7 +103,7 @@ namespace Core.Components.GameMapItems
             return false;
         }
 
-        public bool IntersectBody(Point food) => Body.Contains(food);
+        public bool IntersectBody(Point food) => _body.Contains(food);
 
         private Point GetNewHeadPosition()
         {

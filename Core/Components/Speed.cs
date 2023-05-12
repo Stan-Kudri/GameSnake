@@ -48,7 +48,5 @@ namespace Core.Components
                 Value = _startSpeed + _numberInterval * _valueIncreaseSpeed;
             }
         }
-
-        public abstract void Apply();
     }
 }

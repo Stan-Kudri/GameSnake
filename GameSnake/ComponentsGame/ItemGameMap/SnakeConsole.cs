@@ -13,8 +13,6 @@ namespace GameSnake.ComponentsGame.ItemGameMap
         {
         }
 
-        public override void Draw() => Body.ForEach(x => x.Draw(SymbolSnake));
-
-        public override void Clear() => Body.ForEach(x => x.Clear());
+        public override void Draw() => _body.ForEach(x => x.Draw(SymbolSnake));
     }
 }

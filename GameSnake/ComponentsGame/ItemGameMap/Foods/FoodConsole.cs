@@ -17,10 +17,5 @@ namespace GameSnake.ComponentsGame.ItemGameMap.Foods
         {
             Position.Draw(SymbolEat);
         }
-
-        public override void Clear()
-        {
-            Position.Clear();
-        }
     }
 }

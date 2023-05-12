@@ -3,6 +3,7 @@ using Core.Components.GameMapItems;
 using Core.Components.GameMapItems.Foods;
 using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.ComponentsGame.ItemGameMap.Foods;
+using GameSnake.Extension;
 
 namespace GameSnake.ComponentsGame
 {
@@ -20,8 +21,8 @@ namespace GameSnake.ComponentsGame
 
         public void Clear()
         {
-            _snake.Clear();
-            _food.Clear();
+            _snake.Body.ForEach(x => x.Clear());
+            _food.Position.Clear();
         }
     }
 }

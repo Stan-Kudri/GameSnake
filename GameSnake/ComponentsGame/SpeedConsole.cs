@@ -9,6 +9,6 @@ namespace GameSnake.ComponentsGame
         {
         }
 
-        public override void Apply() => Thread.Sleep(_maxSpeed - Value);
+        public void Apply() => Thread.Sleep(_maxSpeed - Value);
     }
 }

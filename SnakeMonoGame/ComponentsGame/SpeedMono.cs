@@ -22,10 +22,5 @@ namespace MonoGameSnake.ComponentsGame
         public int TimeMove => _periodToRefreshMovement / Value;
 
         public int TimePressButton => _buttonPressPeriod / (_numberInterval + 1);
-
-        public override void Apply()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
