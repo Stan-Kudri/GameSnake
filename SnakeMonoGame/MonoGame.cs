@@ -22,7 +22,7 @@ namespace SnakeMonoGame
         private ScoreMono _score;
         private GameMapMono _gameMap;
         private SpeedMono _speed;
-        private UserInput _userInput;
+        private UserInputMono _userInput;
 
         private int _currentTimeMove = 0; // The amount of elapsed time.
         private int _currentTimeButton = 0; // Time from button press.
@@ -54,7 +54,7 @@ namespace SnakeMonoGame
             _snake = _border.Creator(_spriteBatch, snakeTexture2D);
             _gameMap = new GameMapMono(_border, _snake, foodTexture2D, _spriteBatch);
 
-            _userInput = new UserInput();
+            _userInput = new UserInputMono();
             _speed = new SpeedMono();
             _score = new ScoreMono(_border.Height, font, _spriteBatch, boardTexture2D);
             _gameOver = new GameOverMono(_border, _spriteBatch, gameOverTexture2D);
@@ -73,7 +73,6 @@ namespace SnakeMonoGame
 
         protected override void Update(GameTime gameTime)
         {
-            var keyboardState = Keyboard.GetState();
             _currentTimeMove += gameTime.ElapsedGameTime.Milliseconds;
             _currentTimeButton += gameTime.ElapsedGameTime.Milliseconds;
 
@@ -82,9 +81,9 @@ namespace SnakeMonoGame
 
             if (!_gameMap.IsGameOver())
             {
-                if (_currentTimeButton >= _speed.TimePressButton && _userInput.HasNewKey(keyboardState))
+                if (_currentTimeButton >= _speed.TimePressButton)
                 {
-                    _userInput.Update(keyboardState);
+                    _userInput.Update();
                     _currentTimeButton = 0;
                 }
 

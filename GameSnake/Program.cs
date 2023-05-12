@@ -32,7 +32,7 @@ static void WindowSetting(int width, int height)
 
 static ConsoleGame GameCreator(int width, int height, int snakeLength)
 {
-    var userInput = new UserInput();
+    var userInput = new UserInputConsole();
     var scoreConsole = new ScoreConsole(height);
     var speedConsole = new SpeedConsole();
 
