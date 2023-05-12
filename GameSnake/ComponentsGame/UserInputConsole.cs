@@ -1,6 +1,6 @@
 using Core.Components;
-using Core.Extension;
 using GameSnake.Enum;
+using GameSnake.Extension;
 
 namespace GameSnake.ComponentsGame
 {

@@ -1,6 +1,6 @@
 using GameSnake.Enum;
 
-namespace Core.Extension
+namespace GameSnake.Extension
 {
     public static class DirectionsExtension
     {
