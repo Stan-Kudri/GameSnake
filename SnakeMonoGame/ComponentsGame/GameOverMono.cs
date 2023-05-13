@@ -7,8 +7,6 @@ namespace MonoGameSnake.ComponentsGame
 {
     public class GameOverMono : GameOver
     {
-        private const int DividerLengthHalf = 2;
-
         private readonly Color _color = Color.Azure;
         private readonly SpriteBatch _spriteBatch;
         private readonly Texture2D _texture2D;
