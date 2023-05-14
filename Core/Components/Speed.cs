@@ -8,7 +8,6 @@ namespace Core.Components
         protected readonly int _startThresholdMillisecond;
         protected readonly int _thresholdPoints;
         protected readonly int _increaseSpeedMillisecond;
-        protected readonly int _maxSpeed;
 
         protected int _numberInterval = 0;
 
