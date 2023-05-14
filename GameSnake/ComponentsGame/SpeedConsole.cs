@@ -4,11 +4,11 @@ namespace GameSnake.ComponentsGame
 {
     public class SpeedConsole : Speed
     {
-        public SpeedConsole(int speed = 20, int thresholdPoints = 5, int valueIncreaseSpeed = 20, int maxSpeed = 100)
-            : base(speed, thresholdPoints, valueIncreaseSpeed, maxSpeed)
+        public SpeedConsole(int thresholdPoints = 5, int increaseSpeedMillisecond = 100)
+            : base(thresholdPoints, increaseSpeedMillisecond)
         {
         }
 
-        public void Apply() => Thread.Sleep(_maxSpeed - Value);
+        public void Apply() => Thread.Sleep(ValueThresholdMillisecond);
     }
 }

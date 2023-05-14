@@ -88,10 +88,10 @@ namespace SnakeMonoGame
                     _currentTimeButton = 0;
                 }
 
-                if (_currentTimeMove >= _speed.TimeMove)
+                if (_currentTimeMove >= _speed.ValueThresholdMillisecond)
                 {
                     _gameMap.Move();
-                    _currentTimeMove -= _speed.TimeMove;
+                    _currentTimeMove -= _speed.ValueThresholdMillisecond;
                 }
             }
 
