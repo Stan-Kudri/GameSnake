@@ -9,8 +9,8 @@ namespace SnakeMonoGame
 {
     public class MonoGame : Game
     {
-        private const int CorrectionFactorTexture = 1;
-        private const int CorrectFactorDisplayScore = 3;
+        private const int TextureFactor = 1;
+        private const int DisplayScoreFactor = 3;
 
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -64,9 +64,10 @@ namespace SnakeMonoGame
             _score.OnUpIntervalScore += _speed.Increase;
 
             // TODO: use this.Content to load your game content here
-
-            _graphics.PreferredBackBufferWidth = (_border.Width + CorrectionFactorTexture) * (boardTexture2D.Width);
-            _graphics.PreferredBackBufferHeight = (_border.Height + CorrectionFactorTexture + CorrectFactorDisplayScore) * (boardTexture2D.Height);
+            var widthWindowGame = (_border.Width + TextureFactor) * (boardTexture2D.Width);
+            var heightWindowGame = (_border.Height + TextureFactor + DisplayScoreFactor) * (boardTexture2D.Height);
+            _graphics.PreferredBackBufferWidth = widthWindowGame;
+            _graphics.PreferredBackBufferHeight = heightWindowGame;
             _graphics.IsFullScreen = false;
             _graphics.ApplyChanges();
         }
