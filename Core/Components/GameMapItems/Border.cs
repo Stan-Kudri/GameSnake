@@ -19,13 +19,13 @@ namespace Core.Components.GameMapItems
 
         public int Height { get; protected set; }
 
-        public List<Point> Borders { get; protected set; }
+        public List<Points> Borders { get; protected set; }
 
         public abstract void Draw();
 
-        protected List<Point> Create()
+        protected List<Points> Create()
         {
-            var border = new List<Point>();
+            var border = new List<Points>();
 
             for (var x = 0; x <= Width; x++)
             {
@@ -36,7 +36,7 @@ namespace Core.Components.GameMapItems
                         x == 0 ||
                         x == Width)
                     {
-                        var position = new Point(x, y);
+                        var position = new Points(x, y);
                         border.Add(position);
                     }
                 }

@@ -1,8 +1,8 @@
 namespace Core
 {
-    public class Point
+    public class Points
     {
-        public Point(int x, int y)
+        public Points(int x, int y)
         {
             X = x;
             Y = y;
@@ -12,13 +12,13 @@ namespace Core
 
         public int Y { get; set; }
 
-        public Point Clone() => new Point(X, Y);
+        public Points Clone() => new Points(X, Y);
 
         public override int GetHashCode() => HashCode.Combine(X, Y);
 
-        public override bool Equals(object? obj) => Equals(obj as Point);
+        public override bool Equals(object? obj) => Equals(obj as Points);
 
-        private bool Equals(Point? position)
+        private bool Equals(Points? position)
         {
             if (position == null)
             {

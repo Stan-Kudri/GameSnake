@@ -69,7 +69,7 @@ namespace Core.Components
             {
                 for (var y = 1; y < _border.Height - 1; y++)
                 {
-                    var newPositionFood = new Point(x, y);
+                    var newPositionFood = new Points(x, y);
 
                     if (!_snake.IntersectBody(newPositionFood))
                     {

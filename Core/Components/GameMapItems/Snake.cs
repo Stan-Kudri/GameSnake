@@ -4,15 +4,15 @@ namespace Core.Components.GameMapItems
 {
     public abstract class Snake
     {
-        private readonly List<Point> _border;
+        private readonly List<Points> _border;
         private readonly int _heightField;
         private readonly int _widthField;
 
         private int _length;
-        private Point _head;
-        private Point _oldTail;
+        private Points _head;
+        private Points _oldTail;
 
-        protected readonly List<Point> _body;
+        protected readonly List<Points> _body;
 
         public Snake(int x, int y, Border border, int length = 1, Directions directions = Directions.Right)
         {
@@ -42,9 +42,9 @@ namespace Core.Components.GameMapItems
 
         public Directions Direction { get; set; }
 
-        public Point Head => _head;
+        public Points Head => _head;
 
-        public List<Point> Body => _body;
+        public List<Points> Body => _body;
 
         public void Move()
         {
@@ -63,7 +63,7 @@ namespace Core.Components.GameMapItems
             _body.Remove(_body.First());
         }
 
-        public bool TryEatFood(Point food)
+        public bool TryEatFood(Points food)
         {
             if (food.Equals(_head))
             {
@@ -103,9 +103,9 @@ namespace Core.Components.GameMapItems
             return false;
         }
 
-        public bool IntersectBody(Point food) => _body.Contains(food);
+        public bool IntersectBody(Points food) => _body.Contains(food);
 
-        private Point GetNewHeadPosition()
+        private Points GetNewHeadPosition()
         {
             var position = _head.Clone();
 
@@ -142,20 +142,20 @@ namespace Core.Components.GameMapItems
             return position;
         }
 
-        private List<Point> BuildBody(int x, int y)
+        private List<Points> BuildBody(int x, int y)
         {
-            var body = new List<Point>();
+            var body = new List<Points>();
 
             if (_length == 1)
             {
-                body.Add(new Point(x, y));
+                body.Add(new Points(x, y));
             }
             else
             {
                 for (var i = 0; i < _length; i++)
                 {
                     x++;
-                    var position = new Point(x, y);
+                    var position = new Points(x, y);
                     body.Add(position);
                 }
             }

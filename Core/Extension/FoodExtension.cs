@@ -8,9 +8,9 @@ namespace Core.Extension
 
         private static readonly Random Random = new Random();
 
-        public static Point GenerateFoodPosition(this Border field)
+        public static Points GenerateFoodPosition(this Border field)
         {
-            return new Point(
+            return new Points(
                 Random.Next(MinCoordinatePoint, field.Width - 1),
                 Random.Next(MinCoordinatePoint, field.Height - 1));
         }
