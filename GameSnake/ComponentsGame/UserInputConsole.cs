@@ -1,6 +1,5 @@
 using Core.Components;
 using GameSnake.Enum;
-using GameSnake.Extension;
 
 namespace GameSnake.ComponentsGame
 {
@@ -16,8 +15,25 @@ namespace GameSnake.ComponentsGame
             if (Console.KeyAvailable)
             {
                 var key = Console.ReadKey().Key;
-                var direction = key.ToDirection();
+                var direction = ToDirection(key);
                 ChangeDirection(direction);
+            }
+        }
+
+        public Directions ToDirection(ConsoleKey key)
+        {
+            switch (key)
+            {
+                case ConsoleKey.UpArrow:
+                    return Directions.Up;
+                case ConsoleKey.DownArrow:
+                    return Directions.Down;
+                case ConsoleKey.LeftArrow:
+                    return Directions.Left;
+                case ConsoleKey.RightArrow:
+                    return Directions.Right;
+                default:
+                    return Directions.Unknown;
             }
         }
     }
