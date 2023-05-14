@@ -13,8 +13,11 @@ namespace GameSnake.ComponentsGame
         public GameOverConsole(Border border)
             : base(border)
         {
-            _startWidthMessage = (_border.Width / DividerLengthHalf) - (Message.Length / DividerLengthHalf);
-            _startHeightMessage = _border.Height / DividerLengthHalf;
+            var centerOfX = _border.Width / 2;
+            var centerOfY = _border.Height / 2;
+            var centerOfMessage = Message.Length / 2;
+            _startWidthMessage = centerOfX - centerOfMessage;
+            _startHeightMessage = centerOfY;
         }
 
         public override void Draw()

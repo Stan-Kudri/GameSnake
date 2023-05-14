@@ -16,10 +16,15 @@ namespace MonoGameSnake.ComponentsGame
             : base(borderMono)
         {
             _texture2D = texture2D;
-            _position = new Vector2(
-                borderMono.Width * borderMono.Texture2D.Width / DividerLengthHalf - _texture2D.Width / DividerLengthHalf,
-                borderMono.Height * borderMono.Texture2D.Height / DividerLengthHalf - _texture2D.Height / DividerLengthHalf);
             _spriteBatch = spriteBatch;
+            var centerFieldOfX = (borderMono.Width + 1) * borderMono.Texture2D.Width / 2;
+            var centerFieldOfY = (borderMono.Height + 1) * borderMono.Texture2D.Height / 2;
+            var centerPicturesGameOverOfX = _texture2D.Width / 2;
+            var centerPicturesGameOverOfY = _texture2D.Height / 2;
+
+            var positionOfX = centerFieldOfX - centerPicturesGameOverOfX;
+            var positionOfY = centerFieldOfY - centerPicturesGameOverOfY;
+            _position = new Vector2(positionOfX, positionOfY);
         }
 
         public override void Draw()
