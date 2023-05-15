@@ -10,6 +10,7 @@ namespace Core.Components
         protected readonly int _thresholdPoints;
 
         protected int _numberInterval = 0;
+        protected TimeSpan _valueThreshold;
 
         public Speed(int thresholdPoints = 5)
             : this(TimeSpan.FromMilliseconds(50), thresholdPoints)
@@ -18,14 +19,14 @@ namespace Core.Components
 
         public Speed(TimeSpan increaseSpeed, int thresholdPoints = 5)
         {
-            ValueThreshold = _startThreshold = HalfSecond;
+            _valueThreshold = _startThreshold = HalfSecond;
 
             if (thresholdPoints <= 0)
             {
                 throw new ArgumentException("Interval points greater than zero.", nameof(thresholdPoints));
             }
 
-            if (increaseSpeed.Milliseconds <= 0 || ValueThreshold <= increaseSpeed)
+            if (increaseSpeed.Milliseconds <= 0 || _valueThreshold <= increaseSpeed)
             {
                 throw new ArgumentException("Increase speed greater than zero.", nameof(increaseSpeed));
             }
@@ -34,7 +35,7 @@ namespace Core.Components
             _increaseSpeed = increaseSpeed;
         }
 
-        public TimeSpan ValueThreshold { get; private set; }
+        public TimeSpan ValueThreshold => _valueThreshold;
 
         public void Increase(int score)
         {
@@ -45,7 +46,7 @@ namespace Core.Components
             if (newThresholdMillisecond >= LimitThreshold)
             {
                 // Point interval number.
-                ValueThreshold = newThresholdMillisecond;
+                _valueThreshold = newThresholdMillisecond;
             }
         }
     }

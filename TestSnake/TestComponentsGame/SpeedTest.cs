@@ -23,9 +23,9 @@ namespace TestSnake.TestComponentsGame
         }
 
         [Theory]
-        //[InlineData(0)]
+        [InlineData(0)]
         [InlineData(2000)]
-        //[InlineData(-20)]
+        [InlineData(-20)]
         public void Exception_The_Speed_Constructor_By_Zero(int increaseSpeedMillisecond)
         {
             var timeSpan = TimeSpan.FromMilliseconds(increaseSpeedMillisecond);
