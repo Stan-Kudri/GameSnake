@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -24,8 +25,8 @@ namespace SnakeMonoGame
         private SpeedMono _speed;
         private UserInputMono _userInput;
 
-        private int _currentTimeMove = 0; // The amount of elapsed time.
-        private int _currentTimeButton = 0; // Time from button press.
+        private TimeSpan _currentTimeMove = TimeSpan.Zero; // The amount of elapsed time.
+        private TimeSpan _currentTimeButton = TimeSpan.Zero; // Time from button press.
 
         public MonoGame()
         {
@@ -74,8 +75,8 @@ namespace SnakeMonoGame
 
         protected override void Update(GameTime gameTime)
         {
-            _currentTimeMove += gameTime.ElapsedGameTime.Milliseconds;
-            _currentTimeButton += gameTime.ElapsedGameTime.Milliseconds;
+            _currentTimeMove += gameTime.ElapsedGameTime;
+            _currentTimeButton += gameTime.ElapsedGameTime;
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
@@ -85,13 +86,13 @@ namespace SnakeMonoGame
                 if (_currentTimeButton >= _speed.TimePressButton)
                 {
                     _userInput.Update();
-                    _currentTimeButton = 0;
+                    _currentTimeButton = TimeSpan.Zero;
                 }
 
-                if (_currentTimeMove >= _speed.ValueThresholdMillisecond)
+                if (_currentTimeMove >= _speed.ValueThreshold)
                 {
                     _gameMap.Move();
-                    _currentTimeMove -= _speed.ValueThresholdMillisecond;
+                    _currentTimeMove -= _speed.ValueThreshold;
                 }
             }
 

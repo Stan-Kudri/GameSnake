@@ -2,45 +2,50 @@ namespace Core.Components
 {
     public abstract class Speed
     {
-        protected const int LimitThresholdMillisecond = 100;
-        protected const int HelfSecondToMilliseconds = 500;
+        protected readonly TimeSpan LimitThreshold = TimeSpan.FromMilliseconds(100);
+        protected readonly TimeSpan HalfSecond = TimeSpan.FromMilliseconds(500);
 
-        protected readonly int _startThresholdMillisecond;
+        protected readonly TimeSpan _startThreshold;
+        protected readonly TimeSpan _increaseSpeed;
         protected readonly int _thresholdPoints;
-        protected readonly int _increaseSpeedMillisecond;
 
         protected int _numberInterval = 0;
 
-        public Speed(int thresholdPoints = 5, int increaseSpeedMillisecond = 50)
+        public Speed(int thresholdPoints = 5)
+            : this(TimeSpan.FromMilliseconds(50), thresholdPoints)
         {
-            ValueThresholdMillisecond = _startThresholdMillisecond = HelfSecondToMilliseconds;
+        }
+
+        public Speed(TimeSpan increaseSpeed, int thresholdPoints = 5)
+        {
+            ValueThreshold = _startThreshold = HalfSecond;
 
             if (thresholdPoints <= 0)
             {
                 throw new ArgumentException("Interval points greater than zero.", nameof(thresholdPoints));
             }
 
-            if (increaseSpeedMillisecond <= 0 || ValueThresholdMillisecond <= increaseSpeedMillisecond)
+            if (increaseSpeed.Milliseconds <= 0 || ValueThreshold <= increaseSpeed)
             {
-                throw new ArgumentException("Increase speed greater than zero.", nameof(increaseSpeedMillisecond));
+                throw new ArgumentException("Increase speed greater than zero.", nameof(increaseSpeed));
             }
 
             _thresholdPoints = thresholdPoints;
-            _increaseSpeedMillisecond = increaseSpeedMillisecond;
+            _increaseSpeed = increaseSpeed;
         }
 
-        public int ValueThresholdMillisecond { get; private set; }
+        public TimeSpan ValueThreshold { get; private set; }
 
         public void Increase(int score)
         {
             _numberInterval = score / _thresholdPoints;
 
-            var newThresholdMillisecond = _startThresholdMillisecond - _numberInterval * _increaseSpeedMillisecond;
+            var newThresholdMillisecond = _startThreshold - _numberInterval * _increaseSpeed;
 
-            if (newThresholdMillisecond >= LimitThresholdMillisecond)
+            if (newThresholdMillisecond >= LimitThreshold)
             {
                 // Point interval number.
-                ValueThresholdMillisecond = newThresholdMillisecond;
+                ValueThreshold = newThresholdMillisecond;
             }
         }
     }

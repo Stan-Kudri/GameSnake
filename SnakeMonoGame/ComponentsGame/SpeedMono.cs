@@ -1,14 +1,15 @@
+using System;
 using Core.Components;
 
 namespace MonoGameSnake.ComponentsGame
 {
     public class SpeedMono : Speed
     {
-        public SpeedMono(int thresholdPoints = 5, int increaseSpeedMillisecond = 100)
-            : base(thresholdPoints, increaseSpeedMillisecond)
+        public SpeedMono()
+            : base(TimeSpan.FromMilliseconds(50), 5)
         {
         }
 
-        public int TimePressButton => ValueThresholdMillisecond / 3;
+        public TimeSpan TimePressButton => ValueThreshold.Divide(3);
     }
 }
