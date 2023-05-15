@@ -12,7 +12,7 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap.Foods
         private readonly SpriteBatch _spriteBatch;
         private readonly Texture2D _texture2D;
 
-        public FoodMono(Points position, SpriteBatch spriteBatch, Texture2D texture2D, int scorePoint = 1)
+        public FoodMono(Core.Point position, SpriteBatch spriteBatch, Texture2D texture2D, int scorePoint = 1)
             : base(position, scorePoint)
         {
             _spriteBatch = spriteBatch;

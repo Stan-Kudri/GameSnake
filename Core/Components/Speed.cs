@@ -3,7 +3,7 @@ namespace Core.Components
     public abstract class Speed
     {
         protected const int LimitThresholdMillisecond = 100;
-        protected const int OneSecondToMilliseconds = 500;
+        protected const int HelfSecondToMilliseconds = 500;
 
         protected readonly int _startThresholdMillisecond;
         protected readonly int _thresholdPoints;
@@ -13,7 +13,7 @@ namespace Core.Components
 
         public Speed(int thresholdPoints = 5, int increaseSpeedMillisecond = 50)
         {
-            ValueThresholdMillisecond = _startThresholdMillisecond = OneSecondToMilliseconds;
+            ValueThresholdMillisecond = _startThresholdMillisecond = HelfSecondToMilliseconds;
 
             if (thresholdPoints <= 0)
             {

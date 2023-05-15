@@ -5,6 +5,6 @@ namespace GameSnake.ComponentsGame.ItemGameMap.Foods
 {
     public class FoodFactoryConsole : FoodFactory
     {
-        public override Food Create(Points point) => new FoodConsole(point);
+        public override Food Create(Point point) => new FoodConsole(point);
     }
 }

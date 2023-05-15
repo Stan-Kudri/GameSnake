@@ -13,7 +13,7 @@ namespace TestSnake.TestComponentsGame
             //Arrange
             var startScore = 0;
             var score = new ScoreConsole(startHeightDisplay, startScore);
-            var positionFood = new Points(2, 2);
+            var positionFood = new Point(2, 2);
             var food = new FoodConsole(positionFood, expectScore);
 
             //Act

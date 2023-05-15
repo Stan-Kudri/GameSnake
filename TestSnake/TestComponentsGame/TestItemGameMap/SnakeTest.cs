@@ -28,7 +28,7 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
             var snake = new SnakeConsole(startPositionX, startPositionY, border);
 
             //Act
-            var expectHeadPosition = new Points(expectHeadPositionX, expectHeadPositionY);
+            var expectHeadPosition = new Point(expectHeadPositionX, expectHeadPositionY);
             for (var i = 0; i < countMoveSnakeByX; i++)
             {
                 snake.Move();
