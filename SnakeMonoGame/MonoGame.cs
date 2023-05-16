@@ -92,7 +92,6 @@ namespace SnakeMonoGame
 
             if (_gameMap.IsGameOver())
             {
-
                 _gameOver.Draw();
             }
             else
