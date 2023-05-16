@@ -14,34 +14,28 @@ namespace MonoGameSnake.ComponentsGame
         {
         }
 
+        public event Action OnPressButton;
+
+        public event Action OnTimeMovie;
+
         private TimeSpan TimePressButton => _valueThreshold.Divide(3);
 
         public void Update(GameTime gameTime)
         {
             _currentTimeButton += gameTime.ElapsedGameTime;
             _currentTimeMove += gameTime.ElapsedGameTime;
-        }
 
-        public bool CanPressButton()
-        {
             if (_currentTimeButton >= TimePressButton)
             {
                 _currentTimeButton = TimeSpan.Zero;
-                return true;
+                OnPressButton?.Invoke();
             }
 
-            return false;
-        }
-
-        public bool CanTimeMovie()
-        {
             if (_currentTimeMove >= _valueThreshold)
             {
                 _currentTimeMove -= _valueThreshold;
-                return true;
+                OnTimeMovie?.Invoke();
             }
-
-            return false;
         }
     }
 }

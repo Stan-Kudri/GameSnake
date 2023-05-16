@@ -59,6 +59,8 @@ namespace SnakeMonoGame
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
             _gameMap.OnEatScore += _score.Increase;
             _score.OnUpIntervalScore += _speed.Increase;
+            _speed.OnPressButton += _userInput.Update;
+            _speed.OnTimeMovie += _gameMap.Move;
 
             // TODO: use this.Content to load your game content here
             var widthWindowGame = (_border.Width + TextureFactor) * (boardTexture2D.Width);
@@ -74,19 +76,9 @@ namespace SnakeMonoGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            _speed.Update(gameTime);
-
             if (!_gameMap.IsGameOver())
             {
-                if (_speed.CanPressButton())
-                {
-                    _userInput.Update();
-                }
-
-                if (_speed.CanTimeMovie())
-                {
-                    _gameMap.Move();
-                }
+                _speed.Update(gameTime);
             }
 
             // TODO: Add your update logic here
