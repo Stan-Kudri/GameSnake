@@ -5,6 +5,14 @@ namespace GameSnake.ComponentsGame
 {
     public class UserInputConsole : UserInput
     {
+        private readonly Dictionary<ConsoleKey, Directions> _directionMap = new Dictionary<ConsoleKey, Directions>
+        {
+            { ConsoleKey.UpArrow, Directions.Up },
+            { ConsoleKey.DownArrow, Directions.Down },
+            { ConsoleKey.LeftArrow, Directions.Left },
+            { ConsoleKey.RightArrow, Directions.Right },
+        };
+
         public UserInputConsole(Directions direction = Directions.Right)
             : base(direction)
         {
@@ -20,21 +28,14 @@ namespace GameSnake.ComponentsGame
             }
         }
 
-        public Directions ToDirection(ConsoleKey key)
+        private Directions ToDirection(ConsoleKey key)
         {
-            switch (key)
+            if (_directionMap.TryGetValue(key, out var directions))
             {
-                case ConsoleKey.UpArrow:
-                    return Directions.Up;
-                case ConsoleKey.DownArrow:
-                    return Directions.Down;
-                case ConsoleKey.LeftArrow:
-                    return Directions.Left;
-                case ConsoleKey.RightArrow:
-                    return Directions.Right;
-                default:
-                    return Directions.Unknown;
+                return directions;
             }
+
+            return Directions.Unknown;
         }
     }
 }

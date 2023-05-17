@@ -37,7 +37,7 @@ static ConsoleGame CreateGame(int width, int height, int snakeLength)
     var speedConsole = new SpeedConsole();
 
     var borderConsole = new BorderConsole(width, height);
-    var snakeConsole = borderConsole.Creator(snakeLength);
+    var snakeConsole = borderConsole.CreatSnake(snakeLength);
     var foodFactoryConsole = new FoodFactoryConsole();
 
     var gameMapConsole = new GameMapConsole(borderConsole, snakeConsole, foodFactoryConsole);

@@ -4,7 +4,7 @@ namespace Core.Components
 {
     public abstract class UserInput
     {
-        protected Directions _currentDirection = Directions.Right;
+        private Directions _currentDirection = Directions.Right;
 
         public UserInput(Directions directions = Directions.Right) => _currentDirection = directions;
 

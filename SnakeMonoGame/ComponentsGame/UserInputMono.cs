@@ -6,6 +6,14 @@ namespace MonoGameSnake.ComponentsGame
 {
     public class UserInputMono : UserInput
     {
+        private static readonly DirectionDetail[] _directionDetails = new[]
+        {
+            new DirectionDetail(Keys.Up, Directions.Up),
+            new DirectionDetail(Keys.Down, Directions.Down),
+            new DirectionDetail(Keys.Left, Directions.Left),
+            new DirectionDetail(Keys.Right, Directions.Right),
+        };
+
         public UserInputMono(Directions direction = Directions.Right)
             : base(direction)
         {
@@ -18,26 +26,20 @@ namespace MonoGameSnake.ComponentsGame
             ChangeDirection(direction);
         }
 
-        public Directions ToDirection(KeyboardState key)
+        private static Directions ToDirection(KeyboardState key)
         {
-            if (key.IsKeyDown(Keys.Up))
+            foreach (var directionDetail in _directionDetails)
             {
-                return Directions.Up;
-            }
-            else if (key.IsKeyDown(Keys.Down))
-            {
-                return Directions.Down;
-            }
-            else if (key.IsKeyDown(Keys.Left))
-            {
-                return Directions.Left;
-            }
-            else if (key.IsKeyDown(Keys.Right))
-            {
-                return Directions.Right;
+                if (key.IsKeyDown(directionDetail.Key))
+                {
+                    return directionDetail.Directions;
+                }
             }
 
             return Directions.Unknown;
         }
+
+        private record DirectionDetail(Keys Key, Directions Directions);
+
     }
 }
