@@ -30,16 +30,15 @@ namespace MonoGameSnake.ComponentsGame
         {
             foreach (var directionDetail in _directionDetails)
             {
-                if (key.IsKeyDown(directionDetail.Key))
+                if (key.IsKeyDown(directionDetail.key))
                 {
-                    return directionDetail.Directions;
+                    return directionDetail.directions;
                 }
             }
 
             return Directions.Unknown;
         }
 
-        private record DirectionDetail(Keys Key, Directions Directions);
-
+        private record DirectionDetail(Keys key, Directions directions);
     }
 }
