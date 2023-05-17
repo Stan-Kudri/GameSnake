@@ -10,7 +10,8 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap
         private readonly SpriteBatch _spriteBatch;
         private readonly Texture2D _texture2D;
 
-        public BorderMono(int width, int height, SpriteBatch spriteBatch, Texture2D texture2D) : base(width, height)
+        public BorderMono(int width, int height, SpriteBatch spriteBatch, Texture2D texture2D)
+            : base(width, height)
         {
             _spriteBatch = spriteBatch;
             _texture2D = texture2D;
