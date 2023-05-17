@@ -9,8 +9,8 @@ namespace Core.Components
         protected readonly TimeSpan _increaseSpeed;
         protected readonly int _thresholdPoints;
 
-        protected int _numberInterval = 0;
-        protected TimeSpan _valueThreshold;
+        private int _numberInterval = 0;
+        private TimeSpan _valueThreshold;
 
         public Speed(int thresholdPoints = 5)
             : this(TimeSpan.FromMilliseconds(50), thresholdPoints)
@@ -41,7 +41,7 @@ namespace Core.Components
         {
             _numberInterval = score / _thresholdPoints;
 
-            var newThresholdMillisecond = _startThreshold - _numberInterval * _increaseSpeed;
+            var newThresholdMillisecond = _startThreshold - (_numberInterval * _increaseSpeed);
 
             if (newThresholdMillisecond >= LimitThreshold)
             {

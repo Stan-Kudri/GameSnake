@@ -25,6 +25,7 @@ namespace Core.Components
                         _currentDirection = direction;
                         OnChangedDirection?.Invoke(this);
                     }
+
                     break;
 
                 case Directions.Right:
@@ -34,6 +35,7 @@ namespace Core.Components
                         _currentDirection = direction;
                         OnChangedDirection?.Invoke(this);
                     }
+
                     break;
             }
         }

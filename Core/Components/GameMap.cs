@@ -6,15 +6,12 @@ namespace Core.Components
 {
     public abstract class GameMap
     {
-        public const int NumberRandomSearchPosition = 3;
+        private const int NumberRandomSearchPosition = 3;
 
-        protected readonly FoodFactory _foodFactory;
-
-        protected readonly Border _border;
-
-        protected readonly Snake _snake;
-
-        protected Food _food;
+        private readonly FoodFactory _foodFactory;
+        private readonly Border _border;
+        private readonly Snake _snake;
+        private Food _food;
 
         public GameMap(Border border, Snake snake, FoodFactory foodFactory)
         {
@@ -25,6 +22,10 @@ namespace Core.Components
         }
 
         public event Action<Food>? OnEatScore;
+
+        public Snake Snake => _snake;
+
+        public Food Food => _food;
 
         public bool IsGameOver() => _snake.ObstacleCollision() || _snake.Intersect();
 

@@ -63,8 +63,8 @@ namespace SnakeMonoGame
             _speed.OnTimeMovie += _gameMap.Move;
 
             // TODO: use this.Content to load your game content here
-            var widthWindowGame = (_border.Width + TextureFactor) * (boardTexture2D.Width);
-            var heightWindowGame = (_border.Height + TextureFactor + DisplayScoreFactor) * (boardTexture2D.Height);
+            var widthWindowGame = (_border.Width + TextureFactor) * boardTexture2D.Width;
+            var heightWindowGame = (_border.Height + TextureFactor + DisplayScoreFactor) * boardTexture2D.Height;
             _graphics.PreferredBackBufferWidth = widthWindowGame;
             _graphics.PreferredBackBufferHeight = heightWindowGame;
             _graphics.IsFullScreen = false;
@@ -74,7 +74,9 @@ namespace SnakeMonoGame
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 Exit();
+            }
 
             if (!_gameMap.IsGameOver())
             {

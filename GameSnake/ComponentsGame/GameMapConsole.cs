@@ -21,8 +21,8 @@ namespace GameSnake.ComponentsGame
 
         public void Clear()
         {
-            _snake.Body.ForEach(x => x.Clear());
-            _food.Position.Clear();
+            Snake.Body.ForEach(x => x.Clear());
+            Food.Position.Clear();
         }
     }
 }

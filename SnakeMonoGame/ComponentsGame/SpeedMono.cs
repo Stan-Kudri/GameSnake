@@ -18,7 +18,7 @@ namespace MonoGameSnake.ComponentsGame
 
         public event Action OnTimeMovie;
 
-        private TimeSpan TimePressButton => _valueThreshold.Divide(3);
+        private TimeSpan TimePressButton => ValueThreshold.Divide(3);
 
         public void Update(GameTime gameTime)
         {
@@ -31,9 +31,9 @@ namespace MonoGameSnake.ComponentsGame
                 OnPressButton?.Invoke();
             }
 
-            if (_currentTimeMove >= _valueThreshold)
+            if (_currentTimeMove >= ValueThreshold)
             {
-                _currentTimeMove -= _valueThreshold;
+                _currentTimeMove -= ValueThreshold;
                 OnTimeMovie?.Invoke();
             }
         }

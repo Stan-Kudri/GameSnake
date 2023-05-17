@@ -23,7 +23,7 @@ namespace Core.Components.GameMapItems
 
         public abstract void Draw();
 
-        protected List<Point> Create()
+        private List<Point> Create()
         {
             var border = new List<Point>();
 

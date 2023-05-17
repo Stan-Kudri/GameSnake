@@ -14,6 +14,6 @@ namespace GameSnake.ComponentsGame
         {
         }
 
-        public void Apply() => Thread.Sleep(_valueThreshold);
+        public void Apply() => Thread.Sleep(ValueThreshold);
     }
 }

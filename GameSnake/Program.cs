@@ -13,7 +13,7 @@ var snakeLength = 5;
 
 WindowSetting(width, height);
 
-var game = GameCreator(width, height, snakeLength);
+var game = CreateGame(width, height, snakeLength);
 game.Run();
 
 Console.ReadKey();
@@ -30,7 +30,7 @@ static void WindowSetting(int width, int height)
     Console.Title = "SNAKE";
 }
 
-static ConsoleGame GameCreator(int width, int height, int snakeLength)
+static ConsoleGame CreateGame(int width, int height, int snakeLength)
 {
     var userInput = new UserInputConsole();
     var scoreConsole = new ScoreConsole(height);

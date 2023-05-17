@@ -9,7 +9,7 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
         [InlineData(-5, 23)]
         public void Exception_When_Create_Borders_In_Game_Map(int width, int height)
         {
-            //Assert
+            // Assert
             Assert.Throws<ArgumentException>(() => { new BorderConsole(width, height); });
         }
     }

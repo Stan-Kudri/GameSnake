@@ -9,16 +9,16 @@ namespace TestSnake.TestComponentsGame
         [InlineData(5, 100, 12, 300)]
         public void Speed_Up(int thresholdPoints, int increaseSpeedMillisecond, int score, int expectValueThreshold)
         {
-            //Arrange
+            // Arrange
             var timeSpanMillisecond = TimeSpan.FromMilliseconds(increaseSpeedMillisecond);
             var timeSpanExpect = TimeSpan.FromMilliseconds(expectValueThreshold);
             var speedSnake = new SpeedConsole(timeSpanMillisecond, thresholdPoints);
 
-            //Act
+            // Act
             speedSnake.Increase(score);
             var actualSpeed = speedSnake.ValueThreshold;
 
-            //Assert
+            // Assert
             Assert.Equal(timeSpanExpect, actualSpeed);
         }
 
@@ -40,6 +40,5 @@ namespace TestSnake.TestComponentsGame
             var timeSpan = TimeSpan.FromMicroseconds(10);
             Assert.Throws<ArgumentException>(() => { new SpeedConsole(timeSpan, thresholdPoints); });
         }
-
     }
 }

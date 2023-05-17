@@ -10,17 +10,17 @@ namespace TestSnake.TestComponentsGame
         [InlineData(10, 10)]
         public void Add_Points_To_Score(int startHeightDisplay, int expectScore)
         {
-            //Arrange
+            // Arrange
             var startScore = 0;
             var score = new ScoreConsole(startHeightDisplay, startScore);
             var positionFood = new Point(2, 2);
             var food = new FoodConsole(positionFood, expectScore);
 
-            //Act
+            // Act
             score.Increase(food);
             var actualScore = score.Points;
 
-            //Assert
+            // Assert
             Assert.Equal(expectScore, actualScore);
         }
 

@@ -7,12 +7,11 @@ namespace Core.Components.GameMapItems
         private readonly List<Point> _border;
         private readonly int _heightField;
         private readonly int _widthField;
+        private readonly List<Point> _body;
 
         private int _length;
         private Point _head;
         private Point _oldTail;
-
-        protected readonly List<Point> _body;
 
         public Snake(int x, int y, Border border, int length = 1, Directions directions = Directions.Right)
         {
@@ -25,6 +24,7 @@ namespace Core.Components.GameMapItems
             {
                 throw new ArgumentException("The position Y of the snake is incorrect.", nameof(y));
             }
+
             if (length <= 0)
             {
                 throw new ArgumentException("The length of the snake is greater than zero.");
@@ -92,7 +92,9 @@ namespace Core.Components.GameMapItems
 
         public bool Intersect()
         {
-            for (var i = _length - 2; i > 0; i--)
+            var countLengthWithoutHead = _length - 2;
+
+            for (var i = countLengthWithoutHead; i > 0; i--)
             {
                 if (_head.Equals(_body[i]))
                 {

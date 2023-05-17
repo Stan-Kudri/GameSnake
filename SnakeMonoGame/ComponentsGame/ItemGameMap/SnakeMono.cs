@@ -7,7 +7,7 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap
 {
     public class SnakeMono : Snake
     {
-        private Color _color = Color.Red;
+        private readonly Color _color = Color.Red;
         private readonly SpriteBatch _spriteBatch;
         private readonly Texture2D _texture2D;
 
@@ -20,7 +20,7 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap
 
         public override void Draw()
         {
-            _body.ForEach(x => _spriteBatch.Draw(
+            Body.ForEach(x => _spriteBatch.Draw(
                 _texture2D,
                 new Vector2(x.X * _texture2D.Width, x.Y * _texture2D.Height),
                 _color));

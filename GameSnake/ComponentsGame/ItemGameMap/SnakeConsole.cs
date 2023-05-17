@@ -6,13 +6,13 @@ namespace GameSnake.ComponentsGame.ItemGameMap
 {
     public class SnakeConsole : Snake
     {
-        public const char SymbolSnake = 'О';
+        private const char SymbolSnake = 'О';
 
         public SnakeConsole(int x, int y, Border border, int length = 1, Directions directions = Directions.Right)
             : base(x, y, border, length, directions)
         {
         }
 
-        public override void Draw() => _body.ForEach(x => x.Draw(SymbolSnake));
+        public override void Draw() => Body.ForEach(x => x.Draw(SymbolSnake));
     }
 }
