@@ -59,7 +59,6 @@ namespace SnakeMonoGame
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
             _gameMap.OnEatScore += _score.Increase;
             _score.OnUpIntervalScore += _speed.Increase;
-            _speed.OnPressButton += _userInput.Update;
             _speed.OnTimeMovie += _gameMap.Move;
 
             // TODO: use this.Content to load your game content here
@@ -73,7 +72,7 @@ namespace SnakeMonoGame
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (IsPressedExit())
             {
                 Exit();
             }
@@ -91,6 +90,7 @@ namespace SnakeMonoGame
         {
             GraphicsDevice.Clear(Color.SeaShell);
             _spriteBatch.Begin();
+            _userInput.Update();
 
             if (_gameMap.IsGameOver())
             {
@@ -106,6 +106,18 @@ namespace SnakeMonoGame
 
             // TODO: Add your drawing code here
             base.Draw(gameTime);
+        }
+
+        private static bool IsPressedExit()
+        {
+            var gamePadState = GamePad.GetState(PlayerIndex.One).Buttons.Back;
+            if (gamePadState == ButtonState.Pressed)
+            {
+                return true;
+            }
+
+            var keyBoardState = Keyboard.GetState();
+            return keyBoardState.IsKeyDown(Keys.Escape);
         }
     }
 }

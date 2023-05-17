@@ -2,51 +2,54 @@ namespace Core.Components
 {
     public abstract class Speed
     {
-        protected readonly TimeSpan LimitThreshold = TimeSpan.FromMilliseconds(100);
+        protected const int DefaultNumberOfScoreToBoos = 5;
 
-        private readonly TimeSpan _startThreshold;
-        private readonly TimeSpan _increaseSpeed;
-        private readonly int _thresholdPoints;
+        protected readonly TimeSpan MinSleepTime = TimeSpan.FromMilliseconds(100);
 
-        private int _numberInterval = 0;
-        private TimeSpan _valueThreshold;
+        private readonly TimeSpan _initialSleepTime;
+        private readonly TimeSpan _decreaseSleepTime;
+        private readonly int _numberOfScoreToBoost;
 
-        public Speed(int thresholdPoints = 5)
-            : this(TimeSpan.FromMilliseconds(50), thresholdPoints)
+        private TimeSpan _sleepTime;
+
+        public Speed(int numberOfScoreToBoos = DefaultNumberOfScoreToBoos)
+            : this(DefaultDecreaseSleepTime, numberOfScoreToBoos)
         {
         }
 
-        public Speed(TimeSpan increaseSpeed, int thresholdPoints = 5)
+        public Speed(TimeSpan decreaseSleepTime, int numberOfScoreToBoos = DefaultNumberOfScoreToBoos)
         {
             var halfSecond = TimeSpan.FromMilliseconds(500);
-            _valueThreshold = _startThreshold = halfSecond;
+            _sleepTime = _initialSleepTime = halfSecond;
 
-            if (thresholdPoints <= 0)
+            if (numberOfScoreToBoos <= 0)
             {
-                throw new ArgumentException("Interval points greater than zero.", nameof(thresholdPoints));
+                throw new ArgumentException("Interval points greater than zero.", nameof(numberOfScoreToBoos));
             }
 
-            if (increaseSpeed.Milliseconds <= 0 || _valueThreshold <= increaseSpeed)
+            if (decreaseSleepTime.Milliseconds <= 0 || _sleepTime <= decreaseSleepTime)
             {
-                throw new ArgumentException("Increase speed greater than zero.", nameof(increaseSpeed));
+                throw new ArgumentException("Increase speed greater than zero.", nameof(decreaseSleepTime));
             }
 
-            _thresholdPoints = thresholdPoints;
-            _increaseSpeed = increaseSpeed;
+            _numberOfScoreToBoost = numberOfScoreToBoos;
+            _decreaseSleepTime = decreaseSleepTime;
         }
 
-        public TimeSpan ValueThreshold => _valueThreshold;
+        public TimeSpan SleepTime => _sleepTime;
+
+        protected static TimeSpan DefaultDecreaseSleepTime => TimeSpan.FromMilliseconds(50);
 
         public void Increase(int score)
         {
-            _numberInterval = score / _thresholdPoints;
+            var accelerationFactor = score / _numberOfScoreToBoost;
+            var decreaseSleepTime = accelerationFactor * _decreaseSleepTime;
+            var newThresholdMillisecond = _initialSleepTime - decreaseSleepTime;
 
-            var newThresholdMillisecond = _startThreshold - (_numberInterval * _increaseSpeed);
-
-            if (newThresholdMillisecond >= LimitThreshold)
+            if (newThresholdMillisecond >= MinSleepTime)
             {
                 // Point interval number.
-                _valueThreshold = newThresholdMillisecond;
+                _sleepTime = newThresholdMillisecond;
             }
         }
     }

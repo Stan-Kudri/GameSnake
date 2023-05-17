@@ -16,7 +16,7 @@ namespace TestSnake.TestComponentsGame
 
             // Act
             speedSnake.Increase(score);
-            var actualSpeed = speedSnake.ValueThreshold;
+            var actualSpeed = speedSnake.SleepTime;
 
             // Assert
             Assert.Equal(timeSpanExpect, actualSpeed);

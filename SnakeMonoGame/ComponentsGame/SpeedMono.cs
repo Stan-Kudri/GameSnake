@@ -6,34 +6,23 @@ namespace MonoGameSnake.ComponentsGame
 {
     public class SpeedMono : Speed
     {
-        private TimeSpan _currentTimeMove = TimeSpan.Zero; // The amount of elapsed time.
-        private TimeSpan _currentTimeButton = TimeSpan.Zero; // Time from button press.
+        // The amount of elapsed time.
+        private TimeSpan _currentTimeMove = TimeSpan.Zero;
 
         public SpeedMono()
-            : base(TimeSpan.FromMilliseconds(50), 5)
+            : base(DefaultDecreaseSleepTime)
         {
         }
 
-        public event Action OnPressButton;
-
         public event Action OnTimeMovie;
-
-        private TimeSpan TimePressButton => ValueThreshold.Divide(3);
 
         public void Update(GameTime gameTime)
         {
-            _currentTimeButton += gameTime.ElapsedGameTime;
             _currentTimeMove += gameTime.ElapsedGameTime;
 
-            if (_currentTimeButton >= TimePressButton)
+            if (_currentTimeMove >= SleepTime)
             {
-                _currentTimeButton = TimeSpan.Zero;
-                OnPressButton?.Invoke();
-            }
-
-            if (_currentTimeMove >= ValueThreshold)
-            {
-                _currentTimeMove -= ValueThreshold;
+                _currentTimeMove -= SleepTime;
                 OnTimeMovie?.Invoke();
             }
         }

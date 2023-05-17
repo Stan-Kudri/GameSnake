@@ -5,15 +5,15 @@ namespace GameSnake.ComponentsGame
     public class SpeedConsole : Speed
     {
         public SpeedConsole()
-            : this(TimeSpan.FromMilliseconds(50), 5)
+            : this(DefaultDecreaseSleepTime)
         {
         }
 
-        public SpeedConsole(TimeSpan increaseSpeed, int thresholdPoints = 5)
-            : base(increaseSpeed, thresholdPoints)
+        public SpeedConsole(TimeSpan decreaseSleepTime, int numberOfScoreToBoos = DefaultNumberOfScoreToBoos)
+            : base(decreaseSleepTime, numberOfScoreToBoos)
         {
         }
 
-        public void Apply() => Thread.Sleep(ValueThreshold);
+        public void Apply() => Thread.Sleep(SleepTime);
     }
 }
