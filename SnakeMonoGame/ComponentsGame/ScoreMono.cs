@@ -6,6 +6,8 @@ namespace MonoGameSnake.ComponentsGame
 {
     public class ScoreMono : Score
     {
+        private const int StartWidthDisplay = 0;
+
         private readonly Vector2 _textPosition;
         private readonly Color _color = Color.Black;
         private readonly SpriteFont _spriteFont;

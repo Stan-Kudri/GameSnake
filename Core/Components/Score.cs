@@ -4,7 +4,6 @@ namespace Core.Components
 {
     public abstract class Score
     {
-        public const int StartWidthDisplay = 0;
         public const int OffsetPositionHeight = 2;
 
         protected int _startHeightDisplay;

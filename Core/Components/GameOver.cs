@@ -8,6 +8,7 @@ namespace Core.Components
 
         public GameOver(Border border) => _border = border;
 
-        public abstract void Draw();// Massage "Game Over"
+        // Massage "Game Over"
+        public abstract void Draw();
     }
 }

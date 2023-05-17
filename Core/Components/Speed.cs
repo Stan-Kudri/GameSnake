@@ -3,11 +3,10 @@ namespace Core.Components
     public abstract class Speed
     {
         protected readonly TimeSpan LimitThreshold = TimeSpan.FromMilliseconds(100);
-        protected readonly TimeSpan HalfSecond = TimeSpan.FromMilliseconds(500);
 
-        protected readonly TimeSpan _startThreshold;
-        protected readonly TimeSpan _increaseSpeed;
-        protected readonly int _thresholdPoints;
+        private readonly TimeSpan _startThreshold;
+        private readonly TimeSpan _increaseSpeed;
+        private readonly int _thresholdPoints;
 
         private int _numberInterval = 0;
         private TimeSpan _valueThreshold;
@@ -19,7 +18,8 @@ namespace Core.Components
 
         public Speed(TimeSpan increaseSpeed, int thresholdPoints = 5)
         {
-            _valueThreshold = _startThreshold = HalfSecond;
+            var halfSecond = TimeSpan.FromMilliseconds(500);
+            _valueThreshold = _startThreshold = halfSecond;
 
             if (thresholdPoints <= 0)
             {

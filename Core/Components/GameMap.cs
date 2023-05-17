@@ -11,6 +11,7 @@ namespace Core.Components
         private readonly FoodFactory _foodFactory;
         private readonly Border _border;
         private readonly Snake _snake;
+
         private Food _food;
 
         public GameMap(Border border, Snake snake, FoodFactory foodFactory)
