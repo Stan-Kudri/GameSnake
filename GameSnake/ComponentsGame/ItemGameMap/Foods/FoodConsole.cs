@@ -6,7 +6,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap.Foods
 {
     public class FoodConsole : Food
     {
-        public const char SymbolEat = '@';
+        private const char SymbolEat = '@';
 
         public FoodConsole(Point position, int scorePoint = 1)
             : base(position, scorePoint)

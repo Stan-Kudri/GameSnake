@@ -19,7 +19,7 @@ namespace Core.Components
             _foodFactory = foodFactory;
             _border = border;
             _snake = snake;
-            _food = RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
+            _food = NewFoodCell();
         }
 
         public event Action<Food>? OnEatScore;
@@ -37,7 +37,7 @@ namespace Core.Components
             if (_snake.TryEatFood(_food.Position))
             {
                 OnEatScore?.Invoke(_food);
-                _food = RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
+                _food = NewFoodCell();
             }
 
             _snake.Move();
@@ -49,6 +49,8 @@ namespace Core.Components
             _snake.Draw();
             _border.Draw();
         }
+
+        private Food NewFoodCell() => RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
 
         private Food? RandomCellForFood()
         {

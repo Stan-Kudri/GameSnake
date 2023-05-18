@@ -8,7 +8,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap
     {
         private const char SymbolSnake = 'О';
 
-        public SnakeConsole(int x, int y, Border border, int length = 1, Directions directions = Directions.Right)
+        public SnakeConsole(int x, int y, Border border, int length = StartLength, Directions directions = StartDirection)
             : base(x, y, border, length, directions)
         {
         }

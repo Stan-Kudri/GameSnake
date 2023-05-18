@@ -11,7 +11,7 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap
         private readonly SpriteBatch _spriteBatch;
         private readonly Texture2D _texture2D;
 
-        public SnakeMono(int x, int y, Border border, SpriteBatch spriteBatch, Texture2D texture2D, int length = 1, Directions directions = Directions.Right)
+        public SnakeMono(int x, int y, Border border, SpriteBatch spriteBatch, Texture2D texture2D, int length = StartLength, Directions directions = StartDirection)
             : base(x, y, border, length, directions)
         {
             _spriteBatch = spriteBatch;

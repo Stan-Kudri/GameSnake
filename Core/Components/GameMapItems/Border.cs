@@ -15,9 +15,9 @@ namespace Core.Components.GameMapItems
             Borders = Create();
         }
 
-        public int Width { get; protected set; }
+        public int Width { get; private set; }
 
-        public int Height { get; protected set; }
+        public int Height { get; private set; }
 
         public List<Point> Borders { get; protected set; }
 

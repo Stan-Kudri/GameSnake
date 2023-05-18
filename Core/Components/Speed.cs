@@ -44,12 +44,12 @@ namespace Core.Components
         {
             var accelerationFactor = score / _numberOfScoreToBoost;
             var decreaseSleepTime = accelerationFactor * _decreaseSleepTime;
-            var newThresholdMillisecond = _initialSleepTime - decreaseSleepTime;
+            var newSleepTime = _initialSleepTime - decreaseSleepTime;
 
-            if (newThresholdMillisecond >= MinSleepTime)
+            if (newSleepTime >= MinSleepTime)
             {
                 // Point interval number.
-                _sleepTime = newThresholdMillisecond;
+                _sleepTime = newSleepTime;
             }
         }
     }

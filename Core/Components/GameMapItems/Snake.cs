@@ -4,6 +4,9 @@ namespace Core.Components.GameMapItems
 {
     public abstract class Snake
     {
+        protected const Directions StartDirection = Directions.Right;
+        protected const int StartLength = 1;
+
         private readonly List<Point> _border;
         private readonly int _heightField;
         private readonly int _widthField;
@@ -13,7 +16,7 @@ namespace Core.Components.GameMapItems
         private Point _head;
         private Point _oldTail;
 
-        public Snake(int x, int y, Border border, int length = 1, Directions directions = Directions.Right)
+        public Snake(int x, int y, Border border, int length = StartLength, Directions directions = StartDirection)
         {
             if (x >= border.Width)
             {
