@@ -9,20 +9,20 @@ namespace TestSnake.TestComponentsGame
         [InlineData(20, 20, 2)]
         public void Move_Item_Game_Map_To_Game_Over(int width, int height, int length)
         {
-            //Arrange
+            // Arrange
             var border = new BorderConsole(width, height);
             var snakePositionX = width / 2;
             var snakePositionY = height / 2;
             var snake = new SnakeConsole(snakePositionX, snakePositionY, border, length);
             var gameMap = new GameMapConsole(border, snake);
 
-            //Act
+            // Act
             for (var i = snakePositionX; i < width - 1; i++)
             {
                 gameMap.Move();
             }
 
-            //Assert
+            // Assert
             Assert.True(gameMap.IsGameOver());
         }
 
@@ -30,11 +30,11 @@ namespace TestSnake.TestComponentsGame
         [InlineData(3, 3, 1, 1, 1)]
         public void No_Food_Cell(int width, int height, int snakePositionX, int snakePositionY, int length)
         {
-            //Arrange
+            // Arrange
             var border = new BorderConsole(width, height);
             var snake = new SnakeConsole(snakePositionX, snakePositionY, border, length);
 
-            //Assert
+            // Assert
             Assert.Throws<Exception>(() => { new GameMapConsole(border, snake); });
         }
     }

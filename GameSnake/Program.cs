@@ -1,5 +1,5 @@
 using System.Runtime.InteropServices;
-using Core;
+using GameSnake;
 using GameSnake.ComponentsGame;
 using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.ComponentsGame.ItemGameMap.Foods;
@@ -13,10 +13,8 @@ var snakeLength = 5;
 
 WindowSetting(width, height);
 
-var game = GameCreator(width, height, snakeLength);
+var game = CreateGame(width, height, snakeLength);
 game.Run();
-
-DisplayGameOver(width, height); // Massage "Game Over"
 
 Console.ReadKey();
 
@@ -32,27 +30,18 @@ static void WindowSetting(int width, int height)
     Console.Title = "SNAKE";
 }
 
-static Game GameCreator(int width, int height, int snakeLength)
+static ConsoleGame CreateGame(int width, int height, int snakeLength)
 {
-    var userInput = new UserInput();
+    var userInput = new UserInputConsole();
     var scoreConsole = new ScoreConsole(height);
     var speedConsole = new SpeedConsole();
 
     var borderConsole = new BorderConsole(width, height);
-    var snakeConsole = borderConsole.Creator(snakeLength);
+    var snakeConsole = borderConsole.CreateSnake(snakeLength);
     var foodFactoryConsole = new FoodFactoryConsole();
 
     var gameMapConsole = new GameMapConsole(borderConsole, snakeConsole, foodFactoryConsole);
+    var gameOver = new GameOverConsole(borderConsole);
 
-    return new Game(userInput, scoreConsole, speedConsole, gameMapConsole);
-}
-
-static void DisplayGameOver(int fieldWidth, int fieldHeight)
-{
-    string message = "Game Over";
-    int startWidthMessage = (fieldWidth / 2) - (message.Length / 2);
-    int startHeightMessage = fieldHeight / 2;
-
-    Console.SetCursorPosition(startWidthMessage, startHeightMessage);
-    Console.WriteLine(message);
+    return new ConsoleGame(userInput, scoreConsole, speedConsole, gameMapConsole, gameOver);
 }

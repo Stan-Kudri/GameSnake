@@ -6,44 +6,51 @@ namespace Core.Components
 {
     public abstract class GameMap
     {
-        public const int NumberRandomSearchPosition = 3;
+        private const int NumberRandomSearchPosition = 3;
 
-        protected readonly FoodFactory _foodFactory;
+        private readonly FoodFactory _foodFactory;
+        private readonly Border _border;
+        private readonly Snake _snake;
 
-        protected readonly Border _border;
-
-        protected readonly Snake _snake;
-
-        protected Food _food;
+        private Food _food;
 
         public GameMap(Border border, Snake snake, FoodFactory foodFactory)
         {
             _foodFactory = foodFactory;
             _border = border;
             _snake = snake;
-            _food = RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
+            _food = NewFoodCell();
         }
 
         public event Action<Food>? OnEatScore;
 
+        public Snake Snake => _snake;
+
+        public Food Food => _food;
+
         public bool IsGameOver() => _snake.ObstacleCollision() || _snake.Intersect();
 
-        public void ChangeSnakeDirection(IUserInput direction) => _snake.Direction = direction.CurrentDirection;
+        public void ChangeSnakeDirection(UserInput direction) => _snake.Direction = direction.CurrentDirection;
 
         public void Move()
         {
             if (_snake.TryEatFood(_food.Position))
             {
                 OnEatScore?.Invoke(_food);
-                _food = RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
+                _food = NewFoodCell();
             }
 
             _snake.Move();
         }
 
-        public abstract void Draw();
+        public void Draw()
+        {
+            _food.Draw();
+            _snake.Draw();
+            _border.Draw();
+        }
 
-        public abstract void Clear();
+        private Food NewFoodCell() => RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
 
         private Food? RandomCellForFood()
         {

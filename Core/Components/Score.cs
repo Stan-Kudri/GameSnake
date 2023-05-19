@@ -4,19 +4,24 @@ namespace Core.Components
 {
     public abstract class Score
     {
-        public const int StartWidthDisplay = 0;
-        public const int OffsetPositionHeight = 2;
+        protected const int StartPoints = 0;
 
         protected int _startHeightDisplay;
 
-        public Score(int height, int points = 0)
+        public Score(int height, int points = StartPoints)
         {
             if (points < 0)
             {
                 throw new ArgumentException("Points are not negative.", nameof(points));
             }
 
-            _startHeightDisplay = height + OffsetPositionHeight;
+            if (height <= 0)
+            {
+                throw new ArgumentException("Height greater than one.", nameof(height));
+            }
+
+            var offSetPositionHight = 2;
+            _startHeightDisplay = height + offSetPositionHight;
             Points = points;
         }
 

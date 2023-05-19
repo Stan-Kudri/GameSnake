@@ -5,7 +5,7 @@ namespace GameSnake.ComponentsGame.ItemGameMap
 {
     public class BorderConsole : Border
     {
-        public const char SymbolField = '*';
+        private const char SymbolField = '*';
 
         public BorderConsole(int width, int height)
             : base(width, height)

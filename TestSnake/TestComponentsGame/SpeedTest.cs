@@ -5,34 +5,40 @@ namespace TestSnake.TestComponentsGame
     public class SpeedTest
     {
         [Theory]
-        [InlineData(20, 5, 20, 100, 13, 60)]
-        [InlineData(20, 5, 20, 100, 18, 80)]
-        public void Speed_Up(int speed, int thresholdPoints, int valueIncreaseSpeed, int maxSpeed, int score, int expectSpeed)
+        [InlineData(5, 100, 6, 400)]
+        [InlineData(5, 100, 12, 300)]
+        public void Speed_Up(int thresholdPoints, int increaseSpeedMillisecond, int score, int expectValueThreshold)
         {
-            //Arrange
-            var speedSnake = new SpeedConsole(speed, thresholdPoints, valueIncreaseSpeed, maxSpeed);
+            // Arrange
+            var timeSpanMillisecond = TimeSpan.FromMilliseconds(increaseSpeedMillisecond);
+            var timeSpanExpect = TimeSpan.FromMilliseconds(expectValueThreshold);
+            var speedSnake = new SpeedConsole(timeSpanMillisecond, thresholdPoints);
 
-            //Act
+            // Act
             speedSnake.Increase(score);
-            var actualSpeed = speedSnake.Value;
+            var actualSpeed = speedSnake.SleepTime;
 
-            //Assert
-            Assert.Equal(expectSpeed, actualSpeed);
+            // Assert
+            Assert.Equal(timeSpanExpect, actualSpeed);
         }
 
         [Theory]
         [InlineData(0)]
-        public void Exception_The_Speed_Constructor_By_Zero(int speed)
+        [InlineData(2000)]
+        [InlineData(-20)]
+        public void Exception_The_Speed_Constructor_By_Zero(int increaseSpeedMillisecond)
         {
-            Assert.Throws<ArgumentException>(() => { new SpeedConsole(speed); });
+            var timeSpan = TimeSpan.FromMilliseconds(increaseSpeedMillisecond);
+            Assert.Throws<ArgumentException>(() => { new SpeedConsole(timeSpan, 5); });
         }
 
         [Theory]
         [InlineData(0)]
-        public void Exception_The_Threshold_Points_Constructor_By_Zero(int threshold)
+        [InlineData(-2)]
+        public void Exception_The_Threshold_Points_Constructor_By_Zero(int thresholdPoints)
         {
-            Assert.Throws<ArgumentException>(() => { new SpeedConsole(100, threshold); });
+            var timeSpan = TimeSpan.FromMicroseconds(10);
+            Assert.Throws<ArgumentException>(() => { new SpeedConsole(timeSpan, thresholdPoints); });
         }
-
     }
 }

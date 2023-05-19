@@ -7,7 +7,7 @@ namespace GameSnake.Extension
     {
         public const int DividerLengthHalf = 2;
 
-        public static SnakeConsole Creator(this Border border, int length)
+        public static SnakeConsole CreateSnake(this Border border, int length)
             => new SnakeConsole((border.Width / DividerLengthHalf) - length, border.Height / DividerLengthHalf, border, length);
     }
 }

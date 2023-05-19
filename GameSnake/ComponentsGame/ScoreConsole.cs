@@ -4,7 +4,7 @@ namespace GameSnake.ComponentsGame
 {
     public class ScoreConsole : Score
     {
-        public ScoreConsole(int height, int points = 0)
+        public ScoreConsole(int height, int points = StartPoints)
             : base(height, points)
         {
         }

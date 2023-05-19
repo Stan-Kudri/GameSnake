@@ -18,7 +18,5 @@ namespace Core.Components.GameMapItems.Foods
         public int Score { get; private set; }
 
         public abstract void Draw();
-
-        public abstract void Clear();
     }
 }

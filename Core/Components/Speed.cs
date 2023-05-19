@@ -2,53 +2,55 @@ namespace Core.Components
 {
     public abstract class Speed
     {
-        protected readonly int _startSpeed;
-        protected readonly int _thresholdPoints;
-        protected readonly int _valueIncreaseSpeed;
-        protected readonly int _maxSpeed;
+        protected const int DefaultNumberOfScoreToBoos = 5;
 
-        protected int _numberInterval = 0;
+        protected readonly TimeSpan MinSleepTime = TimeSpan.FromMilliseconds(100);
 
-        public Speed(int speed = 20, int thresholdPoints = 5, int valueIncreaseSpeed = 20, int maxSpeed = 100)
+        private readonly TimeSpan _initialSleepTime;
+        private readonly TimeSpan _decreaseSleepTime;
+        private readonly int _numberOfScoreToBoost;
+
+        private TimeSpan _sleepTime;
+
+        public Speed(int numberOfScoreToBoos = DefaultNumberOfScoreToBoos)
+            : this(DefaultDecreaseSleepTime, numberOfScoreToBoos)
         {
-            if (speed <= 0)
-            {
-                throw new ArgumentException("Speed greater than zero.", nameof(speed));
-            }
-
-            if (speed > maxSpeed)
-            {
-                throw new ArgumentException("The maximum speed is higher than the initial speed.", nameof(maxSpeed));
-            }
-
-            if (thresholdPoints <= 0)
-            {
-                throw new ArgumentException("Interval points greater than zero.", nameof(thresholdPoints));
-            }
-
-            if (thresholdPoints <= 0)
-            {
-                throw new ArgumentException("Increase speed greater than zero.", nameof(valueIncreaseSpeed));
-            }
-
-            Value = _startSpeed = speed;
-            _maxSpeed = maxSpeed;
-            _thresholdPoints = thresholdPoints;
-            _valueIncreaseSpeed = valueIncreaseSpeed;
         }
 
-        public int Value { get; private set; }
+        public Speed(TimeSpan decreaseSleepTime, int numberOfScoreToBoos = DefaultNumberOfScoreToBoos)
+        {
+            var halfSecond = TimeSpan.FromMilliseconds(500);
+            _sleepTime = _initialSleepTime = halfSecond;
+
+            if (numberOfScoreToBoos <= 0)
+            {
+                throw new ArgumentException("Interval points greater than zero.", nameof(numberOfScoreToBoos));
+            }
+
+            if (decreaseSleepTime.Milliseconds <= 0 || _sleepTime <= decreaseSleepTime)
+            {
+                throw new ArgumentException("Increase speed greater than zero.", nameof(decreaseSleepTime));
+            }
+
+            _numberOfScoreToBoost = numberOfScoreToBoos;
+            _decreaseSleepTime = decreaseSleepTime;
+        }
+
+        public TimeSpan SleepTime => _sleepTime;
+
+        protected static TimeSpan DefaultDecreaseSleepTime => TimeSpan.FromMilliseconds(50);
 
         public void Increase(int score)
         {
-            if (_maxSpeed - Value - _valueIncreaseSpeed > 0)
+            var accelerationFactor = score / _numberOfScoreToBoost;
+            var decreaseSleepTime = accelerationFactor * _decreaseSleepTime;
+            var newSleepTime = _initialSleepTime - decreaseSleepTime;
+
+            if (newSleepTime >= MinSleepTime)
             {
                 // Point interval number.
-                _numberInterval = score / _thresholdPoints;
-                Value = _startSpeed + _numberInterval * _valueIncreaseSpeed;
+                _sleepTime = newSleepTime;
             }
         }
-
-        public abstract void Apply();
     }
 }

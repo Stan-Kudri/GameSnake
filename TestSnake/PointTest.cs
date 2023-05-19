@@ -10,11 +10,11 @@ namespace TestSnake
         [InlineData(3, 5)]
         public void Not_Equals_Point(int firstPosition, int secondPosition)
         {
-            //Arrange
+            // Arrange
             var firstPoint = new Point(firstPosition, secondPosition);
             var secondPoint = new Point(secondPosition, firstPosition);
 
-            //Assert
+            // Assert
             Assert.NotEqual(firstPoint, secondPoint);
         }
 
@@ -24,11 +24,11 @@ namespace TestSnake
         [InlineData(3, 5)]
         public void Equals_Point(int firstPosition, int secondPosition)
         {
-            //Arrange
+            // Arrange
             var firstPoint = new Point(firstPosition, secondPosition);
             var secondPoint = new Point(firstPosition, secondPosition);
 
-            //Assert
+            // Assert
             Assert.Equal(firstPoint, secondPoint);
         }
     }
