@@ -3,7 +3,7 @@ using GameSnake;
 using GameSnake.ComponentsGame;
 using GameSnake.ComponentsGame.ItemGameMap;
 using GameSnake.ComponentsGame.ItemGameMap.Foods;
-using GameSnake.Extension;
+using Microsoft.Extensions.DependencyInjection;
 
 const int HeightForScore = 2;
 
@@ -13,7 +13,29 @@ var snakeLength = 5;
 
 WindowSetting(width, height);
 
-var game = CreateGame(width, height, snakeLength);
+var service = new ServiceCollection()
+    .AddSingleton(new BorderConsole(width, height))
+    .AddSingleton(x => new SnakeConsole(x.GetRequiredService<BorderConsole>(), snakeLength))
+    .AddScoped<FoodFactoryConsole>()
+    .AddScoped<UserInputConsole>()
+    .AddSingleton(new ScoreConsole(height))
+    .AddScoped<SpeedConsole>()
+    .AddScoped(x => new GameMapConsole(
+        x.GetRequiredService<BorderConsole>(),
+        x.GetRequiredService<SnakeConsole>(),
+        x.GetRequiredService<FoodFactoryConsole>()))
+    .AddScoped(x => new GameOverConsole(x.GetRequiredService<BorderConsole>()))
+    .AddScoped<ConsoleGame>();
+
+using var serviceScope = service.BuildServiceProvider().CreateScope();
+
+var userInput = serviceScope.ServiceProvider.GetRequiredService<UserInputConsole>();
+var scoreConsole = serviceScope.ServiceProvider.GetRequiredService<ScoreConsole>();
+var speedConsole = serviceScope.ServiceProvider.GetRequiredService<SpeedConsole>();
+var gameOver = serviceScope.ServiceProvider.GetRequiredService<GameOverConsole>();
+var gameMapConsole = serviceScope.ServiceProvider.GetRequiredService<GameMapConsole>();
+
+var game = new ConsoleGame(userInput, scoreConsole, speedConsole, gameMapConsole, gameOver);
 game.Run();
 
 Console.ReadKey();
@@ -28,20 +50,4 @@ static void WindowSetting(int width, int height)
 
     Console.CursorVisible = false;
     Console.Title = "SNAKE";
-}
-
-static ConsoleGame CreateGame(int width, int height, int snakeLength)
-{
-    var userInput = new UserInputConsole();
-    var scoreConsole = new ScoreConsole(height);
-    var speedConsole = new SpeedConsole();
-
-    var borderConsole = new BorderConsole(width, height);
-    var snakeConsole = borderConsole.CreateSnake(snakeLength);
-    var foodFactoryConsole = new FoodFactoryConsole();
-
-    var gameMapConsole = new GameMapConsole(borderConsole, snakeConsole, foodFactoryConsole);
-    var gameOver = new GameOverConsole(borderConsole);
-
-    return new ConsoleGame(userInput, scoreConsole, speedConsole, gameMapConsole, gameOver);
 }
