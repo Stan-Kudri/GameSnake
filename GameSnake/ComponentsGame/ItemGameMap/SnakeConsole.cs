@@ -9,6 +9,11 @@ namespace GameSnake.ComponentsGame.ItemGameMap
         private const char SymbolSnake = 'О';
         private const int DividerLengthHalf = 2;
 
+        public SnakeConsole(int x, int y, Border border, int length = 1)
+            : base(x, y, border, length)
+        {
+        }
+
         public SnakeConsole(Border border, int length = StartLength, Directions directions = StartDirection)
             : base(
                   (border.Width / DividerLengthHalf) - length,
