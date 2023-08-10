@@ -7,9 +7,23 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap
 {
     public class SnakeMono : Snake
     {
+        private const int DividerLengthHalf = 2;
+
         private readonly Color _color = Color.Red;
         private readonly SpriteBatch _spriteBatch;
         private readonly Texture2D _texture2D;
+
+        public SnakeMono(BorderMono border, SpriteBatch spriteBatch, Texture2D texture2D, int length = StartLength, Directions directions = StartDirection)
+            : this(
+                  (border.Width / DividerLengthHalf) - length,
+                  border.Height / DividerLengthHalf,
+                  border,
+                  spriteBatch,
+                  texture2D,
+                  length,
+                  directions)
+        {
+        }
 
         public SnakeMono(int x, int y, Border border, SpriteBatch spriteBatch, Texture2D texture2D, int length = StartLength, Directions directions = StartDirection)
             : base(x, y, border, length, directions)

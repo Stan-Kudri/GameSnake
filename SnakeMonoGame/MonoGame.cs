@@ -1,9 +1,10 @@
+using System;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGameSnake.ComponentsGame;
 using MonoGameSnake.ComponentsGame.ItemGameMap;
-using MonoGameSnake.Extension;
 
 namespace SnakeMonoGame
 {
@@ -14,6 +15,8 @@ namespace SnakeMonoGame
 
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private readonly int _height;
+        private readonly int _width;
 
         private SnakeMono _snake;
         private BorderMono _border;
@@ -24,8 +27,15 @@ namespace SnakeMonoGame
         private SpeedMono _speed;
         private UserInputMono _userInput;
 
-        public MonoGame()
+        public MonoGame(int height, int width)
         {
+            if (width < 1 || height < 1)
+            {
+                throw new ArgumentException("Invalid game size.");
+            }
+
+            _height = height;
+            _width = width;
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -47,14 +57,28 @@ namespace SnakeMonoGame
             var gameOverTexture2D = Content.Load<Texture2D>("GameOver");
             var font = Content.Load<SpriteFont>("Font");
 
-            _border = new BorderMono(20, 20, _spriteBatch, boardTexture2D);
-            _snake = _border.Creator(_spriteBatch, snakeTexture2D);
-            _gameMap = new GameMapMono(_border, _snake, foodTexture2D, _spriteBatch);
+            var service = new ServiceCollection()
+                .AddSingleton(new BorderMono(_width, _height, _spriteBatch, boardTexture2D))
+                .AddScoped(x => new SnakeMono(
+                    x.GetRequiredService<BorderMono>(), _spriteBatch, snakeTexture2D))
+                .AddScoped(x => new GameMapMono(
+                    x.GetRequiredService<BorderMono>(), x.GetRequiredService<SnakeMono>(), _spriteBatch, foodTexture2D))
+                .AddScoped<UserInputMono>()
+                .AddScoped<SpeedMono>()
+                .AddSingleton(x => new ScoreMono(_height, font, _spriteBatch, boardTexture2D))
+                .AddSingleton(x => new GameOverMono(x.GetRequiredService<BorderMono>(), _spriteBatch, gameOverTexture2D));
 
-            _userInput = new UserInputMono();
-            _speed = new SpeedMono();
-            _score = new ScoreMono(_border.Height, font, _spriteBatch, boardTexture2D);
-            _gameOver = new GameOverMono(_border, _spriteBatch, gameOverTexture2D);
+            using var container = service.BuildServiceProvider();
+            using var serviceScope = container.CreateScope();
+
+            _border = serviceScope.ServiceProvider.GetRequiredService<BorderMono>();
+            _snake = serviceScope.ServiceProvider.GetRequiredService<SnakeMono>();
+            _gameMap = serviceScope.ServiceProvider.GetRequiredService<GameMapMono>();
+
+            _userInput = serviceScope.ServiceProvider.GetRequiredService<UserInputMono>();
+            _speed = serviceScope.ServiceProvider.GetRequiredService<SpeedMono>();
+            _score = serviceScope.ServiceProvider.GetRequiredService<ScoreMono>();
+            _gameOver = serviceScope.ServiceProvider.GetRequiredService<GameOverMono>();
 
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
             _gameMap.OnEatScore += _score.Increase;

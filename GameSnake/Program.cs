@@ -26,7 +26,8 @@ var service = new ServiceCollection()
     .AddScoped<GameOver>(x => new GameOverConsole(x.GetRequiredService<BorderConsole>()))
     .AddScoped<ConsoleGame>();
 
-using var serviceScope = service.BuildServiceProvider().CreateScope();
+using var container = service.BuildServiceProvider();
+using var serviceScope = container.CreateScope();
 var game = serviceScope.ServiceProvider.GetRequiredService<ConsoleGame>();
 
 HeightForScore.WindowSetting(width, height);
