@@ -2,16 +2,10 @@ namespace Core.Components.GameMapItems
 {
     public abstract class Border
     {
-        public Border(int width, int height)
+        public Border(BorderSize sizeField)
         {
-            if (width < 1 || height < 1)
-            {
-                throw new ArgumentException("Invalid board size.");
-            }
-
-            Width = width;
-            Height = height;
-
+            Width = sizeField.Width;
+            Height = sizeField.Height;
             Borders = Create();
         }
 

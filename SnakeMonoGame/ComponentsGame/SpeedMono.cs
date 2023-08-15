@@ -1,6 +1,5 @@
 using System;
 using Core.Components;
-using Microsoft.Xna.Framework;
 
 namespace MonoGameSnake.ComponentsGame
 {
@@ -14,17 +13,17 @@ namespace MonoGameSnake.ComponentsGame
         {
         }
 
-        public event Action OnTimeMovie;
-
-        public void Update(GameTime gameTime)
+        public override bool Update(TimeSpan elapsedGameTime)
         {
-            _currentTimeMove += gameTime.ElapsedGameTime;
+            _currentTimeMove += elapsedGameTime;
 
-            if (_currentTimeMove >= SleepTime)
+            if (_currentTimeMove < SleepTime)
             {
-                _currentTimeMove -= SleepTime;
-                OnTimeMovie?.Invoke();
+                return false;
             }
+
+            _currentTimeMove -= SleepTime;
+            return true;
         }
     }
 }

@@ -14,6 +14,10 @@ namespace GameSnake.ComponentsGame
         {
         }
 
-        public void Apply() => Thread.Sleep(SleepTime);
+        public override bool Update(TimeSpan elapsedGameTime)
+        {
+            Thread.Sleep(SleepTime);
+            return true;
+        }
     }
 }

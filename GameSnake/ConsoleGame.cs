@@ -33,15 +33,16 @@ namespace GameSnake
         {
             while (!_gameMap.IsGameOver())
             {
-                _gameMap.Clear();
+                if (_speed.Update(TimeSpan.Zero))
+                {
+                    _gameMap.Clear();
 
-                _userInput.Update();
-                _gameMap.Move();
+                    _userInput.Update();
+                    _gameMap.Move();
 
-                _gameMap.Draw();
-                _score.Draw();
-
-                _speed.Apply();
+                    _gameMap.Draw();
+                    _score.Draw();
+                }
             }
 
             _gameMap.Clear();

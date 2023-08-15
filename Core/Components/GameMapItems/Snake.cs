@@ -4,8 +4,8 @@ namespace Core.Components.GameMapItems
 {
     public abstract class Snake
     {
-        protected const Directions StartDirection = Directions.Right;
-        protected const int StartLength = 1;
+        private const int DividerLengthHalf = 2;
+        private const int StartLength = 3;
 
         private readonly List<Point> _border;
         private readonly int _heightField;
@@ -16,13 +16,17 @@ namespace Core.Components.GameMapItems
         private Point _head;
         private Point _oldTail;
 
-        public Snake(int x, int y, Border border, int length = StartLength, Directions directions = StartDirection)
+        public Snake(Border border, int length = StartLength)
         {
+            _widthField = border.Width;
+            var x = (_widthField / DividerLengthHalf) - length;
             if (x >= border.Width)
             {
                 throw new ArgumentException("The position X of the snake is incorrect.", nameof(x));
             }
 
+            _heightField = border.Height;
+            var y = _heightField / DividerLengthHalf;
             if (y >= border.Height)
             {
                 throw new ArgumentException("The position Y of the snake is incorrect.", nameof(y));
@@ -35,9 +39,7 @@ namespace Core.Components.GameMapItems
 
             _length = length;
             _border = border.Borders;
-            _widthField = border.Width;
-            _heightField = border.Height;
-            Direction = directions;
+            Direction = Directions.Right;
             _body = BuildBody(x, y);
             _head = _body.First();
             _oldTail = _body.Last();
