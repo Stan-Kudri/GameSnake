@@ -1,5 +1,7 @@
+using Core;
 using Core.Components;
 using Core.Components.GameMapItems;
+using Core.Components.GameMapItems.Foods;
 using GameSnake;
 using GameSnake.ComponentsGame;
 using GameSnake.ComponentsGame.ItemGameMap;
@@ -14,22 +16,20 @@ var width = 40;
 
 var service = new ServiceCollection()
     .AddSingleton(new BorderSize(width, height))
-    .AddSingleton<Border, BorderConsole>()
-    .AddSingleton<Snake, SnakeConsole>()
-    .AddScoped<FoodFactoryConsole>()
-    .AddSingleton<UserInput>(new UserInputConsole())
+    .AddScoped<Border, BorderConsole>()
+    .AddScoped<Snake, SnakeConsole>()
+    .AddScoped<FoodFactory, FoodFactoryConsole>()
+    .AddSingleton<UserInput, UserInputConsole>()
     .AddSingleton<Score>(new ScoreConsole(height))
-    .AddScoped<SpeedConsole>()
-    .AddScoped(x => new GameMapConsole(
-        x.GetRequiredService<Border>(),
-        x.GetRequiredService<Snake>(),
-        x.GetRequiredService<FoodFactoryConsole>()))
-    .AddScoped<GameOver>(x => new GameOverConsole(x.GetRequiredService<Border>()))
-    .AddScoped<ConsoleGame>();
+    .AddScoped<Speed, SpeedConsole>()
+    .AddScoped<GameMap, GameMapConsole>()
+    .AddScoped<GameOver, GameOverConsole>()
+    .AddScoped<GameFacade>()
+    .AddScoped<GameRun>();
 
 using var container = service.BuildServiceProvider();
 using var serviceScope = container.CreateScope();
-var game = serviceScope.ServiceProvider.GetRequiredService<ConsoleGame>();
+var game = serviceScope.ServiceProvider.GetRequiredService<GameRun>();
 
 HeightForScore.WindowSetting(width, height);
 game.Run();

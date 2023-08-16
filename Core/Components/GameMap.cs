@@ -50,6 +50,8 @@ namespace Core.Components
             _border.Draw();
         }
 
+        public abstract void Clear();
+
         private Food NewFoodCell() => RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
 
         private Food? RandomCellForFood()

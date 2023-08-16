@@ -19,7 +19,7 @@ namespace GameSnake.ComponentsGame
         {
         }
 
-        public void Clear()
+        public override void Clear()
         {
             Snake.Body.ForEach(x => x.Clear());
             Food.Position.Clear();

@@ -1,13 +1,12 @@
-using System;
 using Core.Components;
 
-namespace SnakeMonoGame
+namespace Core
 {
     public class GameFacade
     {
         private readonly UserInput _userInput;
-        private readonly Speed _speedMono;
-        private readonly Score _scoreMono;
+        private readonly Speed _speed;
+        private readonly Score _score;
         private readonly GameMap _gameMap;
         private readonly GameOver _gameOver;
 
@@ -19,23 +18,26 @@ namespace SnakeMonoGame
             GameOver gameOver)
         {
             _userInput = userInput;
-            _speedMono = speedMono;
-            _scoreMono = score;
+            _speed = speedMono;
+            _score = score;
             _gameMap = gameMap;
             _gameOver = gameOver;
 
             _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
-            _gameMap.OnEatScore += _scoreMono.Increase;
-            _scoreMono.OnUpIntervalScore += _speedMono.Increase;
+            _gameMap.OnEatScore += _score.Increase;
+            _score.OnUpIntervalScore += _speed.Increase;
         }
+
+        public bool IsGameOver => _gameMap.IsGameOver();
 
         public void Update(TimeSpan elapsedGameTime)
         {
-            if (_gameMap.IsGameOver() || !_speedMono.Update(elapsedGameTime))
+            if (_gameMap.IsGameOver() || !_speed.Update(elapsedGameTime))
             {
                 return;
             }
 
+            _gameMap.Clear();
             _gameMap.Move();
         }
 
@@ -52,7 +54,7 @@ namespace SnakeMonoGame
                 _gameMap.Draw();
             }
 
-            _scoreMono.Draw();
+            _score.Draw();
         }
     }
 }

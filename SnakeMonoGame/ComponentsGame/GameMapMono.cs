@@ -13,11 +13,8 @@ namespace MonoGameSnake.ComponentsGame
         {
         }
 
-        /*
-        public GameMapMono(Border border, Snake snake, FoodFactory foodFactoryMono)
-            : base(border, snake, foodFactoryMono)
+        public override void Clear()
         {
         }
-        */
     }
 }
