@@ -28,8 +28,8 @@ namespace TestSnake.TestComponentsGame
         }
 
         [Theory]
-        [InlineData(3, 3, 1, 1, 1)]
-        public void No_Food_Cell(int width, int height, int snakePositionX, int snakePositionY, int length)
+        [InlineData(3, 3)]
+        public void No_Food_Cell(int width, int height)
         {
             // Arrange
             var borederSize = new BorderSize(width, height);
