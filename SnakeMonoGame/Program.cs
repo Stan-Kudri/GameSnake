@@ -9,6 +9,7 @@ using MonoGameSnake.ComponentsGame;
 using MonoGameSnake.ComponentsGame.ItemGameMap;
 using MonoGameSnake.ComponentsGame.ItemGameMap.Foods;
 using SnakeMonoGame;
+using SnakeMonoGame.ComponentsGame;
 
 var collection = new ServiceCollection()
     .AddSingleton(new BorderSize(20, 20))
@@ -24,6 +25,7 @@ var collection = new ServiceCollection()
     .AddScoped<FoodFactory, FoodFactoryMono>()
     .AddScoped<GameMap, GameMapMono>()
     .AddScoped<GameOver, GameOverMono>()
+    .AddScoped<WindowGameSetting>()
     .AddScoped<GameFacade>();
 
 using var contain = collection.BuildServiceProvider(new ServiceProviderOptions

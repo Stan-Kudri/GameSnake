@@ -1,25 +1,21 @@
 using System;
 using Core;
-using Core.Components;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SnakeMonoGame.ComponentsGame;
 
 namespace SnakeMonoGame
 {
     public class MonoGame : Game
     {
-        private const int TextureFactor = 1;
-        private const int DisplayScoreFactor = 3;
-
         private readonly IServiceProvider _serviceProvider;
         private readonly GraphicsDeviceManager _deviceManager;
         private SpriteBatch _spriteBatch;
 
         private GameFacade _gameFacade;
-        private BorderSize _borderSize;
-        private TextureHolder _textureHolder;
+        private WindowGameSetting _windowSetting;
 
         public MonoGame(IServiceProvider serviceProvider)
         {
@@ -39,16 +35,10 @@ namespace SnakeMonoGame
         {
             _spriteBatch = _serviceProvider.GetRequiredService<SpriteBatch>();
             _gameFacade = _serviceProvider.GetRequiredService<GameFacade>();
-            _borderSize = _serviceProvider.GetRequiredService<BorderSize>();
-            _textureHolder = _serviceProvider.GetRequiredService<TextureHolder>();
 
             // TODO: use this.Content to load your game content here
-            var widthWindowGame = (_borderSize.Width + TextureFactor) * _textureHolder.BoardTexture.Width;
-            var heightWindowGame = (_borderSize.Height + TextureFactor + DisplayScoreFactor) * _textureHolder.BoardTexture.Height;
-            _deviceManager.PreferredBackBufferWidth = widthWindowGame;
-            _deviceManager.PreferredBackBufferHeight = heightWindowGame;
-            _deviceManager.IsFullScreen = false;
-            _deviceManager.ApplyChanges();
+            _windowSetting = _serviceProvider.GetRequiredService<WindowGameSetting>();
+            _windowSetting.Apply(_deviceManager);
         }
 
         protected override void Update(GameTime gameTime)
