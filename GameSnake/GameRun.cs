@@ -1,6 +1,5 @@
 using Core;
 using Core.Components;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace GameSnake
 {
@@ -9,10 +8,10 @@ namespace GameSnake
         private readonly GameFacade _gameFacade;
         private readonly GameMap _gameMap;
 
-        public GameRun(IServiceProvider serviceProvider)
+        public GameRun(GameFacade gameFacade, GameMap gameMap)
         {
-            _gameFacade = serviceProvider.GetRequiredService<GameFacade>();
-            _gameMap = serviceProvider.GetRequiredService<GameMap>();
+            _gameFacade = gameFacade;
+            _gameMap = gameMap;
         }
 
         public void Run()

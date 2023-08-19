@@ -28,8 +28,6 @@ namespace Core
             _score.OnUpIntervalScore += _speed.Increase;
         }
 
-        public bool IsGameOver => _gameMap.IsGameOver();
-
         public void Update(TimeSpan elapsedGameTime)
         {
             if (_gameMap.IsGameOver() || !_speed.Update(elapsedGameTime))
