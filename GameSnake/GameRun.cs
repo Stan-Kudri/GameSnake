@@ -16,12 +16,11 @@ namespace GameSnake
 
         public void Run()
         {
-            do
+            while (!_gameMap.IsGameOver())
             {
                 _gameFacade.Update(TimeSpan.Zero);
                 _gameFacade.Draw();
             }
-            while (!_gameMap.IsGameOver());
         }
     }
 }

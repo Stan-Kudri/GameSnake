@@ -35,14 +35,12 @@ namespace Core
                 return;
             }
 
-            _gameMap.Clear();
+            _userInput.Update();
             _gameMap.Move();
         }
 
         public void Draw()
         {
-            _userInput.Update();
-
             if (_gameMap.IsGameOver())
             {
                 _gameOver.Draw();
