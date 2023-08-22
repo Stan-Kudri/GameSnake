@@ -30,8 +30,13 @@ namespace Core
 
         public void Update(TimeSpan elapsedGameTime)
         {
-            if (_gameMap.IsGameOver() || !_speed.Update(elapsedGameTime))
+            if (_gameMap.IsGameOver())
             {
+                return;
+            }
+            else if (!_speed.Update(elapsedGameTime))
+            {
+                _userInput.Update();
                 return;
             }
 
