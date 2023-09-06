@@ -1,4 +1,4 @@
-using Core;
+using Core.Components;
 using GameSnake.ComponentsGame.ItemGameMap;
 
 namespace TestSnake.TestComponentsGame.TestItemGameMap
@@ -7,50 +7,30 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
     {
         public static IEnumerable<object[]> TrueSnakePattern()
         {
-            var border = new BorderConsole(20, 20);
+            var borderSize = new BorderSize(20, 20);
+            var border = new BorderConsole(borderSize);
             var startPositionX = border.Width / 2;
             var startPositionY = border.Height / 2;
-            var length = 5;
 
             yield return new object[]
             {
-                new SnakeConsole(startPositionX, startPositionY, border, length),
+                new SnakeConsole(border),
             };
         }
 
         [Theory]
-        [InlineData(20, 20, 10, 10, 5, 15, 10)]
-        [InlineData(10, 10, 3, 3, 2, 5, 3)]
-        public void Move_Snake_At_New_Position(int width, int height, int startPositionX, int startPositionY, int countMoveSnakeByX, int expectHeadPositionX, int expectHeadPositionY)
+        [InlineData(20, 20)]
+        [InlineData(10, 10)]
+        public void Wall_Collision_While_Moving(int width, int height)
         {
             // Arrange
-            var border = new BorderConsole(width, height);
-            var snake = new SnakeConsole(startPositionX, startPositionY, border);
+            var borderSize = new BorderSize(width, height);
+            var border = new BorderConsole(borderSize);
+            var snake = new SnakeConsole(border);
+            var countMoveSnakeToCollision = snake.Body.Last().X;
 
             // Act
-            var expectHeadPosition = new Point(expectHeadPositionX, expectHeadPositionY);
-            for (var i = 0; i < countMoveSnakeByX; i++)
-            {
-                snake.Move();
-            }
-
-            var actualHeadPosition = snake.Head;
-
-            // Assert
-            Assert.Equal(expectHeadPosition, actualHeadPosition);
-        }
-
-        [Theory]
-        [InlineData(20, 20, 10, 10, 10)]
-        [InlineData(5, 5, 2, 2, 3)]
-        public void Wall_Collision_While_Moving(int width, int height, int startPositionX, int startPositionY, int countMoveSnakeToCollision)
-        {
-            // Arrange
-            var border = new BorderConsole(width, height);
-            var snake = new SnakeConsole(startPositionX, startPositionY, border);
-
-            // Act
-            for (var i = 0; i < countMoveSnakeToCollision; i++)
+            for (var i = 0; i <= countMoveSnakeToCollision + 1; i++)
             {
                 snake.Move();
             }

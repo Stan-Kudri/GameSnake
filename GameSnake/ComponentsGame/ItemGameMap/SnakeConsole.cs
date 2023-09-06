@@ -1,5 +1,4 @@
 using Core.Components.GameMapItems;
-using GameSnake.Enum;
 using GameSnake.Extension;
 
 namespace GameSnake.ComponentsGame.ItemGameMap
@@ -8,8 +7,8 @@ namespace GameSnake.ComponentsGame.ItemGameMap
     {
         private const char SymbolSnake = 'О';
 
-        public SnakeConsole(int x, int y, Border border, int length = StartLength, Directions directions = StartDirection)
-            : base(x, y, border, length, directions)
+        public SnakeConsole(Border border)
+            : base(border)
         {
         }
 

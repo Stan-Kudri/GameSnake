@@ -1,34 +1,28 @@
+using System;
+using Core;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGameSnake.ComponentsGame;
-using MonoGameSnake.ComponentsGame.ItemGameMap;
-using MonoGameSnake.Extension;
+using SnakeMonoGame.ComponentsGame;
 
 namespace SnakeMonoGame
 {
     public class MonoGame : Game
     {
-        private const int TextureFactor = 1;
-        private const int DisplayScoreFactor = 3;
-
-        private readonly GraphicsDeviceManager _graphics;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly GraphicsDeviceManager _deviceManager;
         private SpriteBatch _spriteBatch;
 
-        private SnakeMono _snake;
-        private BorderMono _border;
+        private GameFacade _gameFacade;
+        private WindowGameSetting _windowSetting;
 
-        private GameOverMono _gameOver;
-        private ScoreMono _score;
-        private GameMapMono _gameMap;
-        private SpeedMono _speed;
-        private UserInputMono _userInput;
-
-        public MonoGame()
+        public MonoGame(IServiceProvider serviceProvider)
         {
-            _graphics = new GraphicsDeviceManager(this);
+            _serviceProvider = serviceProvider;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            _deviceManager = new GraphicsDeviceManager(this);
         }
 
         protected override void Initialize()
@@ -39,35 +33,12 @@ namespace SnakeMonoGame
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            var boardTexture2D = Content.Load<Texture2D>("BorderElement");
-            var snakeTexture2D = Content.Load<Texture2D>("SnakeElement");
-            var foodTexture2D = Content.Load<Texture2D>("Food");
-            var gameOverTexture2D = Content.Load<Texture2D>("GameOver");
-            var font = Content.Load<SpriteFont>("Font");
-
-            _border = new BorderMono(20, 20, _spriteBatch, boardTexture2D);
-            _snake = _border.Creator(_spriteBatch, snakeTexture2D);
-            _gameMap = new GameMapMono(_border, _snake, foodTexture2D, _spriteBatch);
-
-            _userInput = new UserInputMono();
-            _speed = new SpeedMono();
-            _score = new ScoreMono(_border.Height, font, _spriteBatch, boardTexture2D);
-            _gameOver = new GameOverMono(_border, _spriteBatch, gameOverTexture2D);
-
-            _userInput.OnChangedDirection += _gameMap.ChangeSnakeDirection;
-            _gameMap.OnEatScore += _score.Increase;
-            _score.OnUpIntervalScore += _speed.Increase;
-            _speed.OnTimeMovie += _gameMap.Move;
+            _spriteBatch = _serviceProvider.GetRequiredService<SpriteBatch>();
+            _gameFacade = _serviceProvider.GetRequiredService<GameFacade>();
 
             // TODO: use this.Content to load your game content here
-            var widthWindowGame = (_border.Width + TextureFactor) * boardTexture2D.Width;
-            var heightWindowGame = (_border.Height + TextureFactor + DisplayScoreFactor) * boardTexture2D.Height;
-            _graphics.PreferredBackBufferWidth = widthWindowGame;
-            _graphics.PreferredBackBufferHeight = heightWindowGame;
-            _graphics.IsFullScreen = false;
-            _graphics.ApplyChanges();
+            _windowSetting = _serviceProvider.GetRequiredService<WindowGameSetting>();
+            _windowSetting.Apply(_deviceManager);
         }
 
         protected override void Update(GameTime gameTime)
@@ -77,10 +48,7 @@ namespace SnakeMonoGame
                 Exit();
             }
 
-            if (!_gameMap.IsGameOver())
-            {
-                _speed.Update(gameTime);
-            }
+            _gameFacade.Update(gameTime.ElapsedGameTime);
 
             // TODO: Add your update logic here
             base.Update(gameTime);
@@ -89,19 +57,9 @@ namespace SnakeMonoGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.SeaShell);
+
             _spriteBatch.Begin();
-            _userInput.Update();
-
-            if (_gameMap.IsGameOver())
-            {
-                _gameOver.Draw();
-            }
-            else
-            {
-                _gameMap.Draw();
-            }
-
-            _score.Draw();
+            _gameFacade.Draw();
             _spriteBatch.End();
 
             // TODO: Add your drawing code here

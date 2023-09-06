@@ -1,7 +1,8 @@
 using Core.Components;
+using Core.Components.GameMapItems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGameSnake.ComponentsGame.ItemGameMap;
+using SnakeMonoGame;
 
 namespace MonoGameSnake.ComponentsGame
 {
@@ -12,13 +13,13 @@ namespace MonoGameSnake.ComponentsGame
         private readonly Texture2D _texture2D;
         private readonly Vector2 _position;
 
-        public GameOverMono(BorderMono borderMono, SpriteBatch spriteBatch, Texture2D texture2D)
+        public GameOverMono(Border borderMono, TextureHolder textureHolder, SpriteBatch spriteBatch)
             : base(borderMono)
         {
-            _texture2D = texture2D;
+            _texture2D = textureHolder.GameOverTexture;
             _spriteBatch = spriteBatch;
-            var centerFieldOfX = (borderMono.Width + 1) * borderMono.Texture2D.Width / 2;
-            var centerFieldOfY = (borderMono.Height + 1) * borderMono.Texture2D.Height / 2;
+            var centerFieldOfX = (borderMono.Width + 1) * textureHolder.BoardTexture.Width / 2;
+            var centerFieldOfY = (borderMono.Height + 1) * textureHolder.BoardTexture.Height / 2;
             var centerPicturesGameOverOfX = _texture2D.Width / 2;
             var centerPicturesGameOverOfY = _texture2D.Height / 2;
 

@@ -40,6 +40,13 @@ namespace Core.Components
 
         protected static TimeSpan DefaultDecreaseSleepTime => TimeSpan.FromMilliseconds(50);
 
+        /// <summary>
+        /// Update game.
+        /// </summary>
+        /// <param name="elapsedGameTime">Elapsed time.</param>
+        /// <returns>True, If you need to move.</returns>
+        public abstract bool Update(TimeSpan elapsedGameTime);
+
         public void Increase(int score)
         {
             var accelerationFactor = score / _numberOfScoreToBoost;

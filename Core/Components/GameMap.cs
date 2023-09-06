@@ -34,6 +34,7 @@ namespace Core.Components
 
         public void Move()
         {
+            Clear();
             if (_snake.TryEatFood(_food.Position))
             {
                 OnEatScore?.Invoke(_food);
@@ -48,6 +49,10 @@ namespace Core.Components
             _food.Draw();
             _snake.Draw();
             _border.Draw();
+        }
+
+        protected virtual void Clear()
+        {
         }
 
         private Food NewFoodCell() => RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");

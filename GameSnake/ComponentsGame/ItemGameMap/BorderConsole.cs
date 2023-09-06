@@ -1,3 +1,4 @@
+using Core.Components;
 using Core.Components.GameMapItems;
 using GameSnake.Extension;
 
@@ -7,8 +8,8 @@ namespace GameSnake.ComponentsGame.ItemGameMap
     {
         private const char SymbolField = '*';
 
-        public BorderConsole(int width, int height)
-            : base(width, height)
+        public BorderConsole(BorderSize size)
+            : base(size)
         {
         }
 

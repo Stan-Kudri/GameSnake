@@ -1,6 +1,9 @@
+using System;
 using Core.Components;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SnakeMonoGame;
 
 namespace MonoGameSnake.ComponentsGame
 {
@@ -11,21 +14,21 @@ namespace MonoGameSnake.ComponentsGame
         private readonly Vector2 _textPosition;
         private readonly Color _color = Color.Black;
         private readonly SpriteFont _spriteFont;
-        private readonly SpriteBatch _spriteBatch;
+        private readonly IServiceProvider _serviceProvider;
 
-        public ScoreMono(int height, SpriteFont spriteFont, SpriteBatch spriteBatch, Texture2D texture2DBoard, int points = StartPoints)
-            : base(height, points)
+        public ScoreMono(BorderSize size, IServiceProvider serviceProvider, TextureHolder textureHolder)
+            : base(size.Height)
         {
-            _startHeightDisplay *= texture2DBoard.Height;
-            _spriteBatch = spriteBatch;
-            _spriteFont = spriteFont;
+            _startHeightDisplay *= textureHolder.BoardTexture.Height;
+            _serviceProvider = serviceProvider;
+            _spriteFont = textureHolder.Font;
             _textPosition = new Vector2(StartWidthDisplay, _startHeightDisplay);
         }
 
         public override void Draw()
         {
             var scoreLine = $"Score : {Points}";
-            _spriteBatch.DrawString(_spriteFont, $"{scoreLine}", _textPosition, _color);
+            _serviceProvider.GetRequiredService<SpriteBatch>().DrawString(_spriteFont, $"{scoreLine}", _textPosition, _color);
         }
     }
 }
