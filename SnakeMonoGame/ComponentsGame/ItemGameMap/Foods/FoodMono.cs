@@ -1,4 +1,3 @@
-using Core;
 using Core.Components.GameMapItems.Foods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -21,8 +20,6 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap.Foods
         }
 
         public override void Draw()
-        {
-            _spriteBatch.Draw(_texture2D, _position, _color);
-        }
+            => _spriteBatch.Draw(_texture2D, _position, _color);
     }
 }

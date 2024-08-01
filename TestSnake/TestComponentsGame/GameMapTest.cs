@@ -1,6 +1,6 @@
 using Core.Components;
-using GameSnake.ComponentsGame;
-using GameSnake.ComponentsGame.ItemGameMap;
+using TestSnake.Model;
+using TestSnake.Model.ItemsGameMap;
 
 namespace TestSnake.TestComponentsGame
 {
@@ -12,13 +12,13 @@ namespace TestSnake.TestComponentsGame
         {
             // Arrange
             var borederSize = new BorderSize(width, height);
-            var border = new BorderConsole(borederSize);
-            var snake = new SnakeConsole(border);
-            var snakePositionX = snake.Body.Last().X;
-            var gameMap = new GameMapConsole(border, snake);
+            var border = new BorderModel(borederSize);
+            var snake = new SnakeModel(border);
+            var snakePositionHead = snake.Body.Last().X;
+            var gameMap = new GameMapModel(border, snake);
 
             // Act
-            for (var i = snakePositionX; i <= width + 1; i++)
+            for (var i = snakePositionHead; i <= width + 1; i++)
             {
                 gameMap.Move();
             }
@@ -33,11 +33,11 @@ namespace TestSnake.TestComponentsGame
         {
             // Arrange
             var borederSize = new BorderSize(width, height);
-            var border = new BorderConsole(borederSize);
-            var snake = new SnakeConsole(border);
+            var border = new BorderModel(borederSize);
+            var snake = new SnakeModel(border);
 
             // Assert
-            Assert.Throws<Exception>(() => { new GameMapConsole(border, snake); });
+            Assert.Throws<Exception>(() => { new GameMapModel(border, snake); });
         }
     }
 }

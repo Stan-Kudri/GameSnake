@@ -16,7 +16,7 @@ namespace MonoGameSnake.ComponentsGame.ItemGameMap.Foods
             _spriteBatch = spriteBatch;
         }
 
-        public override Food Create(Point point) =>
-            new FoodMono(point, _spriteBatch, _texture2D);
+        public override Food Create(Point point)
+            => new FoodMono(point, _spriteBatch, _texture2D);
     }
 }

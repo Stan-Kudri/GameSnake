@@ -1,5 +1,5 @@
 using Core.Components;
-using GameSnake.ComponentsGame.ItemGameMap;
+using TestSnake.Model.ItemsGameMap;
 
 namespace TestSnake.TestComponentsGame.TestItemGameMap
 {
@@ -8,13 +8,13 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
         public static IEnumerable<object[]> TrueSnakePattern()
         {
             var borderSize = new BorderSize(20, 20);
-            var border = new BorderConsole(borderSize);
+            var border = new BorderModel(borderSize);
             var startPositionX = border.Width / 2;
             var startPositionY = border.Height / 2;
 
             yield return new object[]
             {
-                new SnakeConsole(border),
+                new SnakeModel(border),
             };
         }
 
@@ -25,8 +25,8 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
         {
             // Arrange
             var borderSize = new BorderSize(width, height);
-            var border = new BorderConsole(borderSize);
-            var snake = new SnakeConsole(border);
+            var border = new BorderModel(borderSize);
+            var snake = new SnakeModel(border);
             var countMoveSnakeToCollision = snake.Body.Last().X;
 
             // Act
@@ -43,7 +43,7 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
 
         [Theory]
         [MemberData(nameof(TrueSnakePattern))]
-        public void Snake_Eat_Food(SnakeConsole snake)
+        public void Snake_Eat_Food(SnakeModel snake)
         {
             // Arrange
             var expectFoodPosition = snake.Head;
@@ -57,7 +57,7 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
 
         [Theory]
         [MemberData(nameof(TrueSnakePattern))]
-        public void Equals_Position_Food_And_Snake(SnakeConsole snake)
+        public void Equals_Position_Food_And_Snake(SnakeModel snake)
         {
             // Arrange
             var expectFoodPosition = snake.Head;

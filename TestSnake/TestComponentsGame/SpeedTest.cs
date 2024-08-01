@@ -1,4 +1,4 @@
-using GameSnake.ComponentsGame;
+using TestSnake.Model;
 
 namespace TestSnake.TestComponentsGame
 {
@@ -12,7 +12,7 @@ namespace TestSnake.TestComponentsGame
             // Arrange
             var timeSpanMillisecond = TimeSpan.FromMilliseconds(increaseSpeedMillisecond);
             var timeSpanExpect = TimeSpan.FromMilliseconds(expectValueThreshold);
-            var speedSnake = new SpeedConsole(timeSpanMillisecond, thresholdPoints);
+            var speedSnake = new SpeedModel(timeSpanMillisecond, thresholdPoints);
 
             // Act
             speedSnake.Increase(score);
@@ -29,7 +29,7 @@ namespace TestSnake.TestComponentsGame
         public void Exception_The_Speed_Constructor_By_Zero(int increaseSpeedMillisecond)
         {
             var timeSpan = TimeSpan.FromMilliseconds(increaseSpeedMillisecond);
-            Assert.Throws<ArgumentException>(() => { new SpeedConsole(timeSpan, 5); });
+            Assert.Throws<ArgumentException>(() => { new SpeedModel(timeSpan, 5); });
         }
 
         [Theory]
@@ -38,7 +38,7 @@ namespace TestSnake.TestComponentsGame
         public void Exception_The_Threshold_Points_Constructor_By_Zero(int thresholdPoints)
         {
             var timeSpan = TimeSpan.FromMicroseconds(10);
-            Assert.Throws<ArgumentException>(() => { new SpeedConsole(timeSpan, thresholdPoints); });
+            Assert.Throws<ArgumentException>(() => { new SpeedModel(timeSpan, thresholdPoints); });
         }
     }
 }
