@@ -36,6 +36,10 @@ namespace Core.Components.GameMapItems
             {
                 throw new ArgumentException("The length of the snake is greater than zero.");
             }
+            else if (length > _widthField / 2)
+            {
+                throw new ArgumentException("The length of the snake is incorrect.");
+            }
 
             _length = length;
             _border = border.Borders;

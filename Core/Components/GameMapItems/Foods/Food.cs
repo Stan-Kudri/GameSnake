@@ -4,13 +4,10 @@ namespace Core.Components.GameMapItems.Foods
     {
         public Food(Point position, int scorePoint = 1)
         {
-            if (scorePoint <= 0)
-            {
-                throw new ArgumentException("Points for food are greater than zero.", nameof(scorePoint));
-            }
-
+            Score = scorePoint <= 0
+                            ? throw new ArgumentException("Points for food are greater than zero.", nameof(scorePoint))
+                            : scorePoint;
             Position = position;
-            Score = scorePoint;
         }
 
         public Point Position { get; private set; }

@@ -12,7 +12,6 @@ namespace TestSnake.Model.ItemsGameMap
         // No implementation
         public override void Draw()
         {
-            throw new NotImplementedException();
         }
     }
 }

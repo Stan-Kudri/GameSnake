@@ -19,13 +19,8 @@ namespace Core
         public override bool Equals(object? obj) => Equals(obj as Point);
 
         private bool Equals(Point? position)
-        {
-            if (position == null)
-            {
-                return false;
-            }
-
-            return position.X == X && position.Y == Y;
-        }
+            => position == null
+                    ? false
+                    : position.X == X && position.Y == Y;
     }
 }

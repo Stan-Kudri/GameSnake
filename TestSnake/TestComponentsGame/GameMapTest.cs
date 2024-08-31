@@ -26,18 +26,5 @@ namespace TestSnake.TestComponentsGame
             // Assert
             Assert.True(gameMap.IsGameOver());
         }
-
-        [Theory]
-        [InlineData(3, 3)]
-        public void No_Food_Cell(int width, int height)
-        {
-            // Arrange
-            var borederSize = new BorderSize(width, height);
-            var border = new BorderModel(borederSize);
-            var snake = new SnakeModel(border);
-
-            // Assert
-            Assert.Throws<Exception>(() => { new GameMapModel(border, snake); });
-        }
     }
 }

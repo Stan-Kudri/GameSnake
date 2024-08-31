@@ -29,13 +29,8 @@ namespace GameSnake.ComponentsGame
         }
 
         private Directions ToDirection(ConsoleKey key)
-        {
-            if (_directionMap.TryGetValue(key, out var directions))
-            {
-                return directions;
-            }
-
-            return Directions.Unknown;
-        }
+            => _directionMap.TryGetValue(key, out var directions)
+                ? directions
+                : Directions.Unknown;
     }
 }

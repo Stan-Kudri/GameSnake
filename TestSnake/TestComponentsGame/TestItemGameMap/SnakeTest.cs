@@ -9,8 +9,6 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
         {
             var borderSize = new BorderSize(20, 20);
             var border = new BorderModel(borderSize);
-            var startPositionX = border.Width / 2;
-            var startPositionY = border.Height / 2;
 
             yield return new object[]
             {
@@ -67,6 +65,18 @@ namespace TestSnake.TestComponentsGame.TestItemGameMap
 
             // Assert
             Assert.True(result);
+        }
+
+        [Theory]
+        [InlineData(3, 3)]
+        public void Too_Long_Snake_For_Border(int width, int height)
+        {
+            // Arrange
+            var borederSize = new BorderSize(width, height);
+            var border = new BorderModel(borederSize);
+
+            // Assert
+            Assert.Throws<ArgumentException>(() => { new SnakeModel(border); });
         }
     }
 }
