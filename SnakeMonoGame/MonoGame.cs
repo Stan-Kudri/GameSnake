@@ -25,11 +25,7 @@ namespace SnakeMonoGame
             _deviceManager = new GraphicsDeviceManager(this);
         }
 
-        protected override void Initialize()
-        {
-            // TODO: Add your initialization logic here
-            base.Initialize();
-        }
+        protected override void Initialize() => base.Initialize();
 
         protected override void LoadContent()
         {

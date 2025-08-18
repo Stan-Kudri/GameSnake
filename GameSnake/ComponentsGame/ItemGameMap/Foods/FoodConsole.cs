@@ -13,9 +13,6 @@ namespace GameSnake.ComponentsGame.ItemGameMap.Foods
         {
         }
 
-        public override void Draw()
-        {
-            Position.Draw(SymbolEat);
-        }
+        public override void Draw() => Position.Draw(SymbolEat);
     }
 }

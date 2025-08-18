@@ -55,7 +55,10 @@ namespace Core.Components
         {
         }
 
-        private Food NewFoodCell() => RandomCellForFood() ?? SearchCellForFood() ?? throw new Exception("There is no empty cell for food.");
+        private Food NewFoodCell()
+            => RandomCellForFood()
+            ?? SearchCellForFood()
+            ?? throw new Exception("There is no empty cell for food.");
 
         private Food? RandomCellForFood()
         {
