@@ -6,7 +6,7 @@ Two implementations of the game Snake:
 
 Control with: '⬅️'; '⬆️'; '⬇️'; '➡️'.
 
-Testing: This is a project with game snake implementation on Console/MonoGame.
+Unit Testing: The core game logic (snake movement, food eating, spawning) is covered with unit tests to ensure the reliability of the code.
 
 ## Console 
 ![](ConsoleScreenshot.jpg)
